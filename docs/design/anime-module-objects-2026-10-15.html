@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>番剧模块 · 物件版</title>
+<style>
+  :root{
+    --p50:#faf9f5;--p100:#f5f4ed;--p200:#ebe8dc;--p500:#938a78;--p950:#141413;
+    --accent:#d97757;--card:#f2efe6;
+    --serif:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;
+    --hand:"STKaiti","KaiTi","Kaiti SC",var(--serif);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--p50);color:var(--p950);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1216px;margin:0 auto;padding:72px 32px 96px}
+  h2.t{font-weight:200;font-size:48px;line-height:1.05;margin-bottom:14px}
+  p.lead{max-width:640px;font-size:15px;line-height:2;color:rgba(20,20,19,.6)}
+  .cta{display:inline-flex;gap:8px;align-items:center;margin-top:14px;color:var(--accent);text-decoration:none;font-size:15px}
+  .cta span{transition:transform .2s}.cta:hover span{transform:translateX(3px)}
+
+  /* 统一骨架：标题 + 一行说明 + 等高舞台 */
+  .grid{margin-top:36px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .card{background:var(--card);border-radius:4px;padding:18px 18px 18px;display:flex;flex-direction:column}
+  .card h3{font-size:17px;font-weight:500}
+  .card .desc{margin-top:4px;font-size:14px;line-height:1.7;color:rgba(20,20,19,.55);min-height:48px}
+  .stage{position:relative;margin-top:14px;height:400px;border-radius:3px;overflow:hidden;background:#e6e1d3}
+  .swap{position:absolute;top:10px;right:10px;z-index:30;display:flex;background:rgba(250,249,245,.85);border-radius:999px;padding:2px;font-size:11px}
+  .swap button{border:0;background:none;padding:3px 10px;border-radius:999px;cursor:pointer;color:var(--p500);font-family:inherit}
+  .swap button.on{background:var(--p950);color:#fff}
+  .obj{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .35s}
+  .obj.on{opacity:1;pointer-events:auto}
+
+  /* ===== 1A 书架书脊 ===== */
+  .shelf{display:flex;align-items:flex-end;justify-content:center;padding:0 18px 34px;gap:3px;background:linear-gradient(180deg,#e9e4d6,#ddd6c4)}
+  .shelf::after{content:"";position:absolute;left:0;right:0;bottom:22px;height:12px;background:#a8977a;box-shadow:0 4px 0 #8c7c61}
+  .spine{position:relative;z-index:1;writing-mode:vertical-rl;text-orientation:upright;display:flex;align-items:center;justify-content:flex-start;padding:16px 0 10px;
+    color:#f4efe4;font-size:14px;letter-spacing:.12em;border-radius:2px 2px 0 0;cursor:pointer;transition:transform .3s cubic-bezier(.2,.9,.3,1.3);
+    box-shadow:inset 3px 0 0 rgba(255,255,255,.12),inset -3px 0 0 rgba(0,0,0,.15);white-space:nowrap;overflow:hidden}
+  .spine::after{content:"";position:absolute;left:0;right:0;bottom:14px;height:6px;border-top:1px solid rgba(255,255,255,.35);border-bottom:1px solid rgba(255,255,255,.35)}
+  .spine:hover,.spine.pulled{transform:translateY(-22px)}
+  .spine.tilt{transform:rotate(-7deg);transform-origin:bottom left;margin-left:12px}
+  .spine.tilt:hover{transform:rotate(-7deg) translateY(-14px)}
+  .shelf-tip{position:absolute;left:14px;top:12px;font-size:11px;color:var(--p500);letter-spacing:.15em}
+
+  /* ===== 1B 手写清单 ===== */
+  .listpaper{background:#e6e1d3;display:flex;align-items:center;justify-content:center}
+  .paper{width:78%;height:86%;background:#fbf8ef;transform:rotate(-1.5deg);box-shadow:0 10px 24px -14px rgba(0,0,0,.35);padding:28px 22px 18px 44px;position:relative;
+    background-image:repeating-linear-gradient(180deg,transparent 0 31px,rgba(80,120,170,.18) 31px 32px);background-position:0 18px}
+  .paper::before{content:"";position:absolute;top:0;bottom:0;left:32px;width:1px;background:rgba(217,119,87,.45)}
+  .paper .head{position:absolute;top:6px;left:44px;font-size:11px;color:var(--p500);letter-spacing:.2em}
+  .paper ul{list-style:none;margin-top:6px}
+  .paper li{height:32px;line-height:32px;font-family:var(--hand);font-size:17px;display:flex;align-items:center;gap:10px}
+  .paper li i{position:relative;width:14px;height:14px;border:1.5px solid rgba(20,20,19,.55);flex:none}
+  .paper li i::after{content:"✓";position:absolute;left:-1px;top:-14px;font-style:normal;font-size:22px;color:var(--accent);font-family:var(--hand);
+    clip-path:inset(0 100% 0 0);transition:clip-path .35s ease}
+  .paper.done li i::after{clip-path:inset(0 0 0 0)}
+
+  /* ===== 2A 拍立得 + 便签 ===== */
+  .desk{background:#e3ddcd}
+  .polaroid{position:absolute;left:8%;top:6%;width:62%;background:#fff;padding:9px 9px 34px;transform:rotate(-4deg);box-shadow:0 12px 24px -12px rgba(0,0,0,.4);transition:transform .4s}
+  .polaroid img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:40% 30%}
+  .polaroid span{position:absolute;bottom:8px;left:12px;font-family:var(--hand);font-size:14px;color:#444}
+  .tape{position:absolute;width:70px;height:20px;background:rgba(240,225,180,.75);top:-8px;left:40%;transform:rotate(3deg)}
+  .note{position:absolute;right:5%;bottom:5%;width:66%;background:#fbf8ef;padding:16px 16px 14px;transform:rotate(1.5deg);box-shadow:0 10px 22px -12px rgba(0,0,0,.35);
+    font-size:13px;line-height:1.85;color:rgba(20,20,19,.82);transition:transform .4s}
+  .desk:hover .polaroid{transform:rotate(-6deg) translate(-6px,-4px)}
+  .desk:hover .note{transform:rotate(0deg) translateY(-6px)}
+  .stamp{position:absolute;right:-8px;top:-18px;width:62px;height:62px;border:2px solid var(--accent);border-radius:50%;color:var(--accent);display:flex;align-items:center;justify-content:center;
+    text-align:center;font-size:11px;line-height:1.25;transform:rotate(12deg);background:rgba(251,248,239,.6);letter-spacing:.05em}
+
+  /* ===== 2B 杂志影评页 ===== */
+  .mag{background:#fbf8ef;padding:0;display:flex;flex-direction:column}
+  .mag img{width:100%;height:46%;object-fit:cover;object-position:40% 30%;display:block;filter:saturate(.9)}
+  .mag .body{padding:12px 16px 0;font-size:12.5px;line-height:1.85;color:rgba(20,20,19,.82)}
+  .mag .kick{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.2em;color:var(--accent);border-bottom:1px solid var(--p950);padding-bottom:5px;margin-bottom:8px}
+  .mag .body p::first-letter{float:left;font-size:42px;line-height:.95;padding:3px 6px 0 0;color:var(--p950);font-weight:600}
+  .mag .by{margin-top:6px;text-align:right;font-size:11px;color:var(--p500)}
+
+  /* ===== 3A 撕页日历 ===== */
+  .cal{background:#e3ddcd;display:flex;align-items:center;justify-content:center}
+  .pad{position:relative;width:78%;height:82%}
+  .rings{position:absolute;top:-8px;left:0;right:0;display:flex;justify-content:space-around;z-index:20;padding:0 30px}
+  .rings i{width:9px;height:22px;border-radius:5px;background:linear-gradient(90deg,#777,#ddd,#777)}
+  .page{position:absolute;inset:0;background:#fbf8ef;border-top:16px solid #3b3a36;box-shadow:0 1px 0 #ddd6c4,0 2px 0 #fbf8ef,0 3px 0 #ddd6c4,0 4px 0 #fbf8ef,0 12px 22px -12px rgba(0,0,0,.35);
+    display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 14px;cursor:pointer;transform-origin:top center}
+  .page .no{display:flex;justify-content:space-between;font-size:11px;color:var(--p500);letter-spacing:.15em}
+  .page .no b{font-size:34px;font-weight:200;color:var(--accent);letter-spacing:0;line-height:1}
+  .page q{font-size:21px;line-height:1.6;quotes:none;text-wrap:balance}
+  .page .src{font-size:12px;color:var(--p500)}
+  .page .src.pending{color:rgba(217,119,87,.7)}
+  .page.tear{animation:tear .7s cubic-bezier(.4,0,.6,1) forwards}
+  @keyframes tear{0%{transform:none}30%{transform:rotate(-4deg) translateY(4px)}100%{transform:translate(-40px,280px) rotate(-28deg);opacity:0}}
+  .cal-tip{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11px;color:var(--p500)}
+
+  /* ===== 3B 胶片条 ===== */
+  .filmbox{background:#1b1a18;display:flex;flex-direction:column;justify-content:center;gap:0}
+  .strip{--h:120px;position:relative;height:calc(var(--h) + 36px);background:#0d0d0c;overflow:hidden;
+    background-image:radial-gradient(circle,transparent 0,transparent 0),linear-gradient(#0d0d0c,#0d0d0c)}
+  .strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:10px;z-index:2;
+    background:repeating-linear-gradient(90deg,transparent 0 6px,#e8e2d3 6px 14px,transparent 14px 20px);opacity:.8}
+  .strip::before{top:4px}.strip::after{bottom:4px}
+  .reel{position:absolute;top:18px;display:flex;gap:8px;animation:roll 40s linear infinite;width:max-content}
+  .strip.r .reel{animation-direction:reverse;animation-duration:46s}
+  .filmbox:hover .reel{animation-play-state:paused}
+  @keyframes roll{to{transform:translateX(-50%)}}
+  .frame{width:200px;height:var(--h);background:radial-gradient(ellipse at 50% 40%,#3b3428,#141310);border-radius:3px;display:flex;flex-direction:column;justify-content:flex-end;padding:10px 12px;color:#fff}
+  .frame q{quotes:none;font-size:14px;line-height:1.45;text-align:center;text-shadow:0 1px 3px #000}
+  .frame small{margin-top:6px;text-align:center;font-size:10px;opacity:.55;letter-spacing:.1em}
+  .filmbox .lbl{color:#8d867a;font-size:11px;letter-spacing:.25em;text-align:center;padding:12px 0}
+
+  .notes{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:12.5px;line-height:1.9;color:var(--p500)}
+  .notes b{color:var(--p950);font-weight:500}
+
+  @media (max-width:900px){
+    .wrap{padding:48px 16px 64px}
+    h2.t{font-size:36px}
+    .grid,.notes{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2 class="t">纵览番剧</h2>
+  <p class="lead">记录那些触动心灵的故事，分享那些难以忘怀的瞬间。每一帧画面，都是一段珍贵的回忆。</p>
+  <a class="cta" href="#">探索完整榜单 <span>→</span></a>
+
+  <div class="grid">
+    <!-- 卡 1：片单 -->
+    <article class="card" data-card>
+      <h3>近两年所观看番剧</h3>
+      <p class="desc">最近两年看的动漫比大学四年看的还要多，都是非常优秀，令人印象深刻的作品。</p>
+      <div class="stage">
+        <div class="swap"><button class="on">书架</button><button>清单</button></div>
+        <div class="obj shelf on" id="shelf"><span class="shelf-tip">悬停抽出一本</span></div>
+        <div class="obj listpaper"><div class="paper" id="paper"><span class="head">追完了 ✓</span><ul id="plist"></ul></div></div>
+      </div>
+    </article>
+
+    <!-- 卡 2：点评 -->
+    <article class="card" data-card>
+      <h3>年度最佳</h3>
+      <p class="desc">败犬女主太多了</p>
+      <div class="stage">
+        <div class="swap"><button class="on">拍立得</button><button>杂志</button></div>
+        <div class="obj desk on">
+          <div class="polaroid"><div class="tape"></div><img src="https://cdn.xn--cckl9nsb.com/baiquan.545b285f.webp" alt="败犬女主太多了"><span>败犬女主太多了</span></div>
+          <div class="note"><div class="stamp">年度<br>最佳</div><span class="review"></span></div>
+        </div>
+        <div class="obj mag">
+          <img src="https://cdn.xn--cckl9nsb.com/baiquan.545b285f.webp" alt="">
+          <div class="body"><div class="kick"><span>年度最佳</span><span>败犬女主太多了</span></div><p class="review"></p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 卡 3：台词（来自不同作品，与卡 1 无关） -->
+    <article class="card" data-card>
+      <h3>令人铭记的话语</h3>
+      <p class="desc"></p>
+      <div class="stage">
+        <div class="swap"><button class="on">撕页日历</button><button>胶片</button></div>
+        <div class="obj cal on"><div class="pad" id="pad"><div class="rings"><i></i><i></i><i></i><i></i></div></div><div class="cal-tip">点一下，撕掉这一页</div></div>
+        <div class="obj filmbox"><div class="strip"><div class="reel" id="reel1"></div></div><div class="lbl">悬停暂停</div><div class="strip r"><div class="reel" id="reel2"></div></div></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="notes">
+    <div><b>书架：</b>片单本来就是一串名字，竖排书脊天然就是放名字的地方，不需要封面图。<b>清单：</b>更私人，进入视口时逐个打勾。</div>
+    <div><b>点评一字未改</b>，用的就是你原来那段。拍立得版更像私人手账，杂志版更像正经影评（首字下沉）。点评移进了舞台里，卡片说明只留片名，三张卡的骨架就对齐了。</div>
+    <div>台词各自独立、各标出处，和第一张卡没有关系。只有 3 句我确定出处，其余显示"出处待填"。<b>日历：</b>一次一句，撕页是彩蛋（可以配纸声）。<b>胶片：</b>一眼看到全部，上下两条反向滚动。</div>
+  </div>
+</div>
+
+<script>
+const SHOWS=["败犬女主太多了","Re0第三季","凡人修仙传","金牌得主","青之箱","弹珠汽水瓶里的千岁同学","我心里危险的东西","灵笼第二季"];
+const COLORS=["#4a6a8f","#5d4f7a","#3f6352","#6f8fa8","#2f5f8f","#5a9393","#9a5a68","#6a5a46"];
+const REVIEW="最近两年看到过最有意思笑的合不拢嘴来的动漫，女主角有点下头，跟男主产生了非常奇妙的化学反应，非常搞笑，但是又极具含蓄，作品的服装搭配也令人耳目一新，最意想不到的是这个作者是一个四五十岁的中年男性，居然能写出如此青春活泼的故事，非常期待第二季。";
+// 出处只填确定的，其余为空 → 显示"出处待填"
+const QUOTES=[
+  ["海的那边是敌人","进击的巨人"],
+  ["不要把悲伤和痛苦留给别人",""],
+  ["你这份温柔，迟早会害死你",""],
+  ["你把生命当成什么了？",""],
+  ["不是当上火影才被大家承认，而是被承认才当上火影","火影忍者"],
+  ["色彩越少，越能看清重要",""],
+  ["此身为剑所成","Fate/stay night"],
+  ["下辈子我还会找到你",""],
+];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// 每张卡的物件切换
+document.querySelectorAll("[data-card]").forEach(card=>{
+  const btns=[...card.querySelectorAll(".swap button")],objs=[...card.querySelectorAll(".obj")];
+  btns.forEach((b,i)=>b.onclick=()=>{btns.forEach((x,j)=>x.classList.toggle("on",i===j));objs.forEach((o,j)=>o.classList.toggle("on",i===j));if(i===1)card.dispatchEvent(new Event("alt"))});
+});
+
+// 1A 书架
+const shelf=document.getElementById("shelf");
+const H=[300,262,286,250,276,318,294,268],W=[38,34,40,32,36,42,40,36];
+SHOWS.forEach((s,i)=>{const d=document.createElement("div");d.className="spine"+(i===7?" tilt":"");d.style.cssText=`background:${COLORS[i]};height:${H[i]}px;width:${W[i]}px;font-size:${s.length>9?12:14}px`;d.textContent=s;d.title=s;shelf.appendChild(d)});
+// 1B 清单：切过去时逐个打勾
+const plist=document.getElementById("plist"),paper=document.getElementById("paper");
+SHOWS.forEach((s,i)=>{const li=document.createElement("li");li.innerHTML=`<i style="--d:${i}"></i>${s}`;plist.appendChild(li)});
+paper.closest("[data-card]").addEventListener("alt",()=>{paper.classList.remove("done");[...plist.querySelectorAll("i")].forEach((el,i)=>el.style.setProperty("transition-delay",reduce?"0s":`${.15+i*.12}s`));requestAnimationFrame(()=>requestAnimationFrame(()=>paper.classList.add("done")))});
+document.styleSheets[0].insertRule(".paper li i::after{transition-delay:inherit}");
+
+// 2 点评原文
+document.querySelectorAll(".review").forEach(el=>el.textContent=REVIEW);
+
+// 3A 撕页日历
+const pad=document.getElementById("pad");let idx=0;
+function makePage(i){const [q,s]=QUOTES[i%QUOTES.length];const p=document.createElement("div");p.className="page";
+  p.innerHTML=`<div class="no"><span>令人铭记的话语</span><b>${String(i%QUOTES.length+1).padStart(2,"0")}</b></div><q>${q}</q><div class="src ${s?"":"pending"}">— ${s?`《${s}》`:"出处待填"}</div>`;return p}
+function stack(){pad.querySelectorAll(".page").forEach(p=>p.remove());const under=makePage(idx+1),top=makePage(idx);pad.append(under,top);
+  top.onclick=()=>{if(reduce){idx++;stack();return}top.classList.add("tear");top.onclick=null;setTimeout(()=>{idx++;stack()},650)}}
+stack();
+
+// 3B 胶片
+function fill(el,arr){const html=arr.map(([q,s])=>`<div class="frame"><q>${q}</q><small>${s?`《${s}》`:"出处待填"}</small></div>`).join("");el.innerHTML=html+html}
+fill(document.getElementById("reel1"),QUOTES.slice(0,4));fill(document.getElementById("reel2"),QUOTES.slice(4));
+</script>
+</body>
+</html>

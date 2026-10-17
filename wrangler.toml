@@ -1,0 +1,65 @@
+name = "my-remix-worker"
+main = "worker.ts"
+compatibility_date = "2026-02-21"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+[observability.logs]
+invocation_logs = true
+head_sampling_rate = 1
+
+[assets]
+directory = "./build/client"
+binding = "ASSETS"
+# false：静态资源（JS/CSS/图片）由边缘 asset 层直接命中，不再为每个静态请求付一次 Worker 调用。
+# /fonts/* 被 .assetsignore 排除；/stickers/* 不在 public 构建目录中，两者仍会落到 Worker 的 R2 逻辑。
+run_worker_first = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "app-db"
+database_id = "your-d1-database-id"
+migrations_dir = "./migrations"
+
+[[durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiterDO"
+
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "gregorwang"
+
+[ai]
+binding = "AI"
+
+[[migrations]]
+tag = "rate_limiter_v2"
+new_sqlite_classes = ["RateLimiterDO"]
+
+[vars]
+IMAGE_BASE_URL = "https://cdn.xn--cckl9nsb.com"
+APP_NAME = "汪家俊的网站"
+APP_URL = "https://xn--cckl9nsb.com"
+BETTER_AUTH_URL = "https://xn--cckl9nsb.com"
+LOCAL_APP_URL = "http://localhost:3000"
+ADMIN_EMAILS = "admin@example.com"
+ADMIN_MESSAGES_URL = "https://admin.xn--cckl9nsb.com/"
+MESSAGE_MODERATION_ALLOWED_IPS = "127.0.0.1"
+MESSAGE_NOTIFICATION_WEBHOOK_URL = "https://example.com/webhooks/guestbook-notification"
+MICROSOFT_AUTH_BASE_URL = "https://my-remix-worker.your-subdomain.workers.dev"
+MICROSOFT_REDIRECT_URI = "https://my-remix-worker.your-subdomain.workers.dev/api/auth/callback/microsoft"
+NEMESIS_GEMINI_MODEL = "gemini-3.5-flash-lite"
+NEMESIS_GEMINI_LITE_MODEL = "gemini-3.5-flash-lite"
+NEMESIS_GEMINI_THINKING_LEVEL = "high"
+# 2026-10-14 起直连各家 API，不再经 AI Gateway；要回滚就恢复下一行。
+# NEMESIS_AI_GATEWAY_ID = "my-ai-gateway"
+CLOUDFLARE_ACCOUNT_ID = "your-cloudflare-account-id"
+# Grok 暂停：复杂问题走 DeepSeek，roast 交回 Gemini。改成 "true" 即恢复。
+NEMESIS_GROK_ENABLED = "false"
+NEMESIS_GROK_MODEL = "grok-4.7"
+NEMESIS_GROK_ROAST_MODEL = "grok-4.3"
+NEMESIS_MAX_PER_MINUTE = "5"
+NEMESIS_MAX_PER_DAY = "50"
+NEMESIS_MAX_MESSAGE_LENGTH = "1000"

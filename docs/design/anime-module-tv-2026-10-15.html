@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>番剧模块 · 小电视</title>
+<style>
+  :root{
+    --p50:#faf9f5;--p100:#f5f4ed;--p200:#ebe8dc;--p500:#938a78;--p950:#141413;
+    --accent:#d97757;--ink:#2a2622;--shell:#fbf8ef;
+    --serif:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--p50);color:var(--p950);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1216px;margin:0 auto;padding:56px 32px 96px}
+  .layout-switch{display:flex;gap:8px;margin-bottom:40px;font-size:13px}
+  .layout-switch button{font-family:inherit;border:1px solid var(--p200);background:none;padding:6px 14px;border-radius:999px;cursor:pointer;color:var(--p950)}
+  .layout-switch button.on{background:var(--p950);color:#fff;border-color:var(--p950)}
+  h2.t{font-weight:200;font-size:48px;line-height:1.05;margin-bottom:14px}
+  p.lead{max-width:640px;font-size:15px;line-height:2;color:rgba(20,20,19,.6)}
+  .cta{display:inline-flex;gap:8px;align-items:center;margin-top:14px;color:var(--accent);text-decoration:none;font-size:15px}
+  .cta span{transition:transform .2s}.cta:hover span{transform:translateX(3px)}
+  .view{display:none}.view.on{display:block}
+
+  /* ================= 小电视本体 ================= */
+  .tv{position:relative;background:var(--shell);border:3px solid var(--ink);border-radius:34px;padding:20px 20px 26px;box-shadow:0 22px 40px -26px rgba(0,0,0,.5)}
+  .ant{position:absolute;top:-62px;width:4px;height:66px;background:var(--ink);border-radius:2px;transform-origin:bottom center;z-index:0}
+  .ant::after{content:"";position:absolute;top:-8px;left:-5px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--ink)}
+  .ant.l{left:32%;transform:rotate(-30deg)}.ant.r{right:32%;transform:rotate(30deg)}
+  .tv.wiggle .ant.l{animation:wl .6s ease}.tv.wiggle .ant.r{animation:wr .6s ease}
+  @keyframes wl{30%{transform:rotate(-40deg)}60%{transform:rotate(-22deg)}}
+  @keyframes wr{30%{transform:rotate(40deg)}60%{transform:rotate(22deg)}}
+  .feet{position:absolute;bottom:-16px;left:0;right:0;display:flex;justify-content:space-between;padding:0 18%}
+  .feet i{width:28px;height:16px;background:var(--ink);border-radius:0 0 10px 10px}
+  .led{position:absolute;right:26px;bottom:9px;width:7px;height:7px;border-radius:50%;background:#7bd389;box-shadow:0 0 6px #7bd389}
+  .brand{position:absolute;left:26px;bottom:6px;font-size:10px;letter-spacing:.3em;color:var(--p500)}
+
+  .screen{--k:1;container-type:inline-size;position:relative;aspect-ratio:16/10;background:#16161a;border-radius:22px;overflow:hidden;color:#fff;cursor:pointer;user-select:none}
+  .screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:8;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.45))}
+  .layer{position:absolute;inset:0}
+  .noise{position:absolute;inset:0;width:100%;height:100%;z-index:9;opacity:0;image-rendering:pixelated;pointer-events:none}
+  .noise.on{opacity:1}
+  .osd{position:absolute;top:4cqw;right:5cqw;z-index:7;font-family:ui-monospace,Consolas,monospace;font-size:calc(var(--k)*3cqw);color:#7CFF8A;text-shadow:0 0 6px #3f3;opacity:0;transition:opacity .3s}
+  .osd.show{opacity:1}
+
+  /* 频道 0：脸 */
+  .face{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4cqw;background:radial-gradient(ellipse at 50% 45%,#23232b,#121216)}
+  .eyes{display:flex;gap:22cqw}
+  .eye{width:7cqw;height:12cqw;background:#fff;border-radius:4cqw;position:relative;animation:blink 4.2s infinite}
+  .eye.l{transform:rotate(-14deg)}.eye.r{transform:rotate(14deg)}
+  .eye i{position:absolute;width:3.2cqw;height:3.2cqw;border-radius:50%;background:#16161a;left:1.9cqw;top:4.4cqw;transition:transform .12s}
+  @keyframes blink{0%,92%,100%{scale:1 1}95%{scale:1 .1}}
+  .mouth{width:16cqw}
+  .hint{position:absolute;bottom:5cqw;left:0;right:0;text-align:center;font-size:calc(var(--k)*2.4cqw);color:rgba(255,255,255,.45);letter-spacing:.2em}
+
+  /* 频道 1：节目单 */
+  .epg{display:flex;flex-direction:column;padding:4.5cqw 6cqw 0;background:linear-gradient(180deg,#1d2a44,#121a2c)}
+  .epg-h{display:flex;justify-content:space-between;align-items:baseline;font-size:calc(var(--k)*2.6cqw);color:rgba(255,255,255,.55);letter-spacing:.2em;border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:1.6cqw}
+  .epg-h b{font-size:calc(var(--k)*3.6cqw);font-weight:500;color:#fff;letter-spacing:.06em}
+  .epg ol{list-style:none;flex:1;display:flex;flex-direction:column;justify-content:space-around;padding:1.2cqw 0}
+  .epg li{display:flex;align-items:center;gap:2.4cqw;font-size:calc(var(--k)*3cqw);padding:0 1.6cqw;border-radius:1cqw;line-height:1.6;transition:background .25s,color .25s;color:rgba(255,255,255,.82)}
+  .epg li em{font-style:normal;font-family:ui-monospace,Consolas,monospace;font-size:.8em;color:rgba(255,255,255,.4);width:3.6cqw}
+  .epg li.on{background:var(--accent);color:#fff}.epg li.on em{color:#fff}
+  .ticker{height:7cqw;flex:none;margin:0 -6cqw;background:rgba(0,0,0,.35);overflow:hidden;display:flex;align-items:center;font-size:calc(var(--k)*2.5cqw);color:rgba(255,255,255,.75);white-space:nowrap}
+  .ticker span{display:inline-block;padding-left:100%;animation:tick 18s linear infinite}
+  @keyframes tick{to{transform:translateX(-100%)}}
+
+  /* 频道 2：点评（字幕） */
+  .rev{background-size:cover;background-position:45% 30%}
+  .rev::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0) 55%)}
+  .rev .tag{position:absolute;top:4cqw;left:5cqw;font-size:calc(var(--k)*2.4cqw);letter-spacing:.15em;background:var(--accent);padding:.6cqw 1.6cqw;border-radius:.6cqw}
+  .rev .sub{position:absolute;left:6cqw;right:6cqw;bottom:8cqw;text-align:center;font-size:calc(var(--k)*3.6cqw);line-height:1.5;
+    text-shadow:0 0 2px #000,0 0 2px #000,0 2px 8px rgba(0,0,0,.9);transition:opacity .3s}
+  .rev .bar{position:absolute;left:6cqw;right:6cqw;bottom:4cqw;display:flex;gap:.8cqw}
+  .rev .bar i{flex:1;height:.6cqw;background:rgba(255,255,255,.25);border-radius:1cqw;overflow:hidden;position:relative}
+  .rev .bar i b{position:absolute;inset:0;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+  .rev .bar i.done b{transform:scaleX(1)}
+  .rev .bar i.now b{animation:fillx var(--dur) linear forwards}
+  @keyframes fillx{to{transform:scaleX(1)}}
+
+  /* 频道 3：台词弹幕 */
+  .dm{background:radial-gradient(ellipse at 50% 50%,#2a2530,#121216);overflow:hidden}
+  .dm .bgword{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:calc(var(--k)*6cqw);font-weight:200;color:rgba(255,255,255,.06);letter-spacing:.3em}
+  /* 位移由 JS 用 Web Animations 以纯 px 值驱动（可交给合成线程）；初始放在屏幕外 */
+  .dmi{position:absolute;left:0;white-space:nowrap;font-size:calc(var(--k)*3.4cqw);text-shadow:0 1px 2px #000;
+    transform:translate3d(9999px,0,0);will-change:transform;contain:layout style;pointer-events:none}
+  .dmi small{font-size:.62em;opacity:.55;margin-left:.6em}
+  .dm .topline{position:absolute;top:4cqw;left:0;right:0;text-align:center;font-size:calc(var(--k)*3.6cqw);color:#ffd166;text-shadow:0 0 2px #000,0 1px 3px #000;transition:opacity .4s}
+  .dm .bottom{position:absolute;bottom:0;left:0;right:0;height:7cqw;background:rgba(0,0,0,.45);display:flex;align-items:center;padding:0 3cqw;gap:2cqw;font-size:calc(var(--k)*2.3cqw);color:rgba(255,255,255,.45)}
+  .dm .bottom span{flex:1;background:rgba(255,255,255,.08);border-radius:3cqw;padding:.8cqw 2cqw}
+  .dm .bottom b{color:var(--accent);font-weight:500}
+
+  /* ================= 布局 1：一台电视 + 遥控器 ================= */
+  .big-stage{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:44px;align-items:center;
+    padding:96px 72px 64px;border-radius:6px;background:linear-gradient(180deg,#efebe0,#e4ded0)}
+  .big-stage .tv{max-width:760px;margin:0 auto;width:100%}
+  .remote{justify-self:center;width:96px;background:var(--ink);border-radius:44px 44px 36px 36px;padding:24px 14px 30px;display:flex;flex-direction:column;align-items:center;gap:14px;
+    box-shadow:0 18px 30px -18px rgba(0,0,0,.6);transform:rotate(6deg)}
+  .remote .ir{width:16px;height:6px;border-radius:3px;background:#5b1c1c;margin-bottom:4px}
+  .rbtn{width:56px;height:56px;border-radius:50%;border:0;background:#3a3530;color:#f4efe4;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    box-shadow:inset 0 -3px 0 rgba(0,0,0,.35);transition:transform .08s,background .2s}
+  .rbtn:active{transform:translateY(2px);box-shadow:none}
+  .rbtn b{font-size:18px;font-weight:600;line-height:1}
+  .rbtn small{font-size:10px;opacity:.6;margin-top:3px}
+  .rbtn.on{background:var(--accent)}
+  .rbtn.pw{width:36px;height:36px;background:#7a2a20;font-size:14px}
+  .rbtn.mute{width:36px;height:36px;font-size:13px}
+  .remote-tip{font-size:10px;color:#8d867a;letter-spacing:.15em;text-align:center}
+
+  /* ================= 布局 2：三台小电视 ================= */
+  .grid{margin-top:36px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .card{background:#f2efe6;border-radius:4px;padding:18px;display:flex;flex-direction:column}
+  .card h3{font-size:17px;font-weight:500}
+  .card .desc{margin-top:4px;font-size:14px;line-height:1.7;color:rgba(20,20,19,.55);min-height:48px}
+  .card .stage{margin-top:14px;height:340px;border-radius:3px;background:#e6e1d3;display:flex;align-items:center;justify-content:center;padding-top:40px}
+  .card .tv{width:86%;border-width:2.5px;border-radius:24px;padding:12px 12px 18px}
+  .card .ant{top:-44px;height:46px;width:3px}.card .ant::after{width:11px;height:11px;left:-4px;top:-7px;border-width:2.5px}
+  .card .screen{--k:1.55;border-radius:14px}
+  .card .feet i{width:20px;height:12px}.card .feet{bottom:-12px}
+  .card .led{right:18px;bottom:6px;width:5px;height:5px}
+  .card .brand{display:none}
+
+  .notes{margin-top:28px;font-size:12.5px;line-height:1.9;color:var(--p500);max-width:860px}
+  .notes b{color:var(--p950);font-weight:500}
+
+  /* 不在视口 / 被隐藏时，屏幕里所有 CSS 动画一起暂停 */
+  .screen.paused *,.screen.paused{animation-play-state:paused!important}
+  .tv.paused .ant{animation:none}
+  /* 小屏（三台并排）：去掉跑马灯、收紧节目单行高 */
+  .screen.compact .ticker{display:none}
+  .screen.compact .epg{padding:3.5cqw 5cqw 1.5cqw}
+  .screen.compact .epg li{line-height:1.25;padding:0 1.2cqw}
+  .screen.compact .epg-h{padding-bottom:1cqw}
+  .screen.compact .dm .bottom{display:none}
+  .screen.compact .hint{display:none}
+
+  @media (max-width:900px){
+    .wrap{padding:40px 16px 64px}
+    h2.t{font-size:36px}
+    .big-stage{grid-template-columns:1fr;padding:80px 16px 40px}
+    .remote{flex-direction:row;width:auto;border-radius:36px;padding:12px 18px;transform:none;flex-wrap:wrap;justify-content:center}
+    .remote .ir,.remote-tip{display:none}
+    .grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="layout-switch">
+    <button class="on" data-view="big">一台电视 · 遥控换台</button>
+    <button data-view="three">三台小电视并排</button>
+  </div>
+
+  <h2 class="t">纵览番剧</h2>
+  <p class="lead">记录那些触动心灵的故事，分享那些难以忘怀的瞬间。每一帧画面，都是一段珍贵的回忆。</p>
+  <a class="cta" href="#">探索完整榜单 <span>→</span></a>
+
+  <!-- 布局 1 -->
+  <div class="view on" id="view-big">
+    <div class="big-stage">
+      <div class="tv" id="bigTv">
+        <i class="ant l"></i><i class="ant r"></i>
+        <div class="screen" id="bigScreen"></div>
+        <span class="brand">ANIME · TV</span><span class="led"></span>
+        <div class="feet"><i></i><i></i></div>
+      </div>
+      <div class="remote">
+        <span class="ir"></span>
+        <button class="rbtn pw" data-ch="0" title="关机回到小脸">⏻</button>
+        <button class="rbtn" data-ch="1"><b>1</b><small>片单</small></button>
+        <button class="rbtn" data-ch="2"><b>2</b><small>点评</small></button>
+        <button class="rbtn" data-ch="3"><b>3</b><small>台词</small></button>
+        <button class="rbtn mute" id="mute" title="换台声音">🔈</button>
+        <span class="remote-tip">键盘 1/2/3 也能换台</span>
+      </div>
+    </div>
+    <p class="notes">
+      <b>思路：</b>三块内容变成同一台电视的三个频道，内容还是各自独立。<b>频道 1 片单</b>做成电视节目单，底部跑马灯放你原来那句卡片说明；<b>频道 2 点评</b>是剧照全屏，你的点评原文拆成 6 段，像字幕一样一段段播完（点屏幕跳下一段）；<b>频道 3 台词</b>做成弹幕，这是 B 站最有辨识度的东西，悬停暂停，点屏幕放一条顶部弹幕。<br>
+      <b>彩蛋：</b>开机是一张小脸，眼睛跟着鼠标转；换台时天线会晃、出雪花，并配一声"滋"（右下角可静音）。<br>
+      造型是向 B 站小电视致敬的原创画法（奶白机身、两根天线、脸），没用 B 站的官方形象和配色，正式上线也建议保持这样，不直接搬他们的吉祥物。
+    </p>
+  </div>
+
+  <!-- 布局 2 -->
+  <div class="view" id="view-three">
+    <div class="grid">
+      <article class="card"><h3>近两年所观看番剧</h3><p class="desc">最近两年看的动漫比大学四年看的还要多，都是非常优秀，令人印象深刻的作品。</p>
+        <div class="stage"><div class="tv"><i class="ant l"></i><i class="ant r"></i><div class="screen" data-fixed="1"></div><span class="led"></span><div class="feet"><i></i><i></i></div></div></div></article>
+      <article class="card"><h3>年度最佳</h3><p class="desc">败犬女主太多了</p>
+        <div class="stage"><div class="tv"><i class="ant l"></i><i class="ant r"></i><div class="screen" data-fixed="2"></div><span class="led"></span><div class="feet"><i></i><i></i></div></div></div></article>
+      <article class="card"><h3>令人铭记的话语</h3><p class="desc"></p>
+        <div class="stage"><div class="tv"><i class="ant l"></i><i class="ant r"></i><div class="screen" data-fixed="3"></div><span class="led"></span><div class="feet"><i></i><i></i></div></div></div></article>
+    </div>
+    <p class="notes"><b>思路：</b>保留现在的三张卡骨架，每张卡里放一台小电视，各自固定一个频道。比一台大电视更规整，但少了"换台"这个动作。点屏幕同样会出雪花并重播。</p>
+  </div>
+</div>
+
+<script>
+const SHOWS=["败犬女主太多了","Re0第三季","凡人修仙传","金牌得主","青之箱","弹珠汽水瓶里的千岁同学","我心里危险的东西","灵笼第二季"];
+const LIST_DESC="最近两年看的动漫比大学四年看的还要多，都是非常优秀，令人印象深刻的作品。";
+const STILL="https://cdn.xn--cckl9nsb.com/baiquan.545b285f.webp";
+// 点评原文按逗号拆成 6 段，拼回去与原文一字不差
+const REVIEW=["最近两年看到过最有意思笑的合不拢嘴来的动漫，","女主角有点下头，跟男主产生了非常奇妙的化学反应，","非常搞笑，但是又极具含蓄，","作品的服装搭配也令人耳目一新，","最意想不到的是这个作者是一个四五十岁的中年男性，","居然能写出如此青春活泼的故事，非常期待第二季。"];
+// 出处只填确定的
+const QUOTES=[["海的那边是敌人","进击的巨人"],["不要把悲伤和痛苦留给别人",""],["你这份温柔，迟早会害死你",""],["你把生命当成什么了？",""],["不是当上火影才被大家承认，而是被承认才当上火影","火影忍者"],["色彩越少，越能看清重要",""],["此身为剑所成","Fate/stay night"],["下辈子我还会找到你",""]];
+const DM_COLORS=["#fff","#fff","#fff","#ffd166","#8fd3ff","#ffb3a1"];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// 剧照提前解码，切到点评频道时不再等下载
+const stillImg=new Image();stillImg.decoding="async";stillImg.src=STILL;
+
+/* ---------- 声音：噪声 buffer 只生成一次 ---------- */
+let muted=false,actx=null,zBuf=null;
+function zzz(){
+  if(muted||reduce)return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    if(!zBuf){const len=actx.sampleRate*.18|0;zBuf=actx.createBuffer(1,len,actx.sampleRate);const d=zBuf.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len)}
+    const src=actx.createBufferSource(),g=actx.createGain(),f=actx.createBiquadFilter();
+    f.type="highpass";f.frequency.value=1200;g.gain.value=.05;
+    src.buffer=zBuf;src.connect(f).connect(g).connect(actx.destination);src.start();
+  }catch(e){}
+}
+
+/* ---------- 雪花：预先生成 6 帧，换台时轮播，不再每帧 createImageData + 随机数 ---------- */
+const NW=96,NH=60;
+const NOISE_FRAMES=(()=>{const c=document.createElement("canvas").getContext("2d"),out=[];
+  for(let f=0;f<6;f++){const im=c.createImageData(NW,NH);const u=new Uint32Array(im.data.buffer);
+    for(let i=0;i<u.length;i++){const v=Math.random()*255|0;u[i]=0xff000000|(v<<16)|(v<<8)|v}out.push(im)}return out})();
+
+/* ---------- 一块屏幕 ---------- */
+// 屏幕只在「可见」时跑：所在布局显示中 && 进入视口 && 标签页在前台。不可见时卸载频道（清掉定时器和弹幕），回来再挂上
+function makeScreen(el){
+  el.innerHTML=`<div class="layer"></div><canvas class="noise" width="${NW}" height="${NH}"></canvas><div class="osd"></div>`;
+  const layer=el.querySelector(".layer"),cv=el.querySelector(".noise"),osd=el.querySelector(".osd"),ctx=cv.getContext("2d");
+  const tv=el.closest(".tv");
+  let cleanup=null,raf=0,osdT=0,mountT=0,ch=-1,inView=false,active=false;
+
+  // 尺寸：ResizeObserver 代替 window resize；小屏自动加 compact、放大字号系数
+  const ro=new ResizeObserver(([e])=>{
+    const w=e.contentRect.width;
+    el.style.setProperty("--sw",w+"px");
+    el.classList.toggle("compact",w<440);
+    el.style.setProperty("--k",Math.max(1,11/(w*.03)).toFixed(2)); // 正文最小约 11px
+  });
+  ro.observe(el);
+
+  function noise(ms){
+    if(reduce)return;
+    cv.classList.add("on");const end=performance.now()+ms;let f=0;
+    const draw=()=>{ctx.putImageData(NOISE_FRAMES[f++%NOISE_FRAMES.length],0,0);
+      if(performance.now()<end)raf=requestAnimationFrame(draw);else cv.classList.remove("on")};
+    cancelAnimationFrame(raf);draw();
+  }
+  function unmount(){if(cleanup){cleanup();cleanup=null}layer.className="layer";layer.removeAttribute("style");layer.innerHTML=""}
+  function mount(){unmount();cleanup=CHANNELS[ch](layer,el)}
+
+  function tune(n,{sound=true,fx=true}={}){
+    ch=n;
+    clearTimeout(mountT); // 连按换台时只挂最后一个频道，旧的定时器不会泄漏
+    if(!active)return;    // 不可见时只记住频道，等可见再挂
+    if(fx){if(sound)zzz();noise(260);tv.classList.remove("wiggle");void tv.offsetWidth;tv.classList.add("wiggle")}
+    mountT=setTimeout(()=>{
+      mount();
+      if(n>0&&fx){osd.textContent="CH "+String(n).padStart(2,"0");osd.classList.add("show");clearTimeout(osdT);osdT=setTimeout(()=>osd.classList.remove("show"),1600)}
+      else osd.classList.remove("show");
+    },fx&&!reduce?170:0);
+  }
+  function setActive(v){
+    if(v===active)return;active=v;
+    el.classList.toggle("paused",!v);tv.classList.toggle("paused",!v);
+    if(v){if(ch>=0)tune(ch,{fx:false})}else{clearTimeout(mountT);cancelAnimationFrame(raf);cv.classList.remove("on");unmount()}
+  }
+  const refresh=()=>setActive(inView&&!document.hidden&&el.offsetParent!==null);
+  new IntersectionObserver(([e])=>{inView=e.isIntersecting;refresh()},{rootMargin:"120px 0px"}).observe(el);
+  document.addEventListener("visibilitychange",refresh);
+
+  return {tune,refresh,get ch(){return ch},get active(){return active}};
+}
+
+/* ---------- 频道 ---------- */
+const CHANNELS={
+  0(layer,screen){ // 小脸：眼睛跟鼠标，rAF 合并 pointermove，rect 只在进入时量一次
+    layer.classList.add("face");
+    layer.innerHTML=`<div class="eyes"><div class="eye l"><i></i></div><div class="eye r"><i></i></div></div>
+      <svg class="mouth" viewBox="0 0 60 20" fill="none"><path d="M4 4 Q17 18 30 6 Q43 18 56 4" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
+      <div class="hint">按遥控器换台</div>`;
+    const pupils=[...layer.querySelectorAll(".eye i")];
+    let rect=screen.getBoundingClientRect(),px=0,py=0,pending=false;
+    const remeasure=()=>{rect=screen.getBoundingClientRect()};
+    const apply=()=>{pending=false;
+      const dx=Math.max(-1,Math.min(1,(px-(rect.left+rect.width/2))/rect.width*2)),dy=Math.max(-1,Math.min(1,(py-(rect.top+rect.height/2))/rect.height*2));
+      const t=`translate(${(dx*1.4).toFixed(2)}cqw,${(dy*3.4).toFixed(2)}cqw)`;pupils.forEach(p=>p.style.transform=t)};
+    const move=e=>{px=e.clientX;py=e.clientY;if(!pending){pending=true;requestAnimationFrame(apply)}};
+    addEventListener("pointermove",move,{passive:true});
+    addEventListener("scroll",remeasure,{passive:true});addEventListener("resize",remeasure);
+    return()=>{removeEventListener("pointermove",move);removeEventListener("scroll",remeasure);removeEventListener("resize",remeasure)};
+  },
+  1(layer,screen){ // 节目单
+    layer.classList.add("epg");
+    layer.innerHTML=`<div class="epg-h"><b>节目单</b><span>近两年所观看番剧</span></div>
+      <ol>${SHOWS.map((s,i)=>`<li><em>${String(i+1).padStart(2,"0")}</em>${s}</li>`).join("")}</ol>
+      <div class="ticker"><span>${LIST_DESC}　　　${LIST_DESC}</span></div>`;
+    const lis=[...layer.querySelectorAll("li")];let i=0,cur=-1,hover=false;
+    const set=n=>{if(cur>=0)lis[cur].classList.remove("on");lis[n].classList.add("on");cur=n};set(0);
+    lis.forEach((l,j)=>{l.onmouseenter=()=>{hover=true;i=j;set(j)};l.onmouseleave=()=>hover=false});
+    const t=setInterval(()=>{if(!hover){i=(i+1)%lis.length;set(i)}},1500);
+    return()=>clearInterval(t);
+  },
+  2(layer,screen){ // 点评字幕
+    layer.classList.add("rev");layer.style.backgroundImage=`url(${STILL})`;
+    layer.innerHTML=`<span class="tag">年度最佳 · 败犬女主太多了</span><div class="sub"></div><div class="bar">${REVIEW.map(()=>"<i><b></b></i>").join("")}</div>`;
+    const sub=layer.querySelector(".sub"),bars=[...layer.querySelectorAll(".bar i")];let i=-1,t=0,ft=0;
+    const show=n=>{i=n%REVIEW.length;sub.style.opacity=0;
+      clearTimeout(ft);ft=setTimeout(()=>{sub.textContent=REVIEW[i].replace(/，$/,"");sub.style.opacity=1},150);
+      const dur=1600+REVIEW[i].length*120;
+      bars.forEach((b,j)=>{b.className=j<i?"done":"";b.style.setProperty("--dur",dur+"ms")});void bars[i].offsetWidth;bars[i].className="now";
+      clearTimeout(t);t=setTimeout(()=>show(i+1),dur)};
+    show(0);
+    const click=()=>show(i+1);screen.addEventListener("click",click);
+    return()=>{clearTimeout(t);clearTimeout(ft);screen.removeEventListener("click",click)};
+  },
+  3(layer,screen){ // 台词弹幕
+    layer.classList.add("dm");
+    layer.innerHTML=`<div class="bgword">令人铭记的话语</div><div class="topline"></div><div class="bottom"><span>发个友善的弹幕见证当下</span><b>弹幕 ${QUOTES.length}</b></div>`;
+    const top=layer.querySelector(".topline");
+    if(reduce){const w=layer.querySelector(".bgword");w.innerHTML=QUOTES.map(q=>q[0]).join("<br>");w.style.cssText+="font-size:3cqw;color:#fff;letter-spacing:.05em;text-align:center;line-height:1.8";return()=>{}}
+
+    const compact=screen.classList.contains("compact"),LANES=compact?5:6,MAX=10,GAP=24;
+    const laneFree=new Array(LANES).fill(0); // 每条轨道「尾巴完全进场」的时间点，防止弹幕叠在一起
+    let k=0,hovering=false,paused=0,pauseStart=0;
+    const anims=new Set();
+    const onEnter=()=>{hovering=true;pauseStart=performance.now();anims.forEach(a=>a.pause())},
+          onLeave=()=>{hovering=false;paused+=performance.now()-pauseStart;anims.forEach(a=>a.play())};
+    screen.addEventListener("pointerenter",onEnter);screen.addEventListener("pointerleave",onLeave);
+    const spawn=()=>{
+      if(hovering||layer.childElementCount-3>=MAX)return;
+      const now=performance.now()-paused;
+      const lane=laneFree.findIndex(t=>t<=now);if(lane<0)return; // 没有空轨道就这次不发
+      const [q,s]=QUOTES[k++%QUOTES.length];
+      const d=document.createElement("div");d.className="dmi";
+      d.innerHTML=`${q}<small>${s?"—《"+s+"》":"— 出处待填"}</small>`;
+      d.style.color=DM_COLORS[(Math.random()*DM_COLORS.length)|0];
+      d.style.top=(compact?16+lane*13:13+lane*11)+"%";
+      const dur=8+Math.random()*3;
+      layer.appendChild(d);
+      const w=d.offsetWidth,sw=screen.clientWidth,speed=(sw+w)/dur; // px/s
+      laneFree[lane]=now+(w+GAP)/speed*1000;
+      // 关键帧只用 px，不用 calc/百分比/CSS 变量，浏览器才能把动画交给合成线程，主线程每帧不再重算样式
+      const a=d.animate([{transform:`translate3d(${sw}px,0,0)`},{transform:`translate3d(${-w}px,0,0)`}],{duration:dur*1000,easing:"linear",fill:"forwards"});
+      anims.add(a);
+      a.onfinish=()=>{anims.delete(a);d.remove()};
+    };
+    let topT=0;
+    const fire=()=>{const [q,s]=QUOTES[(Math.random()*QUOTES.length)|0];top.textContent=q+(s?"　—《"+s+"》":"");top.style.opacity=1;clearTimeout(topT);topT=setTimeout(()=>top.style.opacity=0,3200)};
+    spawn();const t0=setTimeout(spawn,600),t1=setTimeout(spawn,1300);
+    const t=setInterval(spawn,1200);
+    screen.addEventListener("click",fire);
+    return()=>{anims.forEach(a=>a.cancel());anims.clear();clearInterval(t);clearTimeout(t0);clearTimeout(t1);clearTimeout(topT);screen.removeEventListener("click",fire);
+      screen.removeEventListener("pointerenter",onEnter);screen.removeEventListener("pointerleave",onLeave)};
+  },
+};
+
+/* ---------- 布局 1：大电视 + 遥控 ---------- */
+const bigEl=document.getElementById("bigScreen");
+const big=makeScreen(bigEl);
+big.tune(0,{sound:false,fx:false});
+const rbtns=[...document.querySelectorAll(".rbtn[data-ch]")];
+const go=n=>{if(big.ch===n)return;big.tune(n);rbtns.forEach(b=>b.classList.toggle("on",+b.dataset.ch===n&&n>0))};
+rbtns.forEach(b=>b.onclick=()=>go(+b.dataset.ch));
+// 键盘换台只在大电视可见、且焦点不在输入框时生效
+addEventListener("keydown",e=>{
+  if(!big.active||e.metaKey||e.ctrlKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+  if(["0","1","2","3"].includes(e.key))go(+e.key);
+});
+bigEl.addEventListener("click",()=>{if(big.ch===0)go(1)});
+const muteBtn=document.getElementById("mute");
+muteBtn.onclick=()=>{muted=!muted;muteBtn.textContent=muted?"🔇":"🔈"};
+
+/* ---------- 布局 2：三台小电视（第一次切过去才创建） ---------- */
+const smalls=[];
+function initSmall(){
+  if(smalls.length)return;
+  document.querySelectorAll(".screen[data-fixed]").forEach(el=>{
+    const s=makeScreen(el),n=+el.dataset.fixed;smalls.push(s);s.tune(n,{sound:false,fx:false});
+    if(n===1)el.addEventListener("click",()=>s.tune(1));
+  });
+}
+document.querySelectorAll(".layout-switch button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".layout-switch button").forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="view-"+b.dataset.view));
+  if(b.dataset.view==="three")initSmall();
+  // display 切换不会触发 IntersectionObserver 的状态变化，手动刷新一次
+  requestAnimationFrame(()=>{big.refresh();smalls.forEach(s=>s.refresh())});
+});
+</script>
+</body>
+</html>

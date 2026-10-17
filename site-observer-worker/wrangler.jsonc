@@ -1,0 +1,59 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "site-observer-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-24",
+  "workers_dev": true,
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "head_sampling_rate": 1
+    }
+  },
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
+  "vars": {
+    "CLOUDFLARE_ACCOUNT_ID": "your-cloudflare-account-id",
+    "TARGET_WORKER_NAME": "my-remix-worker",
+    "TARGET_ENVIRONMENT": "production",
+    "DELIVERY_ENABLED": "true",
+    "AI_ENABLED": "true",
+    "AI_GATEWAY_ID": "my-ai-gateway",
+    "LOOKBACK_MINUTES": "10",
+    "RECOVERY_MINUTES": "30",
+    "QUERY_EVENT_LIMIT": "100",
+    "DAILY_HEARTBEAT_HOUR_JST": "9"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "site-observer-db",
+      "database_id": "your-d1-database-id",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "queues": {
+    "producers": [
+      {
+        "binding": "INCIDENT_QUEUE",
+        "queue": "site-observer-incidents"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "site-observer-incidents",
+        "max_batch_size": 10,
+        "max_batch_timeout": 5,
+        "max_retries": 5,
+        "dead_letter_queue": "site-observer-incidents-dlq",
+        "retry_delay": 60
+      }
+    ]
+  }
+}

@@ -1,0 +1,1633 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>音乐图版集 · 预览</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5f4ed;
+    --paper: #faf9f5;
+    --band: #e3dccb;
+    --line: #d8d3c4;
+    --ink: #262421;
+    --ink-2: #5b554b;
+    --ink-3: #938a78;
+    --accent: #d97757;
+    --rust: #a33b22;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "SiteSourceHanSerif", "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .wrap { padding: 0 40px; } }
+
+  /* ---------- 页头 ---------- */
+  .head { padding-top: 56px; padding-bottom: 18px; }
+  .eyebrow { font-size: 12px; letter-spacing: .2em; color: var(--ink-3); }
+  h1 { font-size: clamp(38px, 5.4vw, 64px); font-weight: 700; margin: 10px 0 6px; letter-spacing: .04em; line-height: 1.1; }
+  .sub { font-size: 15px; color: var(--ink-2); font-style: italic; margin: 0; }
+  .stats { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 18px; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .stats b { color: var(--ink); font-weight: 600; margin-right: 2px; }
+  .toc { display: flex; flex-wrap: wrap; gap: 6px 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .toc a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; }
+  .toc a b { color: var(--accent); font-weight: 600; letter-spacing: .12em; margin-right: 6px; font-size: 11.5px; }
+  .toc a:hover, .toc a:focus-visible { color: var(--rust); border-color: currentColor; }
+
+  /* ---------- 图版通用 ---------- */
+  .plate-sec { scroll-margin-top: 12px; }
+  .plate-head { padding-top: 64px; padding-bottom: 8px; }
+  .plate-no { font-size: 12px; letter-spacing: .24em; color: var(--accent); font-weight: 600; }
+  .plate-head h2 { margin: 6px 0 6px; font-size: clamp(24px, 3vw, 32px); letter-spacing: .03em; }
+  .plate-head p { margin: 0; color: var(--ink-2); font-size: 14px; max-width: 780px; line-height: 1.8; }
+  .caption { padding-top: 18px; font-size: 13.5px; line-height: 1.9; color: var(--ink-2); max-width: 980px; }
+  .caption b { color: var(--ink); }
+  .fig-t { font-size: 12px; color: var(--ink-3); letter-spacing: .06em; margin: 0 0 10px; }
+  .linkbtn { font: inherit; font-size: 12.5px; background: none; border: 0; border-bottom: 1px solid var(--accent); color: var(--rust); padding: 0 0 1px; cursor: pointer; }
+  .linkbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .no { font-size: 11px; letter-spacing: .18em; color: var(--ink-3); }
+  .guess { color: var(--accent); font-size: 12px; }
+
+  /* ---------- Plate I 工具条 ---------- */
+  .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; padding-top: 14px; padding-bottom: 6px; font-size: 13px; color: var(--ink-2); }
+  .seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 999px; overflow: hidden; }
+  .seg button { font: inherit; font-size: 13px; background: transparent; color: var(--ink); border: 0; padding: 7px 14px; cursor: pointer; }
+  .seg button + button { border-left: 1px solid var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+  .grow { display: flex; align-items: center; gap: 10px; flex: 1 1 340px; min-width: 0; max-width: 560px; }
+  .grow button { font: inherit; font-size: 13px; border: 1px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+  .grow button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .grow input[type="range"] { flex: 1; min-width: 60px; accent-color: var(--accent); }
+  .grow output { font-variant-numeric: tabular-nums; min-width: 8.5em; color: var(--ink); white-space: nowrap; }
+  .note { color: var(--ink-3); font-size: 12.5px; }
+
+  /* ---------- Plate I 图版 + 标本卡 ---------- */
+  .stage { display: grid; gap: 24px; padding-top: 4px; }
+  @media (min-width: 1100px) { .stage { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; } }
+  .plate { margin: 0; }
+  .plate svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+
+  #tree text { font-family: inherit; }
+  #tree .edge, #tree .tick, #tree .spec, #tree .bubble, #tree .dot { transition: opacity .12s linear; }
+  #tree .spec, #tree .band, #tree .hit { cursor: pointer; }
+  #tree .nohit { pointer-events: none; }
+  #tree.focus .edge { opacity: .12; }
+  #tree.focus .edge.on { opacity: 1; stroke-width: 1.7px; }
+  #tree.focus .tick { opacity: .18; }
+  #tree.focus .tick.on { opacity: 1; }
+  #tree.focus .spec { opacity: .28; }
+  #tree.focus .spec.on { opacity: 1; }
+  #tree.focus .dot { opacity: .2; }
+  #tree.focus .dot.on { opacity: 1; }
+  #tree.focus .bubble { opacity: .3; }
+  #tree .tick.pending { visibility: hidden; }
+  #tree .spec .pin { transform-box: fill-box; transform-origin: center; transition: opacity .35s ease, transform .45s cubic-bezier(.2, .9, .3, 1.35); }
+  #tree .spec.pending { pointer-events: none; }
+  #tree .spec.pending .pin { opacity: 0; transform: translateY(-7px) scale(1.25); }
+  #tree .spec:focus, #tree .spec:focus-visible, #tree .band:focus, #tree .hit:focus { outline: none; }
+  #tree .spec:focus-visible rect { stroke: var(--accent); stroke-width: 2px; }
+
+  /* 标本框：外框 + 衬纸凹槽 + 玻璃反光 */
+  aside.card {
+    position: relative; isolation: isolate;
+    background: linear-gradient(180deg, #fcfbf7 0%, #f6f3ea 100%);
+    border: 1px solid #cdc3ad; border-radius: 2px;
+    padding: 22px 22px 24px; font-size: 13.5px; line-height: 1.75;
+    box-shadow:
+      0 0 0 6px #ece6d7,
+      0 0 0 7px #cfc5b0,
+      0 14px 28px -14px rgba(70, 54, 30, .32),
+      0 3px 8px rgba(70, 54, 30, .07);
+  }
+  aside.card::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; border-radius: inherit;
+    background:
+      linear-gradient(118deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.12) 22%, rgba(255,255,255,0) 34%,
+        rgba(255,255,255,0) 60%, rgba(255,255,255,.26) 66%, rgba(255,255,255,0) 74%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.45), inset 0 8px 16px -10px rgba(70, 54, 30, .22);
+  }
+  aside.card .close, aside.card audio { position: relative; z-index: 2; }
+  @media (min-width: 1100px) { aside.card { position: sticky; top: 20px; } }
+  .card h3, .fossil h3 { margin: 0 0 4px; font-size: 20px; line-height: 1.35; }
+  .card .cover { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin: 12px 0 14px; background: var(--band); border: 6px solid #fff; box-shadow: 0 0 0 1px var(--line), 0 7px 12px -7px rgba(70, 54, 30, .38); }
+  .card dl, .fossil dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 12px 0 0; }
+  .card dt, .fossil dt { color: var(--ink-3); font-size: 12px; padding-top: 2px; }
+  .card dd, .fossil dd { margin: 0; }
+  .card .sw { display: inline-block; width: 9px; height: 9px; margin-right: 6px; vertical-align: 1px; }
+  .card blockquote { margin: 14px 0 0; padding: 10px 12px; background: var(--bg); border-left: 2px solid var(--accent); font-size: 13px; color: var(--ink-2); }
+  .card .path { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 12px; color: var(--ink-3); }
+  .card audio { width: 100%; margin-top: 12px; height: 34px; }
+  .card ul { margin: 10px 0 0; padding-left: 18px; }
+  .card li { margin: 2px 0; }
+  .card .close { float: right; font: inherit; font-size: 12px; background: none; border: 1px solid var(--line); color: var(--ink-2); padding: 2px 10px; cursor: pointer; }
+
+  /* ---------- Plate II 地层柱 ---------- */
+  .strata-wrap { display: grid; gap: 28px; padding-top: 18px; }
+  @media (min-width: 1000px) { .strata-wrap { grid-template-columns: minmax(0, 640px) 340px; align-items: start; justify-content: space-between; } }
+  #strata { display: block; width: 100%; height: auto; }
+  #strata text { font-family: inherit; }
+  #strata .layer-g { cursor: pointer; transition: transform .8s var(--ease), opacity .8s ease; transition-delay: calc(var(--i) * 120ms); }
+  #strata:not(.settled) .layer-g { opacity: 0; transform: translateY(-18px); }
+  #strata .dimmable { transition: opacity .2s ease; }
+  #strata.focus .layer-g:not(.on) .dimmable { opacity: .42; }
+  #strata .layer-g.on path.layer { stroke: var(--accent); stroke-width: 1.6px; }
+  #strata .layer-g:focus, #strata .layer-g:focus-visible { outline: none; }
+  #strata .layer-g:focus-visible path.layer { stroke: var(--accent); stroke-width: 2px; }
+
+  .fossil { background: var(--paper); border: 1px solid var(--line); padding: 20px; font-size: 13.5px; line-height: 1.75; }
+  @media (min-width: 1000px) { .fossil { position: sticky; top: 20px; } }
+  .fossil .kicker { font-size: 13px; color: var(--rust); margin-top: 8px; }
+  .fossil .photo { width: 132px; height: 132px; border-radius: 50%; overflow: hidden; margin: 14px 0 6px 10px; background: var(--band);
+    box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--ink-3), 0 0 0 9px var(--paper), 0 0 0 10px var(--line); }
+  .fossil .photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(.22) saturate(.88); }
+  .fossil .photo-note { font-size: 11.5px; color: var(--ink-3); margin: 8px 0 0; }
+  .fossil h3 { margin-top: 10px; }
+  .fossil .style { margin: 0; color: var(--ink-3); font-size: 12.5px; letter-spacing: .06em; }
+  .fossil .desc { margin: 10px 0 0; color: var(--ink-2); }
+  .measure { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); }
+  .measure .t { font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
+  .measure .row { display: grid; grid-template-columns: 1.4em 1fr auto; gap: 2px 8px; font-size: 12.5px; margin: 7px 0; font-variant-numeric: tabular-nums; }
+  .measure .row > span:first-child { color: var(--ink-3); }
+  .measure .bar { grid-column: 2 / -1; height: 5px; background: var(--band); }
+  .measure .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .8s var(--ease); }
+  .fossil .linkbtn { margin-top: 16px; }
+
+  /* ---------- Plate III 测序 ---------- */
+  .gene-wrap { display: grid; gap: 34px; padding-top: 18px; }
+  @media (min-width: 1000px) { .gene-wrap { grid-template-columns: 380px minmax(0, 1fr); align-items: start; } .motif { position: sticky; top: 20px; } }
+  #motif { width: 100%; height: auto; display: block; }
+  #motif text { font-family: inherit; }
+  .freq { margin-top: 14px; font-size: 12.5px; color: var(--ink-2); line-height: 1.9; }
+  .freq b { color: var(--ink); font-weight: 600; }
+  .reads { display: grid; gap: 16px; }
+  .read { padding-bottom: 12px; border-bottom: 1px dashed var(--line); }
+  .read-h { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-3); margin-bottom: 4px; }
+  .read-h b { color: var(--accent); letter-spacing: .1em; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .read-h .linkbtn { margin-left: auto; }
+  .trace { display: block; width: 100%; overflow: visible; }
+  .trace text { font-family: inherit; }
+
+  /* ---------- Plate IV 日晷 ---------- */
+  .dial-wrap { display: grid; gap: 30px; padding-top: 18px; align-items: center; }
+  @media (min-width: 900px) { .dial-wrap { grid-template-columns: minmax(0, 520px) minmax(0, 420px); justify-content: space-between; } }
+  #dial { width: 100%; max-width: 520px; height: auto; display: block; margin: 0 auto; }
+  #dial text { font-family: inherit; }
+  .now { text-align: center; font-size: 14px; color: var(--ink-2); margin: 6px 0 0; min-height: 1.6em; }
+  .now b { color: var(--rust); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .log { background: var(--paper); border: 1px solid var(--line); padding: 22px; font-size: 13.5px; }
+  .log dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 22px; margin: 14px 0 0; align-items: baseline; }
+  .log dt { color: var(--ink-3); font-size: 12.5px; }
+  .log dd { margin: 0; }
+  .log dd b { font-size: 21px; font-weight: 600; font-variant-numeric: tabular-nums; margin-right: 4px; }
+  .devbar { margin-top: 18px; }
+  .devbar .bar { display: flex; height: 8px; background: var(--band); }
+  .devbar .bar i { background: var(--ink-2); }
+  .devbar .lbl { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--ink-3); margin-top: 5px; }
+  .poem { margin: 22px 0 0; padding-left: 14px; border-left: 2px solid var(--accent); line-height: 2; color: var(--ink-2); font-size: 14px; }
+
+  /* ---------- Plate V 标本抽屉 ---------- */
+  .drawer { max-width: 1000px; margin: 18px auto 0; transition: transform 1s var(--ease); }
+  .drawer:not(.open) { transform: translateY(-14px); }
+  .drawer-bed { position: relative; padding: 36px 30px 30px; display: grid; gap: 30px 26px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    background: #efe9dc; background-image: linear-gradient(rgba(147, 138, 120, .12) 1px, transparent 1px), linear-gradient(90deg, rgba(147, 138, 120, .12) 1px, transparent 1px); background-size: 22px 22px;
+    border: 14px solid #c9ad84; border-bottom: 0; box-shadow: inset 0 3px 12px rgba(38, 36, 33, .16);
+    clip-path: inset(0 0 0 0); transition: clip-path 1.1s var(--ease); }
+  .drawer:not(.open) .drawer-bed { clip-path: inset(0 0 100% 0); }
+  .drawer-bed::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .26) 48%, transparent 58%); }
+  .drawer-front { height: 48px; display: flex; align-items: center; justify-content: center; gap: 20px; background: linear-gradient(#c9ad84, #b4966b); border-radius: 0 0 4px 4px; box-shadow: 0 8px 18px -12px rgba(38, 36, 33, .5); }
+  .drawer-front .tag { background: #f5efe1; border: 1px solid #8f7653; font-size: 11px; letter-spacing: .16em; padding: 3px 10px; color: #3d3934; }
+  .drawer-front .handle { width: 72px; height: 10px; border-radius: 6px; background: #7f6646; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3); }
+  .pinned { all: unset; box-sizing: border-box; display: block; text-align: center; cursor: default; transition: transform .25s var(--ease); }
+  button.pinned { cursor: pointer; }
+  .pinned:hover { transform: translateY(-3px) rotate(-.4deg); }
+  .pinned:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+  .pinned .mat { position: relative; display: block; background: #fff; padding: 8px; box-shadow: 0 1px 2px rgba(38, 36, 33, .18), 0 8px 16px -10px rgba(38, 36, 33, .4); }
+  .pinned .mat::before { content: ""; position: absolute; top: -4px; left: 50%; width: 9px; height: 9px; border-radius: 50%; transform: translateX(-50%); background: radial-gradient(circle at 35% 35%, #f0d2c4, #a33b22 70%); box-shadow: 0 1px 2px rgba(38, 36, 33, .4); }
+  .pinned img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; background: var(--band); }
+  .pinned .lbl { display: inline-block; margin-top: 12px; font-size: 12px; line-height: 1.5; background: #fbf8f1; border: 1px solid var(--line); padding: 4px 8px; }
+  .pinned .lbl b { display: block; font-weight: 600; }
+  .pinned .lbl span { color: var(--ink-3); }
+  .moth { position: absolute; right: 22px; bottom: 16px; width: 64px; text-align: center; font-size: 10px; color: var(--ink-3); line-height: 1.3; }
+  .moth button { all: unset; cursor: pointer; display: block; margin: 0 auto 2px; }
+  .moth button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- 附录 ---------- */
+  .index { padding-top: 26px; padding-bottom: 80px; border-top: 1px solid var(--line); margin-top: 64px; }
+  .index h2 { font-size: 15px; letter-spacing: .12em; margin: 0 0 14px; }
+  .index-grid { display: grid; gap: 20px 32px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .index h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+  .index h4 span { color: var(--ink-3); font-weight: 400; letter-spacing: .1em; font-size: 11px; margin-left: 6px; }
+  .index ul { list-style: none; margin: 0; padding: 0; }
+  .index button { all: unset; display: flex; justify-content: space-between; gap: 10px; width: 100%; padding: 4px 0; border-bottom: 1px dotted var(--line); font-size: 13px; cursor: pointer; }
+  .index button span { color: var(--ink-3); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .index button:hover, .index button:focus-visible { color: var(--rust); }
+
+  .tooltip { position: fixed; left: 0; top: 0; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 12px; padding: 5px 9px; border-radius: 3px; opacity: 0; white-space: nowrap; z-index: 10; }
+  .tooltip.show { opacity: 1; }
+  @media (hover: none) { .tooltip { display: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    #tree *, #strata *, .measure .bar i, .drawer, .drawer-bed, .pinned { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap head">
+  <div class="eyebrow">MUSIC · 预览稿 · 2026-10-16</div>
+  <h1>音乐图版集</h1>
+  <p class="sub">Five plates on my listening, 2015 — 2026</p>
+  <div class="stats">
+    <span><b>6869</b>首</span>
+    <span><b>750+</b>位艺人</span>
+    <span><b>99999+</b>分钟</span>
+    <span>九年，五张图版</span>
+  </div>
+</header>
+<nav class="wrap toc" aria-label="图版目录">
+  <a href="#plate-1"><b>I</b>谱系树 · 我听过的一切</a>
+  <a href="#plate-2"><b>II</b>地层柱 · 年度歌手</a>
+  <a href="#plate-3"><b>III</b>测序 · 关键词与歌词</a>
+  <a href="#plate-4"><b>IV</b>日晷 · 下午听歌</a>
+  <a href="#plate-5"><b>V</b>标本抽屉 · 常听专辑</a>
+  <a href="#appendix"><b>附录</b>图版索引</a>
+</nav>
+
+<!-- ================= PLATE I ================= -->
+<section class="plate-sec" id="plate-1">
+  <div class="wrap plate-head">
+    <div class="plate-no">PLATE I · 生物学</div>
+    <h2>谱系树：我听过的一切</h2>
+    <p>像画物种演化那样画歌单。中心是第一首歌，越往外越接近现在。分类一层只看一件事：科是风格，属是歌手，种是歌；语种和来源放在外圈的两道细环上。</p>
+  </div>
+  <div class="wrap toolbar">
+    <div class="grow">
+      <button type="button" id="growBtn">▶ 生长</button>
+      <input type="range" id="growRange" min="2015" max="2026.8" step="0.1" value="2026.8" aria-label="时间" />
+      <output id="growOut" for="growRange">今</output>
+    </div>
+    <div class="seg" role="group" aria-label="数据密度">
+      <button type="button" data-mode="full" aria-pressed="true">模拟完整歌单</button>
+      <button type="button" data-mode="known" aria-pressed="false">只看现有数据</button>
+    </div>
+    <span class="note">未命名的细枝是占位；年份带「?」的是推测。</span>
+  </div>
+  <div class="wrap stage">
+    <figure class="plate">
+      <svg id="tree" viewBox="0 0 1060 1060" role="img" aria-label="音乐谱系放射树：中心是 2015 年的第一首歌，越往外越接近现在"></svg>
+    </figure>
+    <aside class="card" id="card" aria-live="polite"></aside>
+  </div>
+  <div class="wrap caption">
+    <p><b>图 1 ｜ 我的听歌谱系（2015—2026）。</b>
+    中心 <b>A</b> 是第一首入谱的歌《梦醒时分》（2015）。<b>半径就是时间</b>，虚线圈每两年一道，右侧缺口里标着年份。
+    第一层分叉是<b>风格（科 B–E）</b>，第二层是<b>歌手（属）</b>，分叉点在他们第一次进歌单的那一年。
+    枝条越红，这一支<b>循环得越狠</b>；橙色圆点 <b>J–R</b> 是<b>品味转折点</b>。
+    外圈两道细环：内环是每首歌的<b>语种</b>，外环是<b>来源</b>（原创不标，只标动画、游戏、影视、同人与翻唱）。最外面钉着代表曲目的封面标本。</p>
+  </div>
+</section>
+
+<!-- ================= PLATE II ================= -->
+<section class="plate-sec" id="plate-2">
+  <div class="wrap plate-head">
+    <div class="plate-no">PLATE II · 地质学</div>
+    <h2>地层柱：年度歌手是每一层的标准化石</h2>
+    <p>地质学家靠「标准化石」给岩层定年代：某种化石只在某一层大量出现，看到它就知道是哪一年。年度歌手就是这样的化石。Mili 压在最底下，已经压成了片岩；Vivienne 在四层里反复出现。</p>
+  </div>
+  <div class="wrap strata-wrap">
+    <figure class="plate"><svg id="strata" role="img" aria-label="年度歌手地层柱，从 2015 年到现在"></svg></figure>
+    <aside class="fossil" id="fossil" aria-live="polite"></aside>
+  </div>
+</section>
+
+<!-- ================= PLATE III ================= -->
+<section class="plate-sec" id="plate-3">
+  <div class="wrap plate-head">
+    <div class="plate-no">PLATE III · 遗传学</div>
+    <h2>测序：写进我基因里的句子</h2>
+    <p>左边是年度关键词的「序列标识图」：字越高，在你听的歌里出现得越多。右边每句最爱的歌词是一条测序读段：上面是读出来的字，下面的峰是这个字在 12 句里出现的频率，颜色是文字种类，和 Plate I 的语种同色。滚到哪一句，就读出哪一句。</p>
+  </div>
+  <div class="wrap gene-wrap">
+    <div class="motif">
+      <p class="fig-t">图 3a ｜ 序列标识图 · 年度关键词</p>
+      <svg id="motif" role="img" aria-label="年度关键词：梦想出现 261 次，发现出现 145 次"></svg>
+      <p class="freq" id="freq"></p>
+    </div>
+    <div>
+      <p class="fig-t">图 3b ｜ 测序峰图 · 最爱的 12 句歌词</p>
+      <div class="reads" id="reads"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLATE IV ================= -->
+<section class="plate-sec" id="plate-4">
+  <div class="wrap plate-head">
+    <div class="plate-no">PLATE IV · 时间生物学</div>
+    <h2>日晷：我最常在下午听歌</h2>
+    <p>一天 24 小时摊成一圈，正午在上、午夜在下。那根指针指着你此刻的时间，橙色的那一段是我一年里最常听歌的时候。</p>
+  </div>
+  <div class="wrap dial-wrap">
+    <div>
+      <svg id="dial" viewBox="0 0 520 520" role="img" aria-label="24 小时日晷，14:00 到 18:00 是最活跃的听歌时段"></svg>
+      <p class="now" id="now" aria-live="polite"></p>
+    </div>
+    <div class="log">
+      <div class="no">OBSERVATION LOG · 全年</div>
+      <dl>
+        <dt>最活跃时段</dt><dd><b>14:00–18:00</b></dd>
+        <dt>总听歌时长</dt><dd><b>387</b>小时 28 分</dd>
+        <dt>听歌总数</dt><dd><b>1330</b>首</dd>
+        <dt>电脑听歌</dt><dd><b>128</b>小时</dd>
+        <dt>播客</dt><dd><b>2</b>小时</dd>
+      </dl>
+      <div class="devbar" aria-hidden="true">
+        <div class="bar"><i style="width:33%"></i></div>
+        <div class="lbl"><span>电脑 128 小时</span><span>其他设备 ≈259 小时</span></div>
+      </div>
+      <p class="poem">大家都急着赶路<br />只有你<br />在音乐里打捞最后的晚霞</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLATE V ================= -->
+<section class="plate-sec" id="plate-5">
+  <div class="wrap plate-head">
+    <div class="plate-no">PLATE V · 博物馆</div>
+    <h2>标本抽屉：常听的专辑</h2>
+    <p>最后一格抽屉，钉着几张反复听的专辑。</p>
+  </div>
+  <div class="wrap">
+    <div class="drawer" id="drawer">
+      <div class="drawer-bed" id="drawerBed"></div>
+      <div class="drawer-front"><span class="tag">ALBUMS · 常听专辑 · No.05</span><span class="handle"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap index" id="appendix">
+  <h2>附录 · 图版索引</h2>
+  <div class="index-grid" id="index"></div>
+</section>
+
+<div class="tooltip" id="tooltip" role="presentation"></div>
+
+<script>
+(() => {
+  /* ================= 几何 ================= */
+  const CX = 530, CY = 530;
+  const Y0 = 2015, Y1 = 2026.8;           // 根 = 2015，外缘 = 现在
+  const R0 = 26, RT = 290;                // 根半径 / 枝梢半径
+  const LANG_R = [293, 303];              // 语种细环
+  const SRC_R = [305, 311];               // 来源细环
+  const FAM_BAND = [315, 333];            // 风格环（浅）
+  const ART_BAND = [336, 350];            // 歌手环（深）
+  const SPEC_R = 398, MAT = 42, IMG = 36; // 标本
+  const GAP = 12 * Math.PI / 180;         // 右侧时间轴缺口
+  const TAU = Math.PI * 2;
+
+  const rOf = (y) => R0 + (y - Y0) / (Y1 - Y0) * (RT - R0);
+  const pt = (r, a) => [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+  const n2 = (v) => (Math.round(v * 100) / 100).toString();
+  const P = (r, a) => pt(r, a).map(n2).join(",");
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  function mulberry32(seed) {
+    let a = seed;
+    return () => {
+      a |= 0; a = (a + 0x6d2b79f5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const gauss = (rng) => { let u = 0, v = 0; while (!u) u = rng(); while (!v) v = rng(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); };
+  const pick = (rng, mix) => { const x = rng(); let acc = 0; for (const k of Object.keys(mix)) { acc += mix[k]; if (x < acc) return k; } return Object.keys(mix).pop(); };
+
+  /* ================= 数据 ================= */
+  const LANG = {
+    zh:   { label: "中文", color: "#b5523b" },
+    ja:   { label: "日文", color: "#4f6d8a" },
+    en:   { label: "英文", color: "#76844f" },
+    ko:   { label: "韩文", color: "#b8913f" },
+    inst: { label: "纯音乐", color: "#8d7391" },
+  };
+  // 来源：原创不画，其余用四档墨色，避免和语种的颜色打架
+  const SRC = {
+    orig:   { label: "原创", color: null },
+    anime:  { label: "动画 · VN", color: "#262421" },
+    game:   { label: "游戏", color: "#5b554b" },
+    film:   { label: "影视", color: "#938a78" },
+    doujin: { label: "同人 · 翻唱", color: "#c4b9a3" },
+  };
+  const CDN = {
+    dd: "https://cdn.xn--cckl9nsb.com/SVG/dd.8c2ebb9c.webp",
+    i:  "https://cdn.xn--cckl9nsb.com/SVG/i.50f6f1af.webp",
+    d:  "https://cdn.xn--cckl9nsb.com/SVG/d.80a22a82.webp",
+    a:  "https://cdn.xn--cckl9nsb.com/SVG/a.8815b031.webp",
+    r:  "https://cdn.xn--cckl9nsb.com/SVG/r.cc7e146a.webp",
+    u:  "https://cdn.xn--cckl9nsb.com/SVG/u.ea555ffd.webp",
+    v:  "https://cdn.xn--cckl9nsb.com/SVG/v.5ac2cfd1.webp",
+    bb: "https://cdn.xn--cckl9nsb.com/SVG/bb.0e3131e1.webp",
+    h:  "https://cdn.xn--cckl9nsb.com/SVG/h.28dda06f.webp",
+    m:  "https://cdn.xn--cckl9nsb.com/SVG/m.f4791784.webp",
+    y:  "https://cdn.xn--cckl9nsb.com/SVG/y.638bc883.webp",
+    f:  "https://cdn.xn--cckl9nsb.com/SVG/f.1be7a188.webp",
+    o:  "https://cdn.xn--cckl9nsb.com/SVG/o.99076e5a.webp",
+    ee: "https://cdn.xn--cckl9nsb.com/SVG/ee.245b0be0.webp",
+    g:  "https://cdn.xn--cckl9nsb.com/SVG/g.0ba8a6b6.webp",
+    n:  "https://cdn.xn--cckl9nsb.com/SVG/n.88252b75.webp",
+    t:  "https://cdn.xn--cckl9nsb.com/SVG/t.63c92c1d.webp",
+    w:  "https://cdn.xn--cckl9nsb.com/SVG/w.12a632bc.webp",
+  };
+  const NE = (u) => `${u}?param=200y200`;
+  const AUDIO = (id) => `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+  const MILI_COVER = NE("https://p2.music.126.net/xIa3fW-PIvzK78_GqYycvw==/8897248092051259.jpg");
+
+  // 规则：科 = 风格（每位歌手只归一科），语种和来源按「每首歌」标在外环
+  const FAMILIES = [
+    { id: "pop", letter: "B", zh: "流行", latin: "POP", mix: { zh: .45, ja: .35, en: .12, ko: .08 }, src: { orig: .62, anime: .24, film: .07, game: .07 }, fill: { artists: 36, tips: [1, 8] },
+      artists: [
+        { id: "liangjingru", name: "梁静茹", heat: 1.1, extra: 4, songs: [
+          { t: "梦醒时分 (Live)", y: 2015, lang: "zh", src: "orig", cover: CDN.dd, note: "第一首入谱的歌" } ] },
+        { id: "key", name: "Key / 麻枝准", heat: 2.4, extra: 16, songs: [
+          { t: "Killer Song", y: 2017, lang: "ja", src: "orig", cover: CDN.i, with: "やなぎなぎ", note: "分享星云" },
+          { t: "アルカテイル", y: 2018, guess: true, lang: "ja", src: "anime", cover: NE("https://p2.music.126.net/MVWKZCUCNQocuhMRBpL-Qw==/109951169976613728.jpg"), url: AUDIO(1311319929), with: "鈴木このみ" },
+          { t: "エタニクル", y: 2025, guess: true, lang: "ja", src: "anime", srcGuess: true, cover: NE("https://p1.music.126.net/Q6h2EQ9_OpFy7rrfOQSjzQ==/109951172114617807.jpg"), url: AUDIO(2752941841), with: "ASCA" } ] },
+        { id: "claris", name: "ClariS", heat: 1.5, extra: 4, songs: [
+          { t: "コネクト", y: 2017, guess: true, lang: "ja", src: "anime", cover: NE("https://p1.music.126.net/w1-Rz3cBOA0_rSTAzne8xA==/109951168080908679.jpg"), url: "https://oss.xn--cckl9nsb.com/ClariS.mp3" } ] },
+        { id: "mashiro", name: "水瀬ましろ", heat: 1.6, extra: 2, songs: [
+          { t: "まっしろな雪", y: 2018, guess: true, lang: "ja", src: "anime", srcGuess: true, cover: NE("https://p1.music.126.net/7Htte2C_Hiv0f9REtBpC5w==/7758154045839218.jpg"), url: AUDIO(30841657), lyric: "まっしろまっしろ まっしろな雪が降る" } ] },
+        { id: "monkeymajik", name: "MONKEY MAJIK", heat: 1.4, extra: 4, songs: [
+          { t: "Headlight", y: 2018, lang: "ja", src: "orig", cover: CDN.a, note: "心动星系" } ] },
+        { id: "maeshima", name: "前島麻由", heat: 1.3, extra: 2, songs: [
+          { t: "longshot", y: 2019, guess: true, lang: "ja", src: "anime", srcGuess: true, cover: CDN.g, lyric: "I will never gonna leave you never wanna lose you，we'll make it in the end" } ] },
+        { id: "sunnan", name: "孙楠 / 陈楚生", heat: 1.3, extra: 1, songs: [
+          { t: "无名之辈", y: 2020, guess: true, lang: "zh", src: "orig", srcGuess: true, lyric: "我是离开，无名的人啊，我敬你一杯酒，敬你的沉默和每一声怒吼" } ] },
+        { id: "straykids", name: "Stray Kids", heat: 1.3, extra: 3, songs: [
+          { t: "SLUMP -Japanese ver.-", y: 2020, lang: "ja", src: "anime", cover: CDN.v, note: "那年春天 · 《神之塔》片头" } ] },
+        { id: "caijianya", name: "蔡健雅", heat: 1.2, extra: 3, songs: [
+          { t: "Letting Go", y: 2022, lang: "zh", src: "orig", cover: CDN.h, note: "雨天心动" } ] },
+        { id: "wangheye", name: "王赫野 / 姚晓棠", heat: 1.2, extra: 1, songs: [
+          { t: "虹之间 (Live)", y: 2023, guess: true, lang: "zh", src: "orig", lyric: "我看见希望闪耀在虹之间，光芒凝结于你我的那片天" } ] },
+        { id: "wuthering", name: "鸣潮先约电台", heat: 1.8, extra: 9, songs: [
+          { t: "Daisy Crown (英文版)", y: 2025, guess: true, lang: "en", src: "game", cover: NE("https://p1.music.126.net/8tEkrZSZgZAxtN3RTArlxg==/109951170566496350.jpg"), url: AUDIO(2682067043), with: "Empty old City" },
+          { t: "远航星的告别", y: 2025, guess: true, lang: "inst", src: "game", cover: NE("https://p1.music.126.net/Ao3z8Adsv-yzXfN6LjKPyw==/109951172692547015.jpg"), url: AUDIO(3346496288), with: "jixwang / Tarokiki / Emi Evans" } ] },
+      ] },
+    { id: "elec", letter: "C", zh: "电子", latin: "ELECTRONIC", mix: { en: .7, ja: .15, inst: .15 }, src: { orig: .6, doujin: .25, game: .15 }, fill: { artists: 18, tips: [1, 7] },
+      artists: [
+        { id: "mili", name: "Mili", heat: 2.6, extra: 14, songs: [
+          { t: "Nine Point Eight", y: 2016, guess: true, lang: "en", src: "orig", cover: MILI_COVER, url: AUDIO(28921695), lyric: "Petals dance for our valediction，And synchronize to your frozen pulsation" },
+          { t: "world.execute(me);", y: 2015, guess: true, lang: "en", src: "orig" },
+          { t: "Ga1ahad and Scientific Witchery", y: 2017, guess: true, lang: "en", src: "orig" } ] },
+        { id: "vivienne", name: "Vivienne", heat: 3.0, extra: 18, songs: [
+          { t: "The Ray of Light", y: 2017, lang: "en", src: "orig", cover: CDN.d, note: "光芒星团" },
+          { t: "Goodbye", y: 2018, guess: true, lang: "en", src: "orig", cover: NE("https://p2.music.126.net/rerz4ODsZE-kkkBojzbyPQ==/3444769938584968.jpg"), url: AUDIO(425280603), lyric: "That since then I've found my way back...but I'll miss you" },
+          { t: "Phantom", y: 2021, lang: "en", src: "orig", cover: CDN.bb, plays: 132, note: "多次循环", lyric: "And now that I understand, have I the courage to try" },
+          { t: "Can't look away", y: 2022, guess: true, lang: "en", src: "orig", plays: 176 },
+          { t: "Falling in Love Again", y: 2023, guess: true, lang: "en", src: "orig", plays: 118 },
+          { t: "World of You", y: 2024, guess: true, lang: "en", src: "orig", plays: 96 },
+          { t: "Distant Memory", y: 2024, guess: true, lang: "en", src: "orig", plays: 80 } ] },
+        { id: "felt", name: "FELT", heat: 2.6, extra: 16, songs: [
+          { t: "Beautiful Trick", y: 2019, guess: true, lang: "en", src: "doujin", lyric: "The fate plays a amazing trick on you，You can't hold it steady" },
+          { t: "You're the Shine", full: "You're the Shine (Night Butterflies)", y: 2019, guess: true, lang: "en", src: "doujin", cover: NE("https://p2.music.126.net/uPGwUIt5BzR650v2T8bmqw==/7994549047861705.jpg"), url: AUDIO(729877), butterfly: true },
+          { t: "Moments", y: 2020, guess: true, lang: "en", src: "doujin", cover: NE("https://p2.music.126.net/HCBGEKOrbSdS6Yy9mMgsCw==/6664139977386194.jpg"), url: AUDIO(29848676) } ] },
+        { id: "stevejames", name: "Steve James", heat: 1.1, extra: 2, songs: [
+          { t: "Renaissance", y: 2019, lang: "en", src: "orig", cover: CDN.r, with: "Clairity", note: "日出星座" } ] },
+        { id: "tronicbox", name: "TRONICBOX", heat: 1.2, extra: 3, songs: [
+          { t: "Somebody That I Used To…", y: 2023, lang: "en", src: "doujin", cover: CDN.m, note: "最爱的情歌 · 翻唱" } ] },
+      ] },
+    { id: "gufeng", letter: "D", zh: "古风", latin: "GUFENG", mix: { zh: .95, inst: .05 }, src: { orig: .8, game: .2 }, fill: { artists: 5, tips: [1, 5] },
+      artists: [
+        { id: "yinque", name: "音阙诗听", heat: 1.0, extra: 3, songs: [
+          { t: "小满", y: 2019, lang: "zh", src: "orig", cover: CDN.u, with: "王梓钰", note: "最爱的情歌" } ] },
+      ] },
+    { id: "inst", letter: "E", zh: "纯音乐", latin: "INSTRUMENTAL", mix: { inst: 1 }, src: { orig: .45, game: .2, film: .2, anime: .15 }, fill: { artists: 10, tips: [1, 6] },
+      artists: [
+        { id: "shiki", name: "四季音色", heat: 2.0, extra: 9, songs: [
+          { t: "（2023 年度歌手）", y: 2023, lang: "inst", src: "orig", cover: CDN.ee, artistOnly: true } ] },
+        { id: "hayashi", name: "林ゆうき", heat: 1.9, extra: 5, songs: [
+          { t: "rich-man", y: 2024, lang: "inst", src: "film", srcGuess: true, cover: CDN.y, note: "超新星" } ] },
+      ] },
+  ];
+  for (const f of FAMILIES) f.short = f.zh;
+
+  // 历年年度歌手（2015—2018 Mili；2025 Vivienne）
+  const YEARLY = { mili: ["2015—2018"], felt: [2019, 2020], vivienne: [2021, 2022, 2024, 2025], shiki: [2023] };
+
+  const EVENTS = [
+    { letter: "J", artist: "mili", year: 2015.6, s: .94, label: "Mili · 2015—2018 年度歌手" },
+    { letter: "K", artist: "key", year: 2017.5, s: .75, label: "入坑 Key 社" },
+    { letter: "L", artist: "vivienne", year: 2017.6, s: .5, label: "初遇 Vivienne" },
+    { letter: "M", artist: "felt", year: 2019.6, s: .94, label: "FELT 连续两年年度歌手" },
+    { letter: "N", artist: "straykids", year: 2020.5, s: .25, label: "SLUMP · 《神之塔》" },
+    { letter: "O", artist: "vivienne", year: 2021.5, s: .94, label: "Phantom 多次循环" },
+    { letter: "P", artist: "shiki", year: 2023.5, s: .5, label: "四季音色年度歌手" },
+    { letter: "Q", artist: "hayashi", year: 2024.5, s: .75, label: "rich-man 超新星" },
+    { letter: "R", artist: "wuthering", year: 2025.5, s: .5, label: "鸣潮原声" },
+  ];
+
+  // 年代按年度歌手划分
+  const ERAS = [
+    [2015, 2019, "Mili"], [2019, 2021, "FELT"], [2021, 2023, "Vivienne"],
+    [2023, 2024, "四季"], [2024, 2026.8, "Vivienne"],
+  ];
+
+  /* ================= Plate I · 建树：科 → 属 → 种，按出现年份做梯形分叉 ================= */
+  function ladder(items, mk) {
+    items.sort((a, b) => a.app - b.app);
+    let node = items[items.length - 1];
+    for (let i = items.length - 2; i >= 0; i--) {
+      node = mk({ kind: "ladder", year: items[i].app, app: items[i].app, children: [items[i], node] });
+    }
+    return node;
+  }
+
+  function build(mode) {
+    const full = mode === "full";
+    const rng = mulberry32(20261016);
+    let uid = 0;
+    const mk = (o) => Object.assign({ id: uid++, children: [] }, o);
+    const artInfo = {}, famInfo = {};
+    const famCrowns = [];
+
+    for (const fam of FAMILIES) {
+      const famStart = Math.min(...fam.artists.flatMap((a) => a.songs.map((s) => s.y))) + 0.5;
+      const artists = fam.artists.map((a) => ({ ...a, placeholder: false }));
+      if (full) {
+        for (let i = 0; i < fam.fill.artists; i++) {
+          artists.push({ id: `${fam.id}-p${i}`, name: null, placeholder: true, heat: Math.exp(gauss(rng) * 0.35) * 0.85, songs: [], extra: 0 });
+        }
+      }
+      const crowns = [];
+      for (const art of artists) {
+        const tips = [];
+        art.songs.forEach((s, i) => {
+          tips.push(mk({ kind: "tip", named: true, key: `${art.id}:${i}`, song: s, art: art.id, fam: fam.id, year: s.y + 0.5, lang: s.lang, src: s.src,
+            plays: s.plays ?? Math.round(art.heat * 42 * Math.exp(gauss(rng) * 0.3)), artist: art, family: fam }));
+        });
+        if (full) {
+          let start, count;
+          if (art.placeholder) {
+            start = famStart + (2026.3 - famStart) * Math.pow(rng(), 0.9);
+            const [lo, hi] = fam.fill.tips;
+            count = lo + Math.floor(Math.pow(rng(), 1.5) * (hi - lo + 1));
+          } else {
+            start = Math.min(...art.songs.map((s) => s.y)) + 0.5;
+            count = art.extra;
+          }
+          for (let k = 0; k < count; k++) {
+            const y = art.placeholder && k === 0 ? start : start + (2026.6 - start) * Math.pow(rng(), 0.85);
+            tips.push(mk({ kind: "tip", named: false, art: art.id, fam: fam.id, year: y, lang: pick(rng, fam.mix), src: pick(rng, fam.src),
+              plays: Math.round(art.heat * 42 * Math.exp(gauss(rng) * 0.45)), artist: art, family: fam }));
+          }
+        }
+        tips.forEach((t) => { t.app = t.year; });
+        const crown = ladder(tips, mk);
+        artInfo[art.id] = { art, fam, crown, tips };
+        crowns.push(crown);
+      }
+      const fc = ladder(crowns, mk);
+      famInfo[fam.id] = { fam, crown: fc };
+      famCrowns.push(fc);
+    }
+    const root = ladder(famCrowns, mk);
+    root.year = Y0; root.app = Y0;
+
+    const nodes = [], tips = [];
+    (function walk(n, parent) {
+      n.parent = parent; nodes.push(n);
+      if (n.kind === "tip") {
+        tips.push(n); n.count = 1; n.playSum = n.plays; n.artOnly = n.art; n.famOnly = n.fam;
+        return;
+      }
+      for (const c of n.children) walk(c, n);
+      n.count = n.children.reduce((s, c) => s + c.count, 0);
+      n.playSum = n.children.reduce((s, c) => s + c.playSum, 0);
+      const a0 = n.children[0].artOnly, f0 = n.children[0].famOnly;
+      n.artOnly = n.children.every((c) => c.artOnly === a0) ? a0 : null;
+      n.famOnly = n.children.every((c) => c.famOnly === f0) ? f0 : null;
+    })(root, null);
+
+    const famGap = full ? 3 : 1.2;
+    let slot = 0, prev = null;
+    for (const t of tips) {
+      if (prev && t.fam !== prev) slot += famGap;
+      t.slot = slot; slot += 1; prev = t.fam;
+    }
+    const slotAngle = (TAU - GAP) / slot;
+    for (const t of tips) t.a = GAP / 2 + (t.slot + 0.5) * slotAngle;
+    (function ang(n) {
+      if (n.kind === "tip") return;
+      n.children.forEach(ang);
+      n.a = (n.children[0].a + n.children[n.children.length - 1].a) / 2;
+    })(root);
+
+    const stem = full ? 2.2 : 5;
+    (function rad(n) {
+      if (n.kind === "tip") n.r = RT;
+      else if (!n.parent) n.r = R0;
+      else n.r = Math.min(RT - 6, Math.max(rOf(n.year), n.parent.r + stem));
+      n.children.forEach(rad);
+    })(root);
+
+    const logs = nodes.filter((n) => n.kind !== "tip").map((n) => Math.log(n.playSum / n.count)).sort((a, b) => a - b);
+    const lo = logs[Math.floor(logs.length * 0.05)], hi = logs[Math.floor(logs.length * 0.95)];
+    const heatT = (n) => Math.max(0, Math.min(1, (Math.log(n.playSum / n.count) - lo) / (hi - lo || 1)));
+    for (const n of nodes) n.t = n.kind === "tip" ? heatT(n.parent) : heatT(n);
+
+    const named = tips.filter((t) => t.named);
+    named.forEach((t, i) => { t.no = String(i + 1).padStart(3, "0"); });
+    const byKey = Object.fromEntries(named.map((t) => [t.key, t]));
+
+    return { mode, full, root, nodes, tips, named, byKey, artInfo, famInfo, slotAngle, playRange: [Math.exp(lo), Math.exp(hi)] };
+  }
+
+  /* ================= Plate I · 画图 ================= */
+  const RAMP = [[0, "#958e7f"], [0.5, "#c2ad86"], [0.78, "#d9875f"], [1, "#a33b22"]];
+  const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  function ramp(t) {
+    for (let i = 1; i < RAMP.length; i++) {
+      if (t <= RAMP[i][0]) {
+        const [t0, c0] = RAMP[i - 1], [t1, c1] = RAMP[i];
+        const k = (t - t0) / (t1 - t0), a = hexRgb(c0), b = hexRgb(c1);
+        return `rgb(${a.map((v, j) => Math.round(v + (b[j] - v) * k)).join(",")})`;
+      }
+    }
+    return RAMP[RAMP.length - 1][1];
+  }
+
+  function edgePath(p, n) {
+    const d = n.a - p.a;
+    let s = `M${P(p.r, p.a)}`;
+    if (Math.abs(d) > 1e-4) s += `A${n2(p.r)},${n2(p.r)} 0 ${Math.abs(d) > Math.PI ? 1 : 0} ${d > 0 ? 1 : 0} ${P(p.r, n.a)}`;
+    return s + `L${P(n.r, n.a)}`;
+  }
+  function sector(r0, r1, a0, a1) {
+    const large = a1 - a0 > Math.PI ? 1 : 0;
+    return `M${P(r1, a0)}A${r1},${r1} 0 ${large} 1 ${P(r1, a1)}L${P(r0, a1)}A${r0},${r0} 0 ${large} 0 ${P(r0, a0)}Z`;
+  }
+  function textArc(r, a0, a1) {
+    const large = a1 - a0 > Math.PI ? 1 : 0;
+    const bottom = Math.sin((a0 + a1) / 2) > 0;
+    return bottom ? `M${P(r, a1)}A${r},${r} 0 ${large} 0 ${P(r, a0)}` : `M${P(r, a0)}A${r},${r} 0 ${large} 1 ${P(r, a1)}`;
+  }
+  function textW(s, size) {
+    let w = 0;
+    for (const ch of s) w += /[　-鿿＀-￯぀-ヿ가-힯]/.test(ch) ? 1 : /[A-Z0-9]/.test(ch) ? 0.66 : 0.52;
+    return w * size;
+  }
+  const clip = (s, max) => (textW(s, 1) > max ? (() => { let o = ""; for (const ch of s) { if (textW(o + ch + "…", 1) > max) break; o += ch; } return o + "…"; })() : s);
+  const halo = `paint-order="stroke" stroke="#f5f4ed" stroke-width="3" stroke-linejoin="round"`;
+
+  function toSvg(M) {
+    const back = [], grown = [], front = [], defs = [];
+    const { full, nodes, tips, slotAngle } = M;
+
+    defs.push(`<linearGradient id="rampGrad">${RAMP.map(([t, c]) => `<stop offset="${t}" stop-color="${c}"/>`).join("")}</linearGradient>`);
+    defs.push(`<clipPath id="growClip"><circle id="growCircle" cx="${CX}" cy="${CY}" r="${RT + 40}"/></clipPath>`);
+
+    ERAS.forEach(([a, b], i) => {
+      if (i % 2) return;
+      const r0 = rOf(a), r1 = rOf(b);
+      back.push(`<circle cx="${CX}" cy="${CY}" r="${n2((r0 + r1) / 2)}" fill="none" stroke="#938a78" stroke-opacity=".08" stroke-width="${n2(r1 - r0)}" class="nohit"/>`);
+    });
+    for (let y = 2016; y <= 2026; y += 2) {
+      back.push(`<circle cx="${CX}" cy="${CY}" r="${n2(rOf(y))}" fill="none" stroke="#938a78" stroke-opacity=".55" stroke-width=".6" stroke-dasharray="1.5 3.5" class="nohit"/>`);
+    }
+
+    const ew = full ? { tip: 0.5, named: 0.9, inner: 0.85 } : { tip: 1.3, named: 1.3, inner: 1.5 };
+    for (const n of nodes) {
+      if (!n.parent) continue;
+      const w = n.kind === "tip" ? (n.named ? ew.named : ew.tip) : ew.inner;
+      grown.push(`<path class="edge" fill="none" stroke-linecap="round" data-e="${n.id}" d="${edgePath(n.parent, n)}" stroke="${ramp(n.t)}" stroke-width="${w}"/>`);
+    }
+    for (const t of M.named) {
+      const [x, y] = pt(RT, t.a);
+      grown.push(`<circle class="dot" data-d="${t.id}" cx="${n2(x)}" cy="${n2(y)}" r="${full ? 1.7 : 2.4}" fill="#262421"/>`);
+    }
+
+    const bubbles = [];
+    for (const ev of EVENTS) {
+      const info = M.artInfo[ev.artist];
+      if (!info) continue;
+      const inner = nodes.filter((n) => n.kind !== "tip" && n.artOnly === ev.artist);
+      let x, y, rr, a;
+      const br = 2.6 + 9 * Math.sqrt(ev.s);
+      if (inner.length) {
+        const best = inner.reduce((b, n) => (Math.abs(n.year - ev.year) < Math.abs(b.year - ev.year) ? n : b));
+        [x, y] = pt(best.r, best.a); rr = best.r; a = best.a;
+      } else {
+        rr = Math.min(rOf(ev.year), RT - 12); a = info.crown.a; [x, y] = pt(rr, a);
+      }
+      const [lx, ly] = pt(rr + br + 7, a);
+      bubbles.push([x, y, br], [lx, ly, 6]);
+      grown.push(`<g class="bubble nohit"><title>${ev.letter} · ${esc(ev.label)}</title><circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(br)}" fill="#d97757" fill-opacity=".85" stroke="#f5f4ed" stroke-width=".8"/>`
+        + `<text x="${n2(lx)}" y="${n2(ly)}" font-size="11" font-weight="700" fill="#262421" text-anchor="middle" dominant-baseline="central" ${halo}>${ev.letter}</text></g>`);
+    }
+
+    for (const id of Object.keys(M.famInfo)) {
+      const { fam, crown } = M.famInfo[id];
+      const cr = crown.kind === "tip" ? Math.min(rOf(crown.app), RT - 20) : crown.r;
+      let lr = Math.min(Math.max(cr + 14, 96), 222);
+      const near = (r) => { const [x, y] = pt(r, crown.a); return bubbles.some(([bx, by, br]) => Math.hypot(bx - x, by - y) < br + 16); };
+      for (let i = 0; i < 6 && near(lr); i++) lr = lr + 14 > 236 ? lr - 30 : lr + 14;
+      const [x0, y0] = pt(cr, crown.a), [x1, y1] = pt(lr, crown.a);
+      const c = Math.cos(crown.a);
+      const anchor = c > 0.3 ? "start" : c < -0.3 ? "end" : "middle";
+      const dy = Math.abs(c) <= 0.3 ? (Math.sin(crown.a) > 0 ? 9 : -3) : 4;
+      grown.push(`<g class="nohit"><line x1="${n2(x0)}" y1="${n2(y0)}" x2="${n2(x1)}" y2="${n2(y1)}" stroke="#262421" stroke-width=".5"/>`
+        + `<text x="${n2(x1 + (anchor === "start" ? 3 : anchor === "end" ? -3 : 0))}" y="${n2(y1 + dy)}" font-size="12.5" fill="#262421" text-anchor="${anchor}" ${halo}>${fam.letter}: ${esc(fam.short)}</text></g>`);
+    }
+    {
+      const [x, y] = pt(M.root.r, M.root.a);
+      grown.push(`<circle cx="${n2(x)}" cy="${n2(y)}" r="2.4" fill="#262421" class="nohit"/>`);
+      front.push(`<text x="${CX}" y="${CY + 4}" font-size="12" font-weight="700" fill="#262421" text-anchor="middle" ${halo} class="nohit">A</text>`);
+    }
+
+    // 两道细环：语种（每首都画）、来源（原创不画）
+    const tw = Math.min(full ? 5.5 : 6, slotAngle * 298 * 0.72);
+    for (const t of tips) {
+      const [x0, y0] = pt(LANG_R[0], t.a), [x1, y1] = pt(LANG_R[1], t.a);
+      front.push(`<line class="tick" data-k="${t.id}" data-y="${n2(t.year)}" x1="${n2(x0)}" y1="${n2(y0)}" x2="${n2(x1)}" y2="${n2(y1)}" stroke="${LANG[t.lang].color}" stroke-width="${n2(tw)}"/>`);
+      const sc = SRC[t.src].color;
+      if (sc) {
+        const [u0, v0] = pt(SRC_R[0], t.a), [u1, v1] = pt(SRC_R[1], t.a);
+        front.push(`<line class="tick" data-k="${t.id}" data-y="${n2(t.year)}" x1="${n2(u0)}" y1="${n2(v0)}" x2="${n2(u1)}" y2="${n2(v1)}" stroke="${sc}" stroke-width="${n2(tw)}"/>`);
+      }
+    }
+    for (const t of tips) {
+      front.push(`<path class="hit" fill="transparent" data-tip="${t.id}" d="${sector(full ? 236 : 120, SRC_R[1] + 1, t.a - slotAngle / 2, t.a + slotAngle / 2)}"/>`);
+    }
+
+    let artIdx = 0, pid = 0;
+    for (const id of Object.keys(M.famInfo)) {
+      const { fam } = M.famInfo[id];
+      const ft = tips.filter((t) => t.fam === id);
+      const a0 = ft[0].a - slotAngle / 2, a1 = ft[ft.length - 1].a + slotAngle / 2;
+      front.push(`<path class="band" data-fam="${id}" d="${sector(FAM_BAND[0], FAM_BAND[1], a0, a1)}" fill="#e2dac7"/>`);
+      const len = (a1 - a0) * ((FAM_BAND[0] + FAM_BAND[1]) / 2);
+      if (textW(fam.latin, 9.5) * 1.18 < len - 8) {
+        defs.push(`<path id="tp${pid}" d="${textArc((FAM_BAND[0] + FAM_BAND[1]) / 2, a0, a1)}"/>`);
+        front.push(`<text font-size="9.5" letter-spacing="1.6" fill="#5b554b" text-anchor="middle" dominant-baseline="central" class="nohit"><textPath href="#tp${pid}" xlink:href="#tp${pid}" startOffset="50%">${esc(fam.latin)}</textPath></text>`);
+        pid++;
+      }
+      const arts = [...new Set(ft.map((t) => t.art))];
+      for (const aid of arts) {
+        const at = ft.filter((t) => t.art === aid);
+        const b0 = at[0].a - slotAngle / 2, b1 = at[at.length - 1].a + slotAngle / 2;
+        const art = M.artInfo[aid].art;
+        front.push(`<path class="band" data-art="${aid}" d="${sector(ART_BAND[0], ART_BAND[1], b0, b1)}" fill="${artIdx % 2 ? "#7a7062" : "#2f2b27"}" stroke="#f5f4ed" stroke-width=".5"/>`);
+        artIdx++;
+        if (!art.placeholder) {
+          const name = /[a-z]/i.test(art.name) ? art.name.toUpperCase() : art.name;
+          const blen = (b1 - b0) * ((ART_BAND[0] + ART_BAND[1]) / 2);
+          if (textW(name, 8) * 1.1 < blen - 4) {
+            defs.push(`<path id="tp${pid}" d="${textArc((ART_BAND[0] + ART_BAND[1]) / 2, b0, b1)}"/>`);
+            front.push(`<text font-size="8" letter-spacing=".6" fill="#f5f4ed" text-anchor="middle" dominant-baseline="central" class="nohit"><textPath href="#tp${pid}" xlink:href="#tp${pid}" startOffset="50%">${esc(name)}</textPath></text>`);
+            pid++;
+          }
+        }
+      }
+    }
+
+    const specs = M.named.filter((t) => t.song.cover).map((t) => {
+      const label = clip(t.song.artistOnly ? t.artist.name : t.song.t, 15);
+      return { t, label, w: textW(label, 9.5), a: t.a };
+    });
+    const foot = (s) => Math.abs(Math.sin(s.a)) * Math.max(MAT, s.w * 0.9) + Math.abs(Math.cos(s.a)) * MAT;
+    for (let it = 0; it < 400; it++) {
+      specs.sort((p, q) => p.a - q.a);
+      for (let i = 0; i < specs.length; i++) {
+        const p = specs[i], q = specs[(i + 1) % specs.length];
+        let d = q.a - p.a; if (i === specs.length - 1) d += TAU;
+        const need = ((foot(p) + foot(q)) / 2 + 6) / SPEC_R;
+        if (d < need) { const push = (need - d) / 2; p.a -= push; q.a += push; }
+      }
+      for (const s of specs) s.a += (s.t.a - s.a) * 0.015;
+    }
+    for (const s of specs) {
+      const { t } = s;
+      const [x, y] = pt(SPEC_R, s.a);
+      const [lx0, ly0] = pt(ART_BAND[1] + 2, t.a), [lx1, ly1] = pt(SPEC_R - MAT / 2 - 5, s.a);
+      const c = Math.cos(s.a), sn = Math.sin(s.a);
+      const k = (MAT / 2 + 5) / Math.max(Math.abs(c), Math.abs(sn));
+      let tx = k * c, ty = k * sn;
+      const anchor = Math.abs(c) < 0.35 ? "middle" : c > 0 ? "start" : "end";
+      if (Math.abs(sn) >= Math.abs(c)) ty += sn > 0 ? 9 : -2; else ty += 3.5;
+      const moth = t.song.butterfly
+        ? `<g transform="translate(16,-17) rotate(-28)"><title>Night Butterflies：这张图版上唯一一只真的蝴蝶</title>`
+          + `<ellipse cx="-3.3" cy="-1.5" rx="3.6" ry="2.2" transform="rotate(-18 -3.3 -1.5)" fill="#3d3934"/><ellipse cx="3.3" cy="-1.5" rx="3.6" ry="2.2" transform="rotate(18 3.3 -1.5)" fill="#3d3934"/>`
+          + `<ellipse cx="-2.2" cy="2.2" rx="2.3" ry="1.5" transform="rotate(20 -2.2 2.2)" fill="#7a7062"/><ellipse cx="2.2" cy="2.2" rx="2.3" ry="1.5" transform="rotate(-20 2.2 2.2)" fill="#7a7062"/>`
+          + `<line x1="0" y1="-4.5" x2="0" y2="4" stroke="#262421" stroke-width="1"/></g>`
+        : "";
+      front.push(`<g class="spec" data-tip="${t.id}" data-y="${n2(t.year)}" tabindex="0" role="button" aria-label="${esc(t.song.artistOnly ? t.artist.name : t.song.t)} — ${esc(t.artist.name)}">`
+        + `<line class="nohit" x1="${n2(lx0)}" y1="${n2(ly0)}" x2="${n2(lx1)}" y2="${n2(ly1)}" stroke="#938a78" stroke-width=".6"/>`
+        + `<g transform="translate(${n2(x)},${n2(y)})"><g class="pin">`
+        + `<rect x="${-MAT / 2}" y="${-MAT / 2}" width="${MAT}" height="${MAT}" fill="#fbfaf6" stroke="#cfc8b6" stroke-width=".8"/>`
+        + `<image href="${esc(t.song.cover)}" x="${-IMG / 2}" y="${-IMG / 2}" width="${IMG}" height="${IMG}" preserveAspectRatio="xMidYMid slice"/>`
+        + `<circle cx="0" cy="${-MAT / 2}" r="1.5" fill="#3d3934"/>${moth}`
+        + `<text x="${n2(tx)}" y="${n2(ty)}" font-size="9.5" fill="#262421" text-anchor="${anchor}">${esc(s.label)}</text></g></g></g>`);
+    }
+
+    front.push(`<line x1="${CX + R0}" y1="${CY}" x2="${CX + RT}" y2="${CY}" stroke="#938a78" stroke-width=".5" class="nohit"/>`);
+    for (let y = 2016; y <= 2026; y += 2) {
+      front.push(`<text x="${n2(CX + rOf(y))}" y="${CY + 3}" font-size="8" fill="#5b554b" text-anchor="middle" ${halo} class="nohit">${y}</text>`);
+    }
+    front.push(`<text x="${CX + RT + 2}" y="${CY + 3}" font-size="8" fill="#5b554b" ${halo} class="nohit">今</text>`);
+    front.push(`<circle id="yearDot" class="nohit" cx="${CX + RT}" cy="${CY - 9}" r="3" fill="#d97757"/>`);
+
+    front.push(legends(M));
+    return `<defs>${defs.join("")}</defs>${back.join("")}<g clip-path="url(#growClip)">${grown.join("")}</g>${front.join("")}`;
+  }
+
+  function legends(M) {
+    const g = [];
+    g.push(`<g transform="translate(20,34)" class="nohit">`
+      + `<text font-size="22" font-weight="700" letter-spacing="2" fill="#262421">PLATE I</text>`
+      + `<text y="19" font-size="10.5" fill="#5b554b">音乐谱系 · 2015—2026</text>`
+      + `<text y="34" font-size="9" fill="#938a78">半径 = 时间　·　中心 = 第一首歌</text></g>`);
+    const W = 230, x0 = 1060 - 20 - W;
+    const [pl, ph] = M.playRange;
+    g.push(`<g transform="translate(${x0},26)" class="nohit">`
+      + `<text font-size="10.5" fill="#262421">循环强度</text><text x="${W}" font-size="9" fill="#938a78" text-anchor="end">平均播放次数</text>`
+      + `<rect y="8" width="${W}" height="7" fill="url(#rampGrad)"/>`
+      + `<text y="27" font-size="8.5" fill="#5b554b">≈${Math.round(pl)}</text><text x="${W}" y="27" font-size="8.5" fill="#5b554b" text-anchor="end">≈${Math.round(ph)}</text>`
+      + eraBar(W) + `</g>`);
+    // 左下：语种 + 来源
+    const L = Object.values(LANG), S = Object.values(SRC).filter((s) => s.color);
+    const rowsL = Math.ceil(L.length / 2), rowsS = Math.ceil(S.length / 2);
+    const sy = 22 + rowsL * 16 + 14;
+    const H = sy + 22 + rowsS * 16;
+    const item = (l, i, y0) => `<g transform="translate(${(i % 2) * 86},${y0 + Math.floor(i / 2) * 16})"><rect y="-8" width="10" height="10" fill="${l.color}"/><text x="15" font-size="9.5" fill="#262421">${l.label}</text></g>`;
+    g.push(`<g transform="translate(20,${1060 - 18 - H + 12})" class="nohit">`
+      + `<text font-size="10.5" fill="#262421">内环 · 语种</text><line x1="0" y1="6" x2="164" y2="6" stroke="#262421" stroke-width=".5"/>`
+      + L.map((l, i) => item(l, i, 22)).join("")
+      + `<text y="${sy}" font-size="10.5" fill="#262421">外环 · 来源<tspan fill="#938a78" font-size="9">（原创不标）</tspan></text><line x1="0" y1="${sy + 6}" x2="164" y2="${sy + 6}" stroke="#262421" stroke-width=".5"/>`
+      + S.map((s, i) => item(s, i, sy + 22)).join("")
+      + `</g>`);
+    const SZ = [.94, .75, .5, .25];
+    g.push(`<g transform="translate(${1060 - 20},${1060 - 20 - SZ.length * 22 - 14})" class="nohit">`
+      + `<text font-size="10.5" fill="#262421" text-anchor="end">品味转折强度</text>`
+      + `<line x1="-110" y1="6" x2="0" y2="6" stroke="#262421" stroke-width=".5"/>`
+      + SZ.map((s, i) => { const r = 2.6 + 9 * Math.sqrt(s); return `<g transform="translate(0,${24 + i * 22})"><circle cx="-62" cy="-4" r="${n2(r)}" fill="#d97757" fill-opacity=".85"/><text font-size="9.5" fill="#262421" text-anchor="end">${s.toFixed(2)}</text></g>`; }).join("")
+      + `</g>`);
+    return g.join("");
+  }
+
+  function eraBar(W) {
+    const x = (y) => (y - Y0) / (Y1 - Y0) * W;
+    const fills = ["#e6dcc6", "#d6c9ad", "#ebe3d1", "#dacdb2", "#e7dfca"];
+    let s = `<g transform="translate(0,44)"><text font-size="10.5" fill="#262421">年代</text><text x="${W}" font-size="9" fill="#938a78" text-anchor="end">按年度歌手划分</text>`;
+    ERAS.forEach(([a, b, name], i) => {
+      const w = x(b) - x(a);
+      s += `<rect x="${n2(x(a))}" y="7" width="${n2(w)}" height="14" fill="${fills[i % fills.length]}" stroke="#f5f4ed" stroke-width=".6"/>`;
+      if (textW(name, 8) < w - 2) s += `<text x="${n2(x(a) + w / 2)}" y="17.5" font-size="8" fill="#3d3934" text-anchor="middle">${name}</text>`;
+    });
+    [2015, 2018, 2021, 2024].forEach((y) => { s += `<line x1="${n2(x(y))}" y1="21" x2="${n2(x(y))}" y2="24" stroke="#5b554b" stroke-width=".5"/><text x="${n2(x(y))}" y="33" font-size="8" fill="#5b554b" text-anchor="middle">${y}</text>`; });
+    s += `<text x="${W}" y="33" font-size="8" fill="#5b554b" text-anchor="end">今</text></g>`;
+    return s;
+  }
+
+  /* ================= Plate II · 地层柱 ================= */
+  // 岩性 = 组：同一位年度歌手连续的年份算一个组，各用一种岩石
+  const FOSSILS = {
+    mili: { name: "Mili", photo: MILI_COVER, photoNote: "照片暂用《Nine Point Eight》封面", style: "古典 / 电音", rock: "schist" },
+    felt: { name: "FELT", photo: CDN.o, style: "东方Project", rock: "lime" },
+    vivienne: { name: "Vivienne", photo: CDN.f, style: "独立 · 原创", rock: "sand",
+      desc: "她的音乐如同在浩瀚宇宙中的一次孤独旅行，旋律深邃而富有感染力，总能触及灵魂深处最柔软的地方。" },
+    shiki: { name: "四季音色", photo: CDN.ee, style: "纯音乐", rock: "shale" },
+  };
+  const ROCK = {
+    schist: { label: "片岩", who: "Mili", note: "最老的一层，已经压成了片岩" },
+    lime:   { label: "石灰岩", who: "FELT" },
+    sand:   { label: "砂岩", who: "Vivienne" },
+    shale:  { label: "页岩", who: "四季音色" },
+    loose:  { label: "未固结沉积", who: "还在沉积" },
+  };
+  const TOP_2024 = [["World of You", 96], ["Falling in Love Again", 118], ["Can't look away", 176], ["Distant Memory", 80], ["Phantom", 132]];
+  const STRATA = [
+    { key: "now", label: "2026—今", active: true, rock: "loose", form: ["现代沉积", ""] },
+    { key: "2025", year: 2025, artist: "vivienne", form: ["Vivienne 组", "上段"] },
+    { key: "2024", year: 2024, artist: "vivienne", form: ["Vivienne 组", "上段"] },
+    { key: "2023", year: 2023, artist: "shiki", form: ["四季音色 组", ""] },
+    { key: "2022", year: 2022, artist: "vivienne", form: ["Vivienne 组", "下段"] },
+    { key: "2021", year: 2021, artist: "vivienne", form: ["Vivienne 组", "下段"] },
+    { key: "2020", year: 2020, artist: "felt", form: ["FELT 组", ""] },
+    { key: "2019", year: 2019, artist: "felt", form: ["FELT 组", ""] },
+    { key: "mili", label: "2015—2018", years: [2015, 2016, 2017, 2018], artist: "mili", form: ["Mili 组", ""] },
+  ];
+  const songsOfYear = (y) => FAMILIES.flatMap((f) => f.artists.flatMap((a) => a.songs.filter((s) => s.y === y && !s.guess && !s.artistOnly).map((s) => ({ s, a }))));
+  const layersOf = (artist) => STRATA.filter((x) => x.artist === artist).map((x) => x.label || x.year).reverse();
+
+  function strataSvg() {
+    const X = { year: [0, 52], form: [60, 150], lith: [158, 360], note: [378, 600] };
+    const HEAD = 30;
+    let y = HEAD;
+    const rows = STRATA.map((s) => {
+      const h = s.active ? 44 : s.years ? 104 : 56;
+      const r = { ...s, y0: y, y1: y + h, rock: s.rock || FOSSILS[s.artist].rock };
+      y += h; return r;
+    });
+    const bottom = y;
+    const n = rows.length;
+    const wave = (x, i, amp) => amp * (Math.sin(x / 23 + i * 1.7) * 0.65 + Math.sin(x / 9.5 + i * 2.3) * 0.35);
+    const bounds = [];
+    for (let b = 0; b <= n; b++) {
+      const yy = b === n ? bottom : rows[b].y0;
+      const amp = b === 0 || b === n ? 0 : rows[b].years ? 3.2 : 1.6;
+      const pts = [];
+      for (let x = X.lith[0]; x <= X.lith[1] + 0.1; x += 5) pts.push([x, yy + wave(x, b, amp)]);
+      bounds.push(pts);
+    }
+    const poly = (i) => "M" + bounds[i].map((p) => p.map(n2).join(",")).join("L") + "L" + [...bounds[i + 1]].reverse().map((p) => p.map(n2).join(",")).join("L") + "Z";
+
+    const defs = `
+      <pattern id="rock-sand" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#ebe1ca"/><circle cx="2" cy="2" r=".85" fill="#5b554b"/><circle cx="6.5" cy="6.5" r=".6" fill="#5b554b"/></pattern>
+      <pattern id="rock-lime" width="18" height="10" patternUnits="userSpaceOnUse"><rect width="18" height="10" fill="#e3dac6"/><path d="M0 .5H18M0 5.5H18M4.5 .5V5.5M13.5 5.5V10" stroke="#5b554b" stroke-width=".55" fill="none"/></pattern>
+      <pattern id="rock-shale" width="16" height="8" patternUnits="userSpaceOnUse"><rect width="16" height="8" fill="#e6dccb"/><path d="M0 2H9M8 6H16" stroke="#5b554b" stroke-width=".6" fill="none"/></pattern>
+      <pattern id="rock-schist" width="24" height="8" patternUnits="userSpaceOnUse"><rect width="24" height="8" fill="#ddd2bd"/><path d="M0 4Q6 1 12 4T24 4" stroke="#5b554b" stroke-width=".6" fill="none"/></pattern>
+      <pattern id="rock-loose" width="14" height="12" patternUnits="userSpaceOnUse"><rect width="14" height="12" fill="#f0eadc"/><circle cx="3" cy="4" r=".7" fill="#938a78"/><circle cx="10" cy="9" r=".5" fill="#938a78"/><circle cx="8.5" cy="2" r=".4" fill="#938a78"/></pattern>`;
+    const out = [];
+    const T = (x, yy, s, a = "") => `<text x="${n2(x)}" y="${n2(yy)}" ${a}>${s}</text>`;
+    out.push(T(X.year[1], 18, "年份", `font-size="10" fill="#938a78" text-anchor="end"`));
+    out.push(T((X.form[0] + X.form[1]) / 2, 18, "组", `font-size="10" fill="#938a78" text-anchor="middle"`));
+    out.push(T((X.lith[0] + X.lith[1]) / 2, 18, "岩性柱", `font-size="10" fill="#938a78" text-anchor="middle"`));
+    out.push(T(X.note[0], 18, "标准化石 · 年度歌手", `font-size="10" fill="#938a78"`));
+
+    for (let i = 0; i < n;) {
+      let j = i;
+      while (j + 1 < n && rows[j + 1].form.join() === rows[i].form.join()) j++;
+      const y0 = rows[i].y0, y1 = rows[j].y1, cy = (y0 + y1) / 2;
+      const [name, part] = rows[i].form;
+      out.push(`<rect x="${X.form[0]}" y="${n2(y0)}" width="${X.form[1] - X.form[0]}" height="${n2(y1 - y0)}" fill="none" stroke="#b7af9d" stroke-width=".6"/>`);
+      out.push(T((X.form[0] + X.form[1]) / 2, part ? cy - 2 : cy + 4, esc(name), `font-size="10" fill="#3d3934" text-anchor="middle"`));
+      if (part) out.push(T((X.form[0] + X.form[1]) / 2, cy + 12, part, `font-size="9" fill="#938a78" text-anchor="middle"`));
+      i = j + 1;
+    }
+
+    rows.forEach((r, i) => {
+      const cy = (r.y0 + r.y1) / 2;
+      const g = [];
+      g.push(`<path class="layer dimmable" d="${poly(i)}" fill="url(#rock-${r.rock})" stroke="#5b554b" stroke-width=".6"/>`);
+      if (i % 2) g.push(`<path class="dimmable" d="${poly(i)}" fill="#262421" fill-opacity=".035"/>`);
+      // Mili 那一层：四年压在一起，画出细纹层
+      if (r.years) {
+        const bh = (r.y1 - r.y0) / r.years.length;
+        r.years.slice().reverse().forEach((yr, k) => {
+          if (k) g.push(`<line class="dimmable" x1="${X.lith[0]}" y1="${n2(r.y0 + k * bh)}" x2="${X.lith[1]}" y2="${n2(r.y0 + k * bh)}" stroke="#5b554b" stroke-width=".5" stroke-dasharray="3 3"/>`);
+          g.push(T(X.lith[0] + 5, r.y0 + k * bh + 11, yr, `font-size="8" fill="#5b554b" class="dimmable" ${halo}`));
+        });
+      }
+      const yearTxt = r.year ? String(r.year) : r.label;
+      const yearSvg = r.years ? r.label.split("—").map((p, k) => `<tspan x="${X.year[1]}" dy="${k ? 13 : -3}">${p}${k ? "" : "—"}</tspan>`).join("") : yearTxt;
+      g.push(T(X.year[1], cy + 4, yearSvg, `font-size="${r.year ? 12 : 10}" font-weight="${r.year ? 600 : 400}" fill="#262421" text-anchor="end" font-variant-numeric="tabular-nums"`));
+      if (r.artist) {
+        const f = FOSSILS[r.artist];
+        const fx = X.lith[0] + (i % 2 ? 76 : 132);
+        g.push(`<clipPath id="fc${i}"><circle cx="${fx}" cy="${n2(cy)}" r="18"/></clipPath>`);
+        g.push(`<circle class="dimmable" cx="${fx}" cy="${n2(cy)}" r="21.5" fill="#faf9f5" stroke="#5b554b" stroke-width=".7"/>`);
+        g.push(`<image class="dimmable" href="${esc(f.photo)}" x="${fx - 18}" y="${n2(cy - 18)}" width="36" height="36" preserveAspectRatio="xMidYMid slice" clip-path="url(#fc${i})"/>`);
+        g.push(`<line class="dimmable" x1="${fx + 23}" y1="${n2(cy)}" x2="${X.note[0] - 6}" y2="${n2(cy)}" stroke="#938a78" stroke-width=".6" stroke-dasharray="2 2"/>`);
+        let sub;
+        if (r.years) sub = `${r.years.length} 年年度歌手`;
+        else {
+          const rep = songsOfYear(r.year).map(({ s }) => s.t).join(" · ");
+          let streak = 1;
+          for (let k = i + 1; k < n && rows[k].artist === r.artist && rows[k].year; k++) streak++;
+          sub = rep ? `同层：${rep}` : streak > 1 ? `连续第 ${streak} 年` : "";
+        }
+        g.push(T(X.note[0], cy - 3, esc(f.name), `font-size="13" font-weight="600" fill="#262421"`));
+        if (sub) g.push(T(X.note[0], cy + 13, esc(clip(sub, 22)), `font-size="9.5" fill="#938a78"`));
+      } else if (r.active) {
+        g.push(T(X.note[0], cy - 2, "仍在沉积", `font-size="12" fill="#262421"`));
+        g.push(T(X.note[0], cy + 13, "2026 年度歌手要等年底", `font-size="9.5" fill="#938a78"`));
+      }
+      out.push(`<g class="layer-g" data-layer="${r.key}" tabindex="0" role="button" aria-label="${esc(yearTxt)} 层" style="--i:${n - 1 - i}">${g.join("")}</g>`);
+    });
+
+    const used = [...new Set(rows.map((r) => r.rock))];
+    const ly = bottom + 30;
+    out.push(used.map((k, i) => `<g transform="translate(${(i % 3) * 200},${ly + Math.floor(i / 3) * 22})"><rect y="-10" width="16" height="12" fill="url(#rock-${k})" stroke="#5b554b" stroke-width=".5"/>`
+      + `<text x="22" font-size="10" fill="#262421">${ROCK[k].label}<tspan fill="#938a78" dx="4">= ${ROCK[k].who}</tspan></text></g>`).join(""));
+    return { svg: `<defs>${defs}</defs>${out.join("")}`, h: ly + Math.ceil(used.length / 3) * 22 - 6 };
+  }
+
+  /* ================= Plate III · 关键词序列标识图 ================= */
+  const KEYWORDS = ["J-POP", "OST", "治愈", "FELT", "mili", "Vivienne"];
+  // 年度关键词：发现 145 次 × 梦想 261 次（按次数从小到大往上叠，最多的在最上面）
+  const MOTIF = [{ w: "发现", n: 145, c: "#4f6d8a" }, { w: "梦想", n: 261, c: "#a33b22" }];
+
+  function motifSvg() {
+    const W = 380, top = 22, base = 232, x0 = 46, max = 420;
+    const sc = (base - top) / max;
+    const colW = 132, gap = 26;
+    const o = [];
+    for (const v of [0, 100, 200, 300, 400]) {
+      const y = base - v * sc;
+      o.push(`<line x1="${x0 - 4}" y1="${n2(y)}" x2="${x0}" y2="${n2(y)}" stroke="#262421" stroke-width=".7"/><text x="${x0 - 7}" y="${n2(y + 3)}" font-size="9" fill="#5b554b" text-anchor="end">${v}</text>`);
+    }
+    o.push(`<line x1="${x0}" y1="${top}" x2="${x0}" y2="${base}" stroke="#262421" stroke-width=".8"/>`);
+    o.push(`<text transform="translate(12 ${(top + base) / 2}) rotate(-90)" font-size="9.5" fill="#938a78" text-anchor="middle">在你听的歌里出现的次数</text>`);
+    for (let pos = 0; pos < 2; pos++) {
+      const cx = x0 + 22 + pos * (colW + gap) + colW / 2;
+      let yb = base;
+      for (const k of MOTIF) {
+        const h = k.n * sc, S = colW * 0.96, sy = h / (0.9 * S);
+        const bl = yb - 0.07 * S * sy;
+        o.push(`<text x="${n2(cx)}" y="${n2(bl)}" font-size="${n2(S)}" fill="${k.c}" text-anchor="middle" transform="translate(0 ${n2(bl)}) scale(1 ${sy.toFixed(4)}) translate(0 ${n2(-bl)})">${k.w[pos]}</text>`);
+        yb -= h;
+      }
+      o.push(`<text x="${n2(cx)}" y="${base + 16}" font-size="9.5" fill="#938a78" text-anchor="middle">位点 ${pos + 1}</text>`);
+    }
+    o.push(`<line x1="${x0}" y1="${base}" x2="${W - 4}" y2="${base}" stroke="#262421" stroke-width=".8"/>`);
+    // 图例
+    const ly = base + 40;
+    MOTIF.slice().reverse().forEach((k, i) => {
+      o.push(`<g transform="translate(${x0 + i * 150},${ly})"><rect y="-9" width="10" height="10" fill="${k.c}"/><text x="15" font-size="11" fill="#262421">${k.w}<tspan fill="#938a78" dx="5">${k.n} 次</tspan></text></g>`);
+    });
+    // 注释轨道：其余年度关键词画成基因箭头
+    const ty = ly + 44;
+    o.push(`<text x="${x0}" y="${ty - 16}" font-size="10" fill="#938a78">注释轨道 · 其他年度关键词</text>`);
+    o.push(`<line x1="${x0}" y1="${ty}" x2="${W - 4}" y2="${ty}" stroke="#938a78" stroke-width=".6"/>`);
+    const avail = W - 4 - x0, aw = (avail - 5 * 5) / 6;
+    KEYWORDS.forEach((k, i) => {
+      const ax = x0 + i * (aw + 5);
+      o.push(`<path d="M${n2(ax)},${ty - 9}H${n2(ax + aw - 7)}L${n2(ax + aw)},${ty}L${n2(ax + aw - 7)},${ty + 9}H${n2(ax)}Z" fill="${i % 2 ? "#cfc6b2" : "#e2dac7"}" stroke="#5b554b" stroke-width=".5"/>`
+        + `<text x="${n2(ax + (aw - 7) / 2 + 1)}" y="${ty + 3.5}" font-size="9.5" fill="#262421" text-anchor="middle">${esc(k)}</text>`);
+    });
+    return { svg: o.join(""), w: W, h: ty + 16 };
+  }
+
+  /* ================= Plate IV · 日晷 ================= */
+  const DC = 260, DR = 196;
+  const HA = (h) => (h / 24) * TAU + Math.PI / 2;   // 午夜在下、正午在上
+  function dialSvg() {
+    const p = (r, a) => [DC + r * Math.cos(a), DC + r * Math.sin(a)].map(n2).join(",");
+    const wedge = (r, a0, a1) => `M${DC},${DC}L${p(r, a0)}A${r},${r} 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${p(r, a1)}Z`;
+    const o = [];
+    o.push(`<defs><pattern id="night" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#f1ece0"/><path d="M0 0V6" stroke="#938a78" stroke-opacity=".35" stroke-width=".8"/></pattern></defs>`);
+    o.push(`<circle cx="${DC}" cy="${DC}" r="${DR}" fill="#faf9f5"/>`);
+    o.push(`<path d="${wedge(DR, HA(18), HA(30))}" fill="url(#night)"/>`);
+    o.push(`<path d="${wedge(DR, HA(14), HA(18))}" fill="#d97757" fill-opacity=".18"/>`);
+    for (const k of [0.33, 0.66]) o.push(`<circle cx="${DC}" cy="${DC}" r="${n2(DR * k)}" fill="none" stroke="#938a78" stroke-opacity=".6" stroke-width=".6" stroke-dasharray="1.5 3.5"/>`);
+    o.push(`<circle cx="${DC}" cy="${DC}" r="${DR}" fill="none" stroke="#262421" stroke-width="1"/>`);
+    for (let q = 0; q < 96; q++) {
+      const h = q / 4, len = q % 4 ? 4 : h % 3 ? 8 : 13;
+      o.push(`<line x1="${p(DR - len, HA(h)).split(",")[0]}" y1="${p(DR - len, HA(h)).split(",")[1]}" x2="${p(DR, HA(h)).split(",")[0]}" y2="${p(DR, HA(h)).split(",")[1]}" stroke="#262421" stroke-width="${q % 4 ? .5 : .9}"/>`);
+    }
+    o.push(`<path d="M${p(DR + 7, HA(14))}A${DR + 7},${DR + 7} 0 0 1 ${p(DR + 7, HA(18))}" fill="none" stroke="#d97757" stroke-width="4" stroke-linecap="round"/>`);
+    for (let h = 0; h < 24; h += 3) {
+      const [x, y] = p(DR + 24, HA(h)).split(",");
+      o.push(`<text x="${x}" y="${n2(+y + 4)}" font-size="${h % 6 ? 11 : 13}" font-weight="${h % 6 ? 400 : 600}" fill="#262421" text-anchor="middle" font-variant-numeric="tabular-nums">${String(h).padStart(2, "0")}</text>`);
+    }
+    o.push(`<text x="${DC}" y="16" font-size="10.5" fill="#938a78" text-anchor="middle">正午</text>`);
+    o.push(`<text x="${DC}" y="512" font-size="10.5" fill="#938a78" text-anchor="middle">午夜</text>`);
+    o.push(`<text x="${DC - DR - 24}" y="${DC + 20}" font-size="10" fill="#938a78" text-anchor="middle">日出</text>`);
+    o.push(`<text x="${DC + DR + 24}" y="${DC + 20}" font-size="10.5" fill="#a33b22" text-anchor="middle">晚霞</text>`);
+    const [lx, ly] = p(DR * 0.5, HA(16)).split(",");
+    o.push(`<text x="${lx}" y="${ly}" font-size="12" fill="#a33b22" text-anchor="middle">活跃相位</text><text x="${lx}" y="${n2(+ly + 15)}" font-size="10.5" fill="#a33b22" text-anchor="middle" font-variant-numeric="tabular-nums">14:00–18:00</text>`);
+    o.push(`<g id="hand" transform="rotate(${n2(HA(6) * 180 / Math.PI)} ${DC} ${DC})"><line x1="${DC}" y1="${DC}" x2="${DC + DR - 18}" y2="${DC}" stroke="#262421" stroke-width="1.6"/><circle cx="${DC + DR - 18}" cy="${DC}" r="5.5" fill="#d97757" stroke="#faf9f5" stroke-width="1.5"/></g>`);
+    o.push(`<circle cx="${DC}" cy="${DC}" r="4.5" fill="#262421"/>`);
+    return o.join("");
+  }
+
+  globalThis.__phylo = { build, toSvg, strataSvg, motifSvg, dialSvg };
+  if (typeof document === "undefined") return;
+
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function onceVisible(el, ratio, fn) {
+    if (!("IntersectionObserver" in window)) { fn(); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((en) => en.isIntersecting)) { io.disconnect(); fn(); }
+    }, { threshold: ratio });
+    io.observe(el);
+  }
+
+  /* ================= Plate I · 交互 ================= */
+  const svg = document.getElementById("tree");
+  const card = document.getElementById("card");
+  const tip = document.getElementById("tooltip");
+  const indexEl = document.getElementById("index");
+  const growBtn = document.getElementById("growBtn");
+  const growRange = document.getElementById("growRange");
+  const growOut = document.getElementById("growOut");
+  const state = { mode: "full", sel: null, hoverKey: null, M: null, els: null, yearEls: [] };
+  const grow = { y: reduced ? Y1 : Y0, playing: false, raf: 0, played: reduced };
+
+  function render() {
+    state.M = build(state.mode);
+    svg.innerHTML = toSvg(state.M);
+    const map = (sel, attr) => { const m = new Map(); svg.querySelectorAll(sel).forEach((el) => { const k = +el.getAttribute(attr); m.set(k, [...(m.get(k) || []), el]); }); return m; };
+    state.els = { edges: map("[data-e]", "data-e"), ticks: map("[data-k]", "data-k"), specs: map(".spec", "data-tip"), dots: map("[data-d]", "data-d") };
+    state.yearEls = [...svg.querySelectorAll("[data-y]")].map((el) => [el, +el.dataset.y]);
+    if (state.sel && state.sel.type === "tip") {
+      const t = state.sel.key && state.M.byKey[state.sel.key];
+      state.sel = t ? { type: "tip", id: t.id, key: t.key } : null;
+    }
+    if (state.sel && state.sel.type === "art" && !state.M.artInfo[state.sel.id]) state.sel = null;
+    highlight(state.sel);
+    showCard(state.sel);
+    applyYear();
+  }
+
+  const eraOf = (y) => (ERAS.find(([a, b]) => y >= a && y < b) || ERAS[ERAS.length - 1])[2];
+  function applyYear() {
+    const y = grow.y, done = y >= Y1 - 0.05;
+    const c = svg.querySelector("#growCircle");
+    if (c) c.setAttribute("r", done ? RT + 40 : n2(rOf(y) + 1));
+    const d = svg.querySelector("#yearDot");
+    if (d) d.setAttribute("cx", n2(CX + Math.min(rOf(y), RT)));
+    for (const [el, ty] of state.yearEls) {
+      const p = ty > y;
+      if (el._p !== p) { el._p = p; el.classList.toggle("pending", p); }
+    }
+    growRange.value = y;
+    growOut.textContent = done ? "今 · Vivienne纪" : `${Math.floor(y)} · ${eraOf(y)}纪`;
+  }
+  function stopGrow() {
+    grow.playing = false;
+    cancelAnimationFrame(grow.raf);
+    growBtn.textContent = grow.y >= Y1 - 0.05 ? "↻ 重播" : "▶ 继续";
+  }
+  function playGrow() {
+    if (grow.playing) { stopGrow(); return; }
+    const from = grow.y >= Y1 - 0.05 ? Y0 : grow.y;
+    const dur = 7000 * (Y1 - from) / (Y1 - Y0);
+    let start = null;
+    grow.playing = true;
+    growBtn.textContent = "❚❚ 暂停";
+    const step = (ts) => {
+      if (!grow.playing) return;
+      if (start === null) start = ts;
+      const k = Math.min(1, (ts - start) / dur);
+      grow.y = from + (Y1 - from) * k;
+      applyYear();
+      if (k < 1) grow.raf = requestAnimationFrame(step); else stopGrow();
+    };
+    grow.raf = requestAnimationFrame(step);
+  }
+  growBtn.addEventListener("click", playGrow);
+  growRange.addEventListener("input", () => { if (grow.playing) stopGrow(); grow.y = +growRange.value; applyYear(); growBtn.textContent = grow.y >= Y1 - 0.05 ? "↻ 重播" : "▶ 继续"; });
+  const showAll = () => { if (grow.playing) stopGrow(); grow.y = Y1; grow.played = true; applyYear(); growBtn.textContent = "↻ 重播"; };
+
+  const nodeById = (id) => state.M.nodes.find((n) => n.id === id);
+  function selFromEl(el) {
+    if (el.dataset.tip) { const t = nodeById(+el.dataset.tip); return { type: "tip", id: t.id, key: t.key }; }
+    if (el.dataset.art) return { type: "art", id: el.dataset.art };
+    if (el.dataset.fam) return { type: "fam", id: el.dataset.fam };
+    return null;
+  }
+  const selKey = (s) => (s ? `${s.type}:${s.id}` : "");
+
+  function highlight(sel) {
+    svg.querySelectorAll(".on").forEach((el) => el.classList.remove("on"));
+    if (!sel) { svg.classList.remove("focus"); return; }
+    svg.classList.add("focus");
+    const M = state.M, on = new Set(), tipsOn = [];
+    const up = (n) => { while (n) { on.add(n.id); n = n.parent; } };
+    if (sel.type === "tip") { const t = nodeById(sel.id); up(t); tipsOn.push(t); }
+    else {
+      const field = sel.type === "art" ? "artOnly" : "famOnly";
+      for (const n of M.nodes) if (n[field] === sel.id) { on.add(n.id); if (n.kind === "tip") tipsOn.push(n); }
+      up(sel.type === "art" ? M.artInfo[sel.id].crown : M.famInfo[sel.id].crown);
+    }
+    for (const id of on) (state.els.edges.get(id) || []).forEach((el) => el.classList.add("on"));
+    for (const t of tipsOn) {
+      (state.els.ticks.get(t.id) || []).forEach((el) => el.classList.add("on"));
+      (state.els.specs.get(t.id) || []).forEach((el) => el.classList.add("on"));
+      (state.els.dots.get(t.id) || []).forEach((el) => el.classList.add("on"));
+    }
+  }
+
+  const songName = (t) => (t.song.artistOnly ? t.artist.name : t.song.full || t.song.t);
+  const yearText = (t) => (t.named ? `${t.song.y}${t.song.guess ? "?" : ""}` : `${Math.floor(t.year)}`);
+  function tipText(sel) {
+    const M = state.M;
+    if (sel.type === "tip") {
+      const t = nodeById(sel.id);
+      return t.named ? `${songName(t)} — ${t.artist.name} · ${yearText(t)}` : `未命名 · ${t.family.zh} · ${yearText(t)}（占位）`;
+    }
+    if (sel.type === "art") {
+      const { art, tips } = M.artInfo[sel.id];
+      return `${art.name || "未命名歌手（占位）"} · ${tips.length} 首 · 自 ${Math.floor(Math.min(...tips.map((t) => t.year)))}`;
+    }
+    const { fam, crown } = M.famInfo[sel.id];
+    return `${fam.letter} ${fam.zh} · ${crown.count} 首`;
+  }
+
+  svg.addEventListener("pointermove", (e) => {
+    const el = e.target.closest("[data-tip],[data-art],[data-fam]");
+    const sel = el ? selFromEl(el) : null;
+    const k = selKey(sel);
+    if (k !== state.hoverKey) {
+      state.hoverKey = k;
+      highlight(sel || state.sel);
+      if (sel) { tip.textContent = tipText(sel); tip.classList.add("show"); } else tip.classList.remove("show");
+    }
+    if (sel) tip.style.transform = `translate(${Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8)}px, ${e.clientY + 16}px)`;
+  });
+  svg.addEventListener("pointerleave", () => { state.hoverKey = null; tip.classList.remove("show"); highlight(state.sel); });
+  svg.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-tip],[data-art],[data-fam]");
+    select(el ? selFromEl(el) : null, false);
+  });
+  svg.addEventListener("keydown", (e) => {
+    const el = e.target.closest(".spec");
+    if (el && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); select(selFromEl(el), false); }
+  });
+
+  function select(sel, scroll) {
+    state.sel = sel;
+    highlight(sel);
+    showCard(sel);
+    if (scroll && sel && innerWidth < 1100) card.scrollIntoView({ block: "nearest" });
+  }
+  // 从其他图版 / 附录跳回谱系
+  function locate(sel) {
+    showAll();
+    select(sel, false);
+    document.getElementById("plate-1").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+  }
+  function locateKey(spec) {
+    const [type, ...rest] = spec.split(":");
+    if (type === "art") locate({ type: "art", id: rest[0] });
+    else { const t = state.M.byKey[rest.join(":")]; if (t) locate({ type: "tip", id: t.id, key: t.key }); }
+  }
+
+  function pathText(t) {
+    return ["A 起点 2015", `${t.family.letter} ${t.family.zh}`, t.artist.name || "未命名歌手", t.named ? (t.song.artistOnly ? "（暂无单曲）" : t.song.t) : "未命名"].join(" → ");
+  }
+
+  function showCard(sel) {
+    const M = state.M;
+    if (!sel) {
+      card.innerHTML = `<div class="no">HOW TO READ</div><h3>怎么读这张图版</h3>
+        <ul>
+          <li><b>中心</b>是第一首歌（2015），<b>越往外越接近现在</b>。</li>
+          <li>第一层分叉是<b>风格</b>，第二层是<b>歌手</b>。</li>
+          <li>枝条越红，这一支<b>循环得越狠</b>。</li>
+          <li>橙色圆点 J–R 是<b>品味转折点</b>。</li>
+          <li>外圈：语种 → 来源 → 风格环 → 歌手环 → 封面标本。</li>
+        </ul>
+        <p class="path">拖上面的时间轴可以回到任何一年；点封面、枝条或圆环打开标本卡。</p>`;
+      return;
+    }
+    if (sel.type === "tip") {
+      const t = nodeById(sel.id);
+      if (!t.named) {
+        card.innerHTML = `<button class="close" type="button">关闭</button><div class="no">PLACEHOLDER</div><h3>未命名枝条</h3>
+          <p>这是一根占位枝，用来模拟接入完整歌单后的密度。</p>
+          <dl><dt>科</dt><dd>${t.family.letter} ${esc(t.family.zh)}</dd><dt>入谱</dt><dd>${Math.floor(t.year)}</dd>
+          <dt>语种</dt><dd><span class="sw" style="background:${LANG[t.lang].color}"></span>${LANG[t.lang].label}</dd><dt>来源</dt><dd>${SRC[t.src].label}</dd></dl>
+          <p class="path">${esc(pathText(t))}</p>`;
+        return;
+      }
+      const s = t.song, a = t.artist;
+      const yearly = YEARLY[a.id] ? `<dt>年度歌手</dt><dd>${YEARLY[a.id].join(" · ")}</dd>` : "";
+      card.innerHTML = `<button class="close" type="button">关闭</button><div class="no">SPECIMEN No. ${t.no}</div>
+        <h3>${esc(songName(t))}</h3>
+        ${s.cover ? `<img class="cover" src="${esc(s.cover)}" alt="${esc(songName(t))} 封面" />` : ""}
+        <dl>
+          <dt>属 · 歌手</dt><dd>${esc(a.name)}${s.with ? ` <span style="color:var(--ink-3)">/ ${esc(s.with)}</span>` : ""}</dd>
+          <dt>科 · 风格</dt><dd>${t.family.letter} ${esc(t.family.zh)}</dd>
+          <dt>入谱</dt><dd>${s.y}${s.guess ? ` <span class="guess">推测</span>` : ""}${s.note ? ` · ${esc(s.note)}` : ""}</dd>
+          <dt>语种</dt><dd><span class="sw" style="background:${LANG[t.lang].color}"></span>${LANG[t.lang].label}</dd>
+          <dt>来源</dt><dd>${SRC[t.src].label}${s.srcGuess ? ` <span class="guess">推测</span>` : ""}</dd>
+          <dt>循环</dt><dd>${s.plays ? `${s.plays} 次` : "—"}</dd>
+          ${yearly}
+        </dl>
+        ${s.lyric ? `<blockquote>${esc(s.lyric)}</blockquote>` : ""}
+        ${s.url ? `<audio controls preload="none" src="${esc(s.url)}"></audio>` : ""}
+        ${s.butterfly ? `<p class="path">副标题叫 Night Butterflies，所以它的标本上停着整张图版唯一一只真蝴蝶。</p>` : ""}
+        <p class="path">${esc(pathText(t))}</p>`;
+      return;
+    }
+    if (sel.type === "art") {
+      const { art, fam, tips } = M.artInfo[sel.id];
+      const named = tips.filter((t) => t.named);
+      card.innerHTML = `<button class="close" type="button">关闭</button><div class="no">GENUS · 歌手</div>
+        <h3>${esc(art.name || "未命名歌手（占位）")}</h3>
+        <dl><dt>科</dt><dd>${fam.letter} ${esc(fam.zh)}</dd><dt>枝数</dt><dd>${tips.length} 首</dd><dt>首次入谱</dt><dd>${Math.floor(Math.min(...tips.map((t) => t.year)))}</dd>
+        ${YEARLY[art.id] ? `<dt>年度歌手</dt><dd>${YEARLY[art.id].join(" · ")}</dd>` : ""}</dl>
+        ${named.length ? `<ul>${named.map((t) => `<li>${esc(t.song.artistOnly ? "（暂无单曲数据）" : t.song.t)} <span style="color:var(--ink-3)">${yearText(t)}</span></li>`).join("")}</ul>` : ""}`;
+      return;
+    }
+    const { fam, crown } = M.famInfo[sel.id];
+    const arts = Object.values(M.artInfo).filter((i) => i.fam.id === fam.id);
+    card.innerHTML = `<button class="close" type="button">关闭</button><div class="no">FAMILY ${fam.letter}</div>
+      <h3>${esc(fam.zh)}</h3><p style="margin:0;color:var(--ink-3);letter-spacing:.12em;font-size:12px">${esc(fam.latin)}</p>
+      <dl><dt>枝数</dt><dd>${crown.count} 首</dd><dt>歌手</dt><dd>${arts.length} 位</dd><dt>首次入谱</dt><dd>${Math.floor(crown.app)}</dd></dl>
+      <ul>${arts.filter((i) => !i.art.placeholder).map((i) => `<li>${esc(i.art.name)}</li>`).join("")}</ul>`;
+  }
+  card.addEventListener("click", (e) => { if (e.target.closest(".close")) select(null, false); });
+
+  function buildIndex() {
+    indexEl.innerHTML = FAMILIES.map((fam) => {
+      const items = [];
+      for (const a of fam.artists) a.songs.forEach((s, i) => items.push({ key: `${a.id}:${i}`, s, a }));
+      return `<section><h4>${fam.letter} · ${esc(fam.zh)}<span>${esc(fam.latin)}</span></h4><ul>`
+        + items.map(({ key, s, a }) => `<li><button type="button" data-key="${esc(key)}">${esc(s.artistOnly ? a.name : s.t)}<span>${esc(a.name)} · ${s.y}${s.guess ? "?" : ""}</span></button></li>`).join("")
+        + `</ul></section>`;
+    }).join("");
+  }
+  indexEl.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-key]");
+    if (b) locateKey(`tip:${b.dataset.key}`);
+  });
+
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
+    state.mode = b.dataset.mode;
+    document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    render();
+  }));
+
+  /* ================= Plate II · 交互 ================= */
+  const strataEl = document.getElementById("strata");
+  const fossilEl = document.getElementById("fossil");
+  {
+    const { svg: s, h } = strataSvg();
+    strataEl.setAttribute("viewBox", `0 0 600 ${h}`);
+    strataEl.innerHTML = s;
+  }
+  function showLayer(key) {
+    strataEl.classList.add("focus");
+    strataEl.querySelectorAll(".layer-g").forEach((g) => g.classList.toggle("on", g.dataset.layer === key));
+    const r = STRATA.find((x) => x.key === key);
+    if (r.active) {
+      fossilEl.innerHTML = `<div class="no">2026 — 今 · 现代沉积</div><h3>还在往下落的这一层</h3>
+        <p class="desc">2026 还没过完，年度歌手要等年底的报告。到时候这一层会固结成岩，长出它的标准化石。</p>
+        <p class="desc">如果还是 Vivienne，「Vivienne 组 · 上段」就会再厚一层。</p>`;
+      return;
+    }
+    const f = FOSSILS[r.artist];
+    const span = r.label || r.year;
+    const layers = layersOf(r.artist);
+    const rep = r.year ? songsOfYear(r.year) : [];
+    const treeSongs = r.years ? FAMILIES.flatMap((fa) => fa.artists.filter((a) => a.id === r.artist).flatMap((a) => a.songs)) : [];
+    const measure = r.year === 2024
+      ? `<div class="measure"><div class="t">2024 年最常听（原页面榜单）</div>${TOP_2024.map(([name, c], i) =>
+          `<div class="row"><span>${i + 1}</span><span>${esc(name)}</span><span>${c} 次</span><div class="bar"><i data-w="${(c / 176 * 100).toFixed(1)}"></i></div></div>`).join("")}</div>`
+      : "";
+    const rock = ROCK[f.rock];
+    fossilEl.innerHTML = `<div class="no">INDEX FOSSIL · ${span} 层</div>
+      <div class="kicker">${span} 年度歌手</div>
+      <div class="photo"><img src="${esc(f.photo)}" alt="${esc(f.name)}" /></div>
+      ${f.photoNote ? `<p class="photo-note">${esc(f.photoNote)}</p>` : ""}
+      <h3>${esc(f.name)}</h3>
+      <p class="style">${esc(f.style)}</p>
+      ${f.desc ? `<p class="desc">${esc(f.desc)}</p>` : ""}
+      <dl>
+        <dt>出现层位</dt><dd>${layers.join(" · ")}${layers.length > 1 ? `（${layers.length} 层）` : ""}</dd>
+        <dt>岩性</dt><dd>${rock.label}${rock.note ? ` · ${rock.note}` : ""}</dd>
+        ${rep.length ? `<dt>同层</dt><dd>${rep.map(({ s, a }) => `${esc(s.t)} <span style="color:var(--ink-3)">${esc(a.name)}</span>`).join("<br />")}</dd>` : ""}
+        ${treeSongs.length ? `<dt>谱系里</dt><dd>${treeSongs.map((s) => `${esc(s.t)} <span class="guess">${s.y}?</span>`).join("<br />")}</dd>` : ""}
+      </dl>
+      ${measure}
+      <button type="button" class="linkbtn" data-locate="art:${r.artist}">在 Plate I 谱系中找到 ${esc(f.name)} →</button>`;
+    requestAnimationFrame(() => requestAnimationFrame(() => fossilEl.querySelectorAll(".bar i").forEach((i) => { i.style.width = `${i.dataset.w}%`; })));
+  }
+  strataEl.addEventListener("click", (e) => { const g = e.target.closest(".layer-g"); if (g) showLayer(g.dataset.layer); });
+  strataEl.addEventListener("keydown", (e) => { const g = e.target.closest(".layer-g"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); showLayer(g.dataset.layer); } });
+  fossilEl.addEventListener("click", (e) => { const b = e.target.closest("[data-locate]"); if (b) locateKey(b.dataset.locate); });
+
+  /* ================= Plate III · 测序 ================= */
+  {
+    const m = motifSvg();
+    const motifEl = document.getElementById("motif");
+    motifEl.setAttribute("viewBox", `0 0 ${m.w} ${m.h}`);
+    motifEl.innerHTML = m.svg;
+  }
+  const LYRICS = [
+    { text: "我是离开，无名的人啊，我敬你一杯酒，敬你的沉默和每一声怒吼", song: "孙楠/陈楚生《无名之辈》", key: "sunnan:0" },
+    { text: "I will never gonna leave you never wanna lose you，we'll make it in the end", song: "前島麻由《longshot》", key: "maeshima:0" },
+    { text: "まっしろまっしろ まっしろな雪が降る", song: "水瀬ましろ《まっしろな雪》", key: "mashiro:0" },
+    { text: "Petals dance for our valediction，And synchronize to your frozen pulsation", song: "Mili《Nine Point Eight》", key: "mili:0" },
+    { text: "That since then I've found my way back...but I'll miss you", song: "Vivienne《Goodbye》", key: "vivienne:1" },
+    { text: "And now that I understand, have I the courage to try", song: "Vivienne《Phantom》", key: "vivienne:2" },
+    { text: "The fate plays a amazing trick on you，You can't hold it steady", song: "FELT《Beautiful Trick》", key: "felt:0" },
+    { text: "我看见希望闪耀在虹之间，光芒凝结于你我的那片天", song: "王赫野/姚晓棠《虹之间 (Live版)》", key: "wangheye:0" },
+    { text: "敬你弯着腰，上山往高处走，头顶苍穹，努力地生活", song: "孙楠/陈楚生《无名之辈》", key: "sunnan:0" },
+    { text: "Take me to where your soul may live in peace", song: "Mili《Nine Point Eight》", key: "mili:0" },
+    { text: "不再追问你为何不能停留，微笑看见爱的浮现", song: "王赫野/姚晓棠《虹之间 (Live版)》", key: "wangheye:0" },
+    { text: "Not backing down for real", song: "前島麻由《longshot》", key: "maeshima:0" },
+  ].map((l, i) => {
+    const m = l.song.match(/^(.*)《(.*)》$/);
+    return { ...l, no: `L-${String(i + 1).padStart(2, "0")}`, artist: m[1], title: m[2] };
+  });
+
+  // 碱基 = 文字种类，颜色和 Plate I 的语种一致
+  const BASE = { zh: LANG.zh.color, ja: LANG.ja.color, en: LANG.en.color, pu: "#938a78" };
+  const clsOf = (ch) => (/[぀-ヿ]/.test(ch) ? "ja" : /[㐀-鿿]/.test(ch) ? "zh" : /[A-Za-z0-9]/.test(ch) ? "en" : /\s/.test(ch) ? "sp" : "pu");
+  const freq = new Map();
+  for (const l of LYRICS) for (const ch of l.text) { if (clsOf(ch) === "sp") continue; const k = ch.toLowerCase(); freq.set(k, (freq.get(k) || 0) + 1); }
+  const clsMax = {};
+  for (const [k, v] of freq) { const c = clsOf(k); clsMax[c] = Math.max(clsMax[c] || 0, v); }
+  {
+    const cjk = [...freq].filter(([k]) => /[぀-ヿ㐀-鿿]/.test(k)).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const words = new Map();
+    for (const l of LYRICS) for (const w of l.text.toLowerCase().match(/[a-z']+/g) || []) words.set(w, (words.get(w) || 0) + 1);
+    const topW = [...words].sort((a, b) => b[1] - a[1]).slice(0, 5);
+    document.getElementById("freq").innerHTML = `12 句里出现最多的字：${cjk.map(([k, v]) => `<b>${esc(k)}</b> ×${v}`).join(" · ")}<br />出现最多的词：${topW.map(([k, v]) => `<b>${esc(k)}</b> ×${v}`).join(" · ")}`;
+  }
+
+  const readsEl = document.getElementById("reads");
+  readsEl.innerHTML = LYRICS.map((l, i) => `<div class="read" data-i="${i}">
+      <div class="read-h"><b>&gt;${l.no}</b><span>${esc(l.title)} · ${esc(l.artist)}</span><button type="button" class="linkbtn" data-locate="tip:${l.key}">在谱系中 →</button></div>
+      <svg class="trace" aria-label="${esc(l.text)}"></svg></div>`).join("");
+  readsEl.addEventListener("click", (e) => { const b = e.target.closest("[data-locate]"); if (b) locateKey(b.dataset.locate); });
+
+  const mctx = (() => { try { return document.createElement("canvas").getContext("2d"); } catch (_) { return null; } })();
+  const FONT_STACK = getComputedStyle(document.body).fontFamily || "serif";
+  const reads = LYRICS.map(() => ({ done: reduced, raf: 0 }));
+  const PK = 26;
+
+  function layoutRead(text, W, fs) {
+    const cw = (ch) => {
+      if (/\s/.test(ch)) return fs * 0.3;
+      if (mctx) { mctx.font = `${fs}px ${FONT_STACK}`; return mctx.measureText(ch).width; }
+      return textW(ch, fs);
+    };
+    const toks = [];
+    let word = null;
+    for (const ch of text) {
+      const c = clsOf(ch);
+      if (c === "en" || ch === "'") { if (word) word.push(ch); else { word = [ch]; toks.push({ t: "w", chars: word }); } }
+      else if (c === "sp") { word = null; toks.push({ t: "s", chars: [ch] }); }
+      else if (c === "pu") { word = null; if (toks.length) toks[toks.length - 1].chars.push(ch); else toks.push({ t: "w", chars: [ch] }); }
+      else { word = null; toks.push({ t: "c", chars: [ch] }); }
+    }
+    const lines = [[]];
+    let x = 0;
+    for (const tk of toks) {
+      const w = tk.chars.reduce((s, ch) => s + cw(ch), 0);
+      if (tk.t === "s") { if (x > 0) x += w; continue; }
+      if (x + w > W && x > 0) { lines.push([]); x = 0; }
+      for (const ch of tk.chars) { const w1 = cw(ch); lines[lines.length - 1].push({ ch, x, w: w1, c: clsOf(ch) }); x += w1; }
+    }
+    return lines.filter((l) => l.length);
+  }
+
+  function drawRead(i) {
+    const el = readsEl.children[i].querySelector(".trace");
+    const W = el.clientWidth || el.getBoundingClientRect().width || 640;
+    const fs = W < 420 ? 17 : 19;
+    const LH = fs + 8 + PK + 12;
+    const lines = layoutRead(LYRICS[i].text, W - 4, fs);
+    const parts = [];
+    lines.forEach((ln, li) => {
+      const top = li * LH, tb = top + fs, yb = top + fs + 8 + PK;
+      const lw = ln[ln.length - 1].x + ln[ln.length - 1].w;
+      parts.push(`<clipPath id="rc${i}_${li}"><rect class="head" x="-2" y="${top}" width="${reads[i].done ? lw + 6 : 0}" height="${LH}"/></clipPath>`);
+      parts.push(`<line x1="0" y1="${yb}" x2="${n2(lw)}" y2="${yb}" stroke="#d8d3c4" stroke-width=".6"/>`);
+      const curves = { zh: [], ja: [], en: [], pu: [] };
+      for (const b of ln) if (curves[b.c]) curves[b.c].push(b);
+      const peaks = [];
+      for (const [c, list] of Object.entries(curves)) {
+        if (!list.length) continue;
+        const pts = [];
+        for (let x = 0; x <= lw + 4; x += 1.5) {
+          let v = 0;
+          for (const b of list) {
+            const cx = b.x + b.w / 2, sg = Math.max(2.2, b.w * 0.27);
+            const h = c === "pu" ? 5 : 5 + 19 * Math.sqrt((freq.get(b.ch.toLowerCase()) || 1) / (clsMax[c] || 1));
+            v += h * Math.exp(-((x - cx) ** 2) / (2 * sg * sg));
+          }
+          pts.push(`${n2(x)},${n2(yb - Math.min(PK, v))}`);
+        }
+        peaks.push(`<polyline points="${pts.join(" ")}" fill="none" stroke="${BASE[c]}" stroke-width="1.1" stroke-linejoin="round"/>`);
+      }
+      parts.push(`<g clip-path="url(#rc${i}_${li})">${peaks.join("")}</g>`);
+      for (const b of ln) {
+        parts.push(`<text class="b" x="${n2(b.x + b.w / 2)}" y="${tb}" font-size="${fs}" fill="#262421" text-anchor="middle" data-c="${b.c}" data-x="${n2(b.x + b.w / 2)}" data-l="${li}"${reads[i].done ? "" : ` opacity="0"`}>${esc(b.ch)}</text>`);
+      }
+    });
+    el.setAttribute("viewBox", `0 0 ${n2(W)} ${lines.length * LH}`);
+    el.setAttribute("height", lines.length * LH);
+    el.innerHTML = parts.join("");
+    reads[i].lines = lines.map((ln) => ln[ln.length - 1].x + ln[ln.length - 1].w);
+  }
+
+  // 读出：一根读头从左往右扫，扫过的位置先闪一下 A/T/C/G，再变成真正的字
+  function playRead(i) {
+    const st = reads[i];
+    if (st.done) return;
+    const el = readsEl.children[i].querySelector(".trace");
+    const total = st.lines.reduce((s, w) => s + w, 0);
+    const chars = [...el.querySelectorAll("text.b")].map((t) => ({ t, x: +t.dataset.x, l: +t.dataset.l, real: t.textContent, state: 0 }));
+    const heads = [...el.querySelectorAll("rect.head")];
+    const dur = Math.min(1800, Math.max(600, chars.length * 32));
+    let start = null;
+    const step = (ts) => {
+      if (start === null) start = ts;
+      const k = Math.min(1, (ts - start) / dur);
+      let g = k * total;
+      st.lines.forEach((w, li) => {
+        const local = Math.max(0, Math.min(w, g));
+        g -= w;
+        heads[li].setAttribute("width", n2(local + (local >= w ? 6 : 0)));
+        for (const c of chars) {
+          if (c.l !== li) continue;
+          const s = c.x < local - 12 || k >= 1 ? 2 : c.x < local ? 1 : 0;
+          if (s === 2 && c.state !== 2) { c.t.textContent = c.real; c.t.setAttribute("fill", "#262421"); c.t.setAttribute("opacity", "1"); }
+          else if (s === 1) { c.t.textContent = "ATCG"[Math.floor(Math.random() * 4)]; c.t.setAttribute("fill", BASE[c.t.dataset.c] || "#938a78"); c.t.setAttribute("opacity", "1"); }
+          c.state = s;
+        }
+      });
+      if (k < 1) st.raf = requestAnimationFrame(step); else st.done = true;
+    };
+    st.raf = requestAnimationFrame(step);
+  }
+  function drawAllReads() { LYRICS.forEach((_, i) => { if (!reads[i].raf || reads[i].done) drawRead(i); }); }
+  drawAllReads();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => drawAllReads());
+  let lastW = innerWidth, rt = 0;
+  addEventListener("resize", () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      if (innerWidth === lastW) return;
+      lastW = innerWidth;
+      LYRICS.forEach((_, i) => { cancelAnimationFrame(reads[i].raf); if (reads[i].raf) reads[i].done = true; drawRead(i); });
+    }, 150);
+  });
+
+  /* ================= Plate IV · 日晷 ================= */
+  const dialEl = document.getElementById("dial");
+  const nowEl = document.getElementById("now");
+  dialEl.innerHTML = dialSvg();
+  const hand = dialEl.querySelector("#hand");
+  const setHand = (h) => hand.setAttribute("transform", `rotate(${n2(HA(h) * 180 / Math.PI)} ${DC} ${DC})`);
+  const nowHours = () => { const d = new Date(); return d.getHours() + d.getMinutes() / 60; };
+  function nowText() {
+    const d = new Date(), m = d.getHours() * 60 + d.getMinutes();
+    const hhmm = `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+    if (m >= 14 * 60 && m < 18 * 60) return `现在 <b>${hhmm}</b> —— 正是我最常听歌的时候`;
+    if (m < 14 * 60) { const left = 14 * 60 - m; return `现在 <b>${hhmm}</b> —— 离我的听歌时段还有 ${Math.floor(left / 60)} 小时 ${left % 60} 分`; }
+    return `现在 <b>${hhmm}</b> —— 今天的晚霞已经打捞完了，明天 14:00 见`;
+  }
+  let dialLive = 0;
+  function startDial() {
+    nowEl.innerHTML = nowText();
+    let target = nowHours();
+    if (target < 6) target += 24;
+    if (reduced) setHand(target);
+    else {
+      let start = null;
+      const step = (ts) => {
+        if (start === null) start = ts;
+        const k = Math.min(1, (ts - start) / 1500);
+        setHand(6 + (target - 6) * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    clearInterval(dialLive);
+    dialLive = setInterval(() => { setHand(nowHours()); nowEl.innerHTML = nowText(); }, 30000);
+  }
+
+  /* ================= Plate V · 标本抽屉 ================= */
+  const ALBUMS = [
+    { cover: CDN.n, title: "5:20AM", who: "刀酱" },
+    { cover: CDN.g, title: "Long shot", who: "前島麻由", locate: "tip:maeshima:0" },
+    { cover: CDN.t, title: "东方同人专辑", who: "名字待补", pending: true },
+    { cover: CDN.w, title: "专辑名待补", who: "", pending: true },
+  ];
+  const drawerEl = document.getElementById("drawer");
+  document.getElementById("drawerBed").innerHTML = ALBUMS.map((a) => {
+    const inner = `<span class="mat"><img src="${esc(a.cover)}" alt="${esc(a.title)}" loading="lazy" /></span>
+      <span class="lbl"><b>${esc(a.title)}</b>${a.who ? `<span>${esc(a.who)}</span>` : ""}${a.pending ? `<span class="guess"> · 待确认</span>` : ""}</span>`;
+    return a.locate ? `<button type="button" class="pinned" data-locate="${a.locate}">${inner}</button>` : `<figure class="pinned">${inner}</figure>`;
+  }).join("") + `<div class="moth"><button type="button" data-locate="tip:felt:1" aria-label="Night Butterflies：去谱系里找 You're the Shine">
+      <svg width="40" height="30" viewBox="-20 -15 40 30"><g transform="rotate(-12)"><ellipse cx="-8" cy="-4" rx="9" ry="5.5" transform="rotate(-18 -8 -4)" fill="#3d3934"/><ellipse cx="8" cy="-4" rx="9" ry="5.5" transform="rotate(18 8 -4)" fill="#3d3934"/><ellipse cx="-5.5" cy="5" rx="5.5" ry="3.5" transform="rotate(20 -5.5 5)" fill="#7a7062"/><ellipse cx="5.5" cy="5" rx="5.5" ry="3.5" transform="rotate(-20 5.5 5)" fill="#7a7062"/><line x1="0" y1="-10" x2="0" y2="9" stroke="#262421" stroke-width="1.6"/><circle cx="0" cy="-12" r="1.6" fill="#a33b22"/></g></svg></button>Night Butterflies<br />不小心飞进来的</div>`;
+  drawerEl.addEventListener("click", (e) => { const b = e.target.closest("[data-locate]"); if (b) locateKey(b.dataset.locate); });
+
+  /* ================= 启动 + 进场动画（各只自动一次） ================= */
+  buildIndex();
+  render();
+  showLayer("2025");
+  if (reduced) {
+    strataEl.classList.add("settled");
+    drawerEl.classList.add("open");
+    startDial();
+  } else {
+    onceVisible(svg, 0.3, () => { if (!grow.played) { grow.played = true; grow.y = Y0; playGrow(); } });
+    onceVisible(strataEl, 0.25, () => strataEl.classList.add("settled"));
+    [...readsEl.children].forEach((el, i) => onceVisible(el, 0.6, () => playRead(i)));
+    onceVisible(dialEl, 0.4, startDial);
+    onceVisible(drawerEl, 0.3, () => drawerEl.classList.add("open"));
+  }
+})();
+</script>
+</body>
+</html>

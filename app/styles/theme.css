@@ -1,0 +1,66 @@
+/*
+ * 主题系统 - 设计系统颜色和变量
+ * 使用 @theme reference 可在其他文件中引用
+ */
+
+@theme reference {
+  /* 字体系统 */
+  --font-main: "SiteSourceHanSerif", "SiteSourceHanSerif Fallback", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-sans: var(--font-main);
+  --font-serif: var(--font-main);
+
+  /* 设计系统颜色 */
+  --color-primary-50: #faf9f5;
+  --color-primary-100: #f5f4ed;
+  --color-primary-200: #ebe8dc;
+  --color-primary-300: #d8d3c4;
+  --color-primary-400: #b7af9d;
+  --color-primary-500: #938a78;
+  --color-primary-600: #746c5e;
+  --color-primary-700: #5b554b;
+  --color-primary-800: #3d3934;
+  --color-primary-900: #262421;
+  --color-primary-950: #141413;
+  --color-accent: #d97757;
+  --color-accent-hover: #c96442;
+
+  /* 流体间距 */
+  --spacing-section-sm: clamp(4rem, calc(4rem + 2 * ((100vw - 20rem) / 70)), 6rem);
+  --spacing-section-md: clamp(6rem, calc(6rem + 2 * ((100vw - 20rem) / 70)), 8rem);
+  --spacing-section-lg: clamp(8rem, calc(8rem + 4.5 * ((100vw - 20rem) / 70)), 12.5rem);
+  --spacing-section-xl: clamp(13rem, calc(13rem + 2 * ((100vw - 20rem) / 70)), 15rem);
+
+  /* 圆角 */
+  --radius-xs: 0.25rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: 1rem;
+
+  /* 动画缓动 */
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* shadcn/ui 兼容性颜色 */
+:root {
+  --font-main: "SiteSourceHanSerif", "SiteSourceHanSerif Fallback", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-sans: var(--font-main);
+  --font-serif: var(--font-main);
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --border: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --ring: oklch(0.556 0 0);
+}

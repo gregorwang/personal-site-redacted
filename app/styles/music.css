@@ -1,0 +1,163 @@
+/*
+ * 音乐页：米色纸面科学图版（Plate I 谱系树 + Plate II 地层柱）
+ * 组件：app/components/music/MusicPlates.tsx
+ */
+
+.music-plates {
+  --mp-bg: #f5f4ed;
+  --mp-paper: #faf9f5;
+  --mp-band: #e3dccb;
+  --mp-line: #d8d3c4;
+  --mp-ink: #262421;
+  --mp-ink-2: #5b554b;
+  --mp-ink-3: #938a78;
+  --mp-accent: #d97757;
+  --mp-rust: #a33b22;
+  --mp-ease: cubic-bezier(.16, 1, .3, 1);
+
+  min-height: 100vh;
+  background: var(--mp-bg);
+  color: var(--mp-ink);
+  font-family: var(--font-main);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.music-plates *, .music-plates *::before, .music-plates *::after { box-sizing: border-box; }
+.music-plates b { font-weight: 600; }
+
+.mp-wrap { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 768px) { .mp-wrap { padding: 0 40px; } }
+
+.mp-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* ---------- 图版通用 ---------- */
+.mp-sec { scroll-margin-top: 12px; }
+.mp-plate-head { padding-top: 64px; padding-bottom: 8px; }
+.mp-plate-no { font-size: 12px; letter-spacing: .24em; color: var(--mp-accent); font-weight: 600; }
+.mp-plate-head h2 { margin: 6px 0; font-size: clamp(24px, 3vw, 32px); font-weight: 700; letter-spacing: .03em; }
+.mp-plate-head p { margin: 0; color: var(--mp-ink-2); font-size: 14px; max-width: 780px; line-height: 1.8; }
+.mp-linkbtn { font: inherit; font-size: 12.5px; background: none; border: 0; border-bottom: 1px solid var(--mp-accent); color: var(--mp-rust); padding: 0 0 1px; cursor: pointer; }
+.mp-linkbtn:focus-visible { outline: 2px solid var(--mp-accent); outline-offset: 3px; }
+.mp-no { font-size: 11px; letter-spacing: .18em; color: var(--mp-ink-3); }
+.mp-guess { color: var(--mp-accent); font-size: 12px; }
+.mp-dim { color: var(--mp-ink-3); }
+.mp-plate { margin: 0; }
+.mp-plate svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+.mp-plate svg text { font-family: inherit; }
+
+/* ---------- Plate I 谱系树 ---------- */
+/* 首屏放下整棵树：树的边长不超过一屏高度 */
+.mp-stage { display: grid; gap: 24px; padding-top: 20px; padding-bottom: 20px; }
+@media (min-width: 1100px) {
+  .mp-stage { grid-template-columns: minmax(0, 1fr) 300px; align-items: center; min-height: 100svh; }
+  .mp-stage .mp-plate svg { width: min(100%, calc(100svh - 40px)); margin: 0 auto; }
+}
+
+.mp-tree .edge, .mp-tree .tick, .mp-tree .spec, .mp-tree .bubble, .mp-tree .dot { transition: opacity .12s linear; }
+.mp-tree .spec, .mp-tree .band, .mp-tree .hit { cursor: pointer; }
+.mp-tree .nohit { pointer-events: none; }
+.mp-tree.focus .edge { opacity: .12; }
+.mp-tree.focus .edge.on { opacity: 1; stroke-width: 1.7px; }
+.mp-tree.focus .tick { opacity: .18; }
+.mp-tree.focus .tick.on { opacity: 1; }
+.mp-tree.focus .spec { opacity: .28; }
+.mp-tree.focus .spec.on { opacity: 1; }
+.mp-tree.focus .dot { opacity: .2; }
+.mp-tree.focus .dot.on { opacity: 1; }
+.mp-tree.focus .bubble { opacity: .3; }
+.mp-tree .tick.pending { visibility: hidden; }
+.mp-tree .spec .pin { transform-box: fill-box; transform-origin: center; transition: opacity .35s ease, transform .45s cubic-bezier(.2, .9, .3, 1.35); }
+.mp-tree .spec.pending { pointer-events: none; }
+.mp-tree .spec.pending .pin { opacity: 0; transform: translateY(-7px) scale(1.25); }
+.mp-tree .spec:focus, .mp-tree .band:focus, .mp-tree .hit:focus { outline: none; }
+.mp-tree .spec:focus-visible rect { stroke: var(--mp-accent); stroke-width: 2px; }
+
+/* 标本卡：外框 + 衬纸凹槽 + 玻璃反光 */
+.mp-card {
+  position: relative; isolation: isolate;
+  background: linear-gradient(180deg, #fcfbf7 0%, #f6f3ea 100%);
+  border: 1px solid #cdc3ad; border-radius: 2px;
+  padding: 22px 22px 24px; font-size: 13.5px; line-height: 1.75;
+  box-shadow:
+    0 0 0 6px #ece6d7,
+    0 0 0 7px #cfc5b0,
+    0 14px 28px -14px rgba(70, 54, 30, .32),
+    0 3px 8px rgba(70, 54, 30, .07);
+}
+.mp-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; border-radius: inherit;
+  background:
+    linear-gradient(118deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.12) 22%, rgba(255,255,255,0) 34%,
+      rgba(255,255,255,0) 60%, rgba(255,255,255,.26) 66%, rgba(255,255,255,0) 74%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.45), inset 0 8px 16px -10px rgba(70, 54, 30, .22);
+}
+.mp-card .mp-close, .mp-card audio { position: relative; z-index: 2; }
+@media (min-width: 1100px) { .mp-card { max-height: calc(100svh - 40px); overflow-y: auto; } }
+.mp-card h3, .mp-fossil h3 { margin: 0 0 4px; font-size: 20px; font-weight: 700; line-height: 1.35; }
+.mp-card p { margin: 8px 0 0; }
+.mp-cover { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin: 12px 0 14px; background: var(--mp-band); border: 6px solid #fff; box-shadow: 0 0 0 1px var(--mp-line), 0 7px 12px -7px rgba(70, 54, 30, .38); }
+.mp-card dl, .mp-fossil dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 12px 0 0; }
+.mp-card dt, .mp-fossil dt { color: var(--mp-ink-3); font-size: 12px; padding-top: 2px; }
+.mp-card dd, .mp-fossil dd { margin: 0; }
+.mp-sw { display: inline-block; width: 9px; height: 9px; margin-right: 6px; vertical-align: 1px; }
+.mp-card blockquote { margin: 14px 0 0; padding: 10px 12px; background: var(--mp-bg); border-left: 2px solid var(--mp-accent); font-size: 13px; color: var(--mp-ink-2); }
+.mp-card blockquote + blockquote { margin-top: 8px; }
+.mp-path { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--mp-line); font-size: 12px; color: var(--mp-ink-3); }
+.mp-card audio { width: 100%; margin-top: 12px; height: 34px; display: block; }
+.mp-card ul { margin: 10px 0 0; padding-left: 18px; list-style: disc; }
+.mp-card li { margin: 2px 0; }
+.mp-close { float: right; font: inherit; font-size: 12px; background: none; border: 1px solid var(--mp-line); color: var(--mp-ink-2); padding: 2px 10px; cursor: pointer; }
+.mp-tally { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 12.5px; color: var(--mp-ink-2); font-variant-numeric: tabular-nums; }
+.mp-tally b { color: var(--mp-ink); }
+.mp-latin { margin: 0; color: var(--mp-ink-3); letter-spacing: .12em; font-size: 12px; }
+
+/* ---------- Plate II 地层柱 ---------- */
+.mp-strata-wrap { display: grid; gap: 28px; padding-top: 18px; }
+@media (min-width: 1000px) { .mp-strata-wrap { grid-template-columns: minmax(0, 640px) 340px; align-items: start; justify-content: space-between; } }
+.mp-strata .layer-g { cursor: pointer; transition: transform .8s var(--mp-ease), opacity .8s ease; transition-delay: calc(var(--i) * 120ms); }
+.mp-strata.armed:not(.settled) .layer-g { opacity: 0; transform: translateY(-18px); }
+.mp-strata .dimmable { transition: opacity .2s ease; }
+.mp-strata.focus .layer-g:not(.on) .dimmable { opacity: .42; }
+.mp-strata .layer-g.on path.layer { stroke: var(--mp-accent); stroke-width: 1.6px; }
+.mp-strata .layer-g:focus { outline: none; }
+.mp-strata .layer-g:focus-visible path.layer { stroke: var(--mp-accent); stroke-width: 2px; }
+
+.mp-fossil { background: var(--mp-paper); border: 1px solid var(--mp-line); padding: 20px; font-size: 13.5px; line-height: 1.75; }
+@media (min-width: 1000px) { .mp-fossil { position: sticky; top: 20px; } }
+.mp-kicker { font-size: 13px; color: var(--mp-rust); margin-top: 8px; }
+.mp-photo { width: 132px; height: 132px; border-radius: 50%; overflow: hidden; margin: 14px 0 6px 10px; background: var(--mp-band);
+  box-shadow: 0 0 0 4px var(--mp-paper), 0 0 0 5px var(--mp-ink-3), 0 0 0 9px var(--mp-paper), 0 0 0 10px var(--mp-line); }
+.mp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(.22) saturate(.88); }
+.mp-photo-note { font-size: 11.5px; color: var(--mp-ink-3); margin: 8px 0 0; }
+.mp-fossil h3 { margin-top: 10px; }
+.mp-style { margin: 0; color: var(--mp-ink-3); font-size: 12.5px; letter-spacing: .06em; }
+.mp-desc { margin: 10px 0 0; color: var(--mp-ink-2); }
+.mp-measure { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--mp-line); }
+.mp-measure-t { font-size: 12px; color: var(--mp-ink-3); margin-bottom: 4px; }
+.mp-row { display: grid; grid-template-columns: 1.4em 1fr auto; gap: 2px 8px; font-size: 12.5px; margin: 7px 0; font-variant-numeric: tabular-nums; }
+.mp-row > span:first-child { color: var(--mp-ink-3); }
+.mp-bar { grid-column: 2 / -1; height: 5px; background: var(--mp-band); }
+.mp-bar i { display: block; height: 100%; width: var(--w); background: var(--mp-accent); animation: mp-bar-in .8s var(--mp-ease) both; }
+@keyframes mp-bar-in { from { width: 0; } }
+.mp-fossil .mp-linkbtn { margin-top: 16px; }
+
+/* ---------- 附录 ---------- */
+.mp-index { padding-top: 26px; padding-bottom: 80px; border-top: 1px solid var(--mp-line); margin-top: 64px; }
+.mp-index h2 { font-size: 15px; font-weight: 700; letter-spacing: .12em; margin: 0 0 14px; }
+.mp-index-grid { display: grid; gap: 20px 32px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.mp-index h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+.mp-index h4 span { color: var(--mp-ink-3); font-weight: 400; letter-spacing: .1em; font-size: 11px; margin-left: 6px; }
+.mp-index ul { list-style: none; margin: 0; padding: 0; }
+.mp-index button { all: unset; box-sizing: border-box; display: flex; justify-content: space-between; gap: 10px; width: 100%; padding: 4px 0; border-bottom: 1px dotted var(--mp-line); font-size: 13px; cursor: pointer; }
+.mp-index button span { color: var(--mp-ink-3); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.mp-index button:hover, .mp-index button:focus-visible { color: var(--mp-rust); }
+
+.mp-tooltip { position: fixed; left: 0; top: 0; pointer-events: none; background: var(--mp-ink); color: var(--mp-bg); font-size: 12px; padding: 5px 9px; border-radius: 3px; opacity: 0; white-space: nowrap; z-index: 10; }
+.mp-tooltip.show { opacity: 1; }
+@media (hover: none) { .mp-tooltip { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-tree *, .mp-strata *, .mp-bar i { transition: none !important; animation: none !important; }
+}

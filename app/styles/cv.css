@@ -1,0 +1,87 @@
+/* 简历页：流体背景与无衬线正文 */
+
+.cv-sans {
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+}
+
+/* 色块用 radial-gradient 自带柔边，只动画 transform，不用 filter: blur 逐帧重绘 */
+.cv-blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.cv-blob--clay {
+  left: -12%;
+  top: -6%;
+  width: 62vw;
+  height: 62vw;
+  background: radial-gradient(circle at 50% 50%, rgba(217, 119, 87, 0.5) 0%, rgba(217, 119, 87, 0) 68%);
+  animation: cv-drift-a 26s ease-in-out infinite;
+}
+
+.cv-blob--slate {
+  right: -14%;
+  top: 12%;
+  width: 56vw;
+  height: 56vw;
+  background: radial-gradient(circle at 50% 50%, rgba(120, 146, 170, 0.42) 0%, rgba(120, 146, 170, 0) 68%);
+  animation: cv-drift-b 32s ease-in-out infinite;
+}
+
+.cv-blob--sand {
+  left: 22%;
+  bottom: -26%;
+  width: 70vw;
+  height: 50vw;
+  background: radial-gradient(ellipse at 50% 50%, rgba(214, 190, 140, 0.55) 0%, rgba(214, 190, 140, 0) 70%);
+  animation: cv-drift-c 38s ease-in-out infinite;
+}
+
+.cv-blob--ink {
+  left: -8%;
+  bottom: -4%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle at 50% 50%, rgba(38, 36, 33, 0.16) 0%, rgba(38, 36, 33, 0) 70%);
+  animation: cv-drift-b 30s ease-in-out infinite reverse;
+}
+
+@keyframes cv-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(8vw, 6vh, 0) scale(1.15);
+  }
+  66% {
+    transform: translate3d(-4vw, 14vh, 0) scale(0.9);
+  }
+}
+
+@keyframes cv-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-10vw, -8vh, 0) scale(1.2);
+  }
+}
+
+@keyframes cv-drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(6vw, -10vh, 0) rotate(30deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-blob {
+    animation: none;
+  }
+}

@@ -1,0 +1,5 @@
+# Cloudflare 静态资源响应头（wrangler [assets] 读取，不会被当成文件对外提供）。
+# /assets/* 是 Vite 产物，文件名带内容 hash，可以永久缓存。
+# 不加的话默认是 max-age=0, must-revalidate：预取下来的 CSS 点击时还要再问一次服务器（约 330ms），预取白做。
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

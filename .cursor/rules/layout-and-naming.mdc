@@ -1,0 +1,55 @@
+---
+description: Folder layout, module boundaries, and naming — prevent misleading paths and duplicate buckets
+alwaysApply: true
+---
+
+# Layout & Naming
+
+Follow existing boundaries. Do not invent parallel folders (`app/lib/data`, `app/lib/types`, generic `MessageContent.tsx`) when a canonical location already exists.
+
+## Directory map
+
+| Path | Put here | Do NOT put here |
+|------|----------|-----------------|
+| `app/data/` | Static site content: `updates.ts`, `game.ts`, `home-songs.ts`, `music-showcase.ts`, generated `lyrics/*.json` | Raw `.lrc`, woff2, stickers, hand-edited CDN URLs |
+| `app/types/` | Shared domain types (`chat`, `game`, `nemesis-sse`, `lyrics`, `remix`) | New `app/lib/types/` tree or mega `types.ts` scaffold |
+| `app/lib/` | Services, `.server.ts` logic, small pure utils actually imported | Static content arrays, dead utility files, UI components |
+| `app/nemesis/` | Server Nemesis: prompts, `*-manifest.json`, catalogs, guard helpers | React components |
+| `app/components/nemesis/chat/` | Nemesis chat page UI (`NemesisChatPage`, sidebar, composer) |
+| `app/hooks/useNemesisChat.client.ts` | Nemesis chat state, sessions, send/regenerate/feedback |
+| `app/lib/nemesis-chat-*.client.ts` | Browser-only chat persistence and API helpers |
+| `app/components/error/` | `NotFound404`, `RouteErrorBoundary` (root error UI) | Page-specific error copies |
+| `app/components/home/` | Homepage sections + visual experiments (`RapidLayersPreview`, etc.) | Other routes' page UI |
+| `app/routes/` | URL wiring only: `loader` / `action` / `meta` / `links`, then render a component | Large inline JSX (move to `app/components/`) |
+| `app/components/game/` | Game page UI + `GamePlatformIcons` | Other pages' components |
+| `app/components/transitions/` | Global `RouteTransition` (root-mounted) | Per-page one-off transition copies |
+| `app/generated/` | Build output (`image-manifest.ts`) — run `npm run images:process` | Manual edits |
+| `assets/` | Build **sources**: `lyrics/*.lrc`, `images/raw/`, font OTF | Runtime JSON consumed by routes |
+| `public/` | Small dev static (favicon, robots). `fonts/` + `stickers/` are gitignored | Large R2-hosted media committed to git |
+| `scripts/` | `build-lyrics.mjs`, `process-images.mjs`, upload pipelines | Business logic duplicated in routes |
+| `docs/` | Category subfolders: `design/` `audits/` `troubleshooting/` `notes/` `prompts/` `reference/` — index + naming rules in `docs/README.md` | Parallel `doc/` folder; loose files in `docs/` root; agent guides (`AGENTS.md`) |
+
+## Remix module suffixes
+
+- **`.server.ts`** — Worker/D1/R2 only; never import from client components.
+- **`.client.ts` / `.client.tsx`** — `window`, GSAP, audio, OAuth SDK, dynamic `import()` of JSON chunks. Route may still SSR loader + shell; only the `.client` chunk is browser-only.
+- **Plain `.ts`** — Shared only when safe on both sides; no top-level browser APIs.
+
+## Naming
+
+- Component/file names must match **domain + role**: `NemesisMessageContent`, `BubbleMessageBoard`, `RouteTransition` — not `MessageContent`, `DynamicShellMessageBoard`, `UpdatesRouteTransition`.
+- Prefix Nemesis-only UI with `Nemesis*`; homepage message board is `BubbleMessageBoard` (not Shell).
+- One shared types folder: **`app/types/`** only. Module-private types may stay next to the module.
+- R2/CDN media: code uses `/fonts/*`, `/stickers/*`, or `resolveImage()` / manifest URLs — not new copies under `public/` or `app/data/`.
+
+## Before adding a file
+
+1. Is it data, type, UI, server logic, or build script? Use the table above.
+2. Is the name accurate in six months? Avoid generic `*Content`, `*Utils`, `Dynamic*`, route-specific names on global modules.
+3. Does similar code exist? Extend it; do not create a second folder.
+
+## Changelog & images
+
+- Versions: **only** `app/data/updates.ts`.
+- Images: edit `scripts/image-assets.config.mjs` → `images:process` → `images:upload`; never hand-edit `app/generated/image-manifest.ts`.
+- Lyrics: edit `assets/lyrics/*.lrc` → `npm run lyrics:build`; runtime JSON in `app/data/lyrics/`.

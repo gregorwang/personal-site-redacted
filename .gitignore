@@ -1,0 +1,52 @@
+# Dependencies
+node_modules
+
+# Build
+/.cache
+/build
+/.react-router/
+
+# Environment
+.env
+.env.*
+!.env.example
+.dev.vars
+
+# Cloudflare Wrangler
+.wrangler/
+.wrangler-check/
+assets/fonts/*.otf
+assets/fonts/*.ttf
+assets/fonts/*.ttc
+assets/images/raw/
+dist/processed-images/
+dist/upload-manifest.json
+.tmp-*
+
+# Nemesis sticker assets (hosted on R2; keep locally for preview only)
+stickers/
+
+# Font subsets (hosted on R2; generated to public/fonts/ for local dev)
+public/fonts/
+public/demo/
+
+# Database files - 不应该提交到 Git
+*.db
+*.db-shm
+*.db-wal
+/data/
+
+# IDE
+.history/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Nemesis eval reports (contain model replies; regenerate with npm run nemesis:eval)
+.nemesis-eval/
+
+# Playwright MCP 截图、快照与评测抓取结果
+.playwright-mcp/

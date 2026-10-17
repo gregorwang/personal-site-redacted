@@ -1,0 +1,50 @@
+/*
+ * Fallback face with metrics aligned to Noto/Source Han Serif SC ExtraLight (upem 1000).
+ * Reduces CLS while SiteSourceHanSerif woff2 subsets are still loading.
+ * Metrics derived from assets/fonts/NotoSerifCJKsc-ExtraLight.otf via fontTools.
+ */
+
+@font-face {
+  font-family: "SiteSourceHanSerif Fallback";
+  font-style: normal;
+  font-weight: 200;
+  src:
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei"),
+    local("Noto Sans SC");
+  ascent-override: 115.1%;
+  descent-override: 28.6%;
+  line-gap-override: 0%;
+  size-adjust: 106%;
+}
+
+@font-face {
+  font-family: "SiteSourceHanSerif Fallback";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("PingFang SC"),
+    local("Hiragino Sans GB"),
+    local("Microsoft YaHei"),
+    local("Noto Sans SC");
+  ascent-override: 115.1%;
+  descent-override: 28.6%;
+  line-gap-override: 0%;
+  size-adjust: 106%;
+}
+
+@font-face {
+  font-family: "SiteSourceHanSerif Fallback";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local("PingFang SC Semibold"),
+    local("PingFang SC"),
+    local("Microsoft YaHei Bold"),
+    local("Microsoft YaHei");
+  ascent-override: 115.1%;
+  descent-override: 28.6%;
+  line-gap-override: 0%;
+  size-adjust: 106%;
+}

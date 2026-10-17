@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>番剧模块 · 三个方向</title>
+<style>
+  :root{
+    --p50:#faf9f5;--p100:#f5f4ed;--p200:#ebe8dc;--p500:#938a78;--p950:#141413;
+    --accent:#d97757;--accent2:#c96442;
+    --serif:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--p50);color:var(--p950);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+  .switcher{position:sticky;top:0;z-index:50;display:flex;gap:8px;justify-content:center;padding:12px;background:rgba(250,249,245,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--p200);font-size:13px}
+  .switcher a{color:var(--p950);text-decoration:none;padding:6px 14px;border-radius:999px;border:1px solid var(--p200)}
+  .switcher a:hover{border-color:var(--accent);color:var(--accent)}
+  .demo-tag{max-width:1216px;margin:0 auto;padding:56px 32px 0;font-size:12px;letter-spacing:.2em;color:var(--accent)}
+  section.mod{padding:40px 0 96px;border-bottom:1px dashed var(--p200)}
+  .wrap{max-width:1216px;margin:0 auto;padding:0 32px}
+  h2.t{font-weight:200;font-size:48px;line-height:1.05;margin-bottom:14px}
+  p.lead{max-width:640px;font-size:15px;line-height:2;color:rgba(20,20,19,.6)}
+  p.lead b{font-weight:500;color:var(--p950)}
+  .cta{display:inline-flex;gap:8px;align-items:center;margin-top:18px;color:var(--accent);text-decoration:none;font-size:15px}
+  .cta:hover span{transform:translateX(3px)}
+  .cta span{transition:transform .2s}
+
+  /* ============ A：电视机 + 录像带架 ============ */
+  .tv-stage{margin-top:36px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:end;
+    padding:48px;border-radius:6px;background:linear-gradient(180deg,#efece2,#e6e1d2)}
+  .tv{position:relative;background:#2a2622;border-radius:28px 28px 22px 22px;padding:26px 26px 64px;box-shadow:0 30px 60px -30px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.08)}
+  .screen{position:relative;aspect-ratio:4/3;border-radius:22px/30px;overflow:hidden;background:#111}
+  .screen img,.screen .card{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .screen .card{display:flex;flex-direction:column;justify-content:flex-end;padding:28px;color:#fff}
+  .screen .card h3{font-size:30px;font-weight:600;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+  .screen .card p{margin-top:8px;font-size:15px;line-height:1.7;opacity:.9;max-width:90%}
+  .screen::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55));}
+  .screen canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .08s}
+  .screen canvas.on{opacity:1}
+  .osd{position:absolute;top:16px;right:20px;font-family:ui-monospace,monospace;color:#7CFF8A;font-size:20px;text-shadow:0 0 6px #3f3;z-index:3}
+  .tv-bar{position:absolute;left:30px;right:30px;bottom:18px;display:flex;align-items:center;justify-content:space-between;color:#9d958a;font-size:12px;letter-spacing:.15em}
+  .knobs{display:flex;gap:12px}.knobs i{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#6b645b,#2b2723);display:block}
+  .shelf{position:relative}
+  .shelf-label{font-size:12px;letter-spacing:.2em;color:var(--p500);margin-bottom:12px}
+  .tapes{display:flex;flex-direction:column;gap:6px;border-bottom:10px solid #b9ad94;padding-bottom:2px}
+  .tape{display:flex;align-items:center;gap:12px;height:38px;padding:0 14px;border-radius:3px;background:#1d1b19;color:#f1ece2;cursor:pointer;font-size:14px;
+    border-left:10px solid var(--c);transition:transform .25s cubic-bezier(.2,.9,.3,1.2),box-shadow .2s;text-align:left;border-top:0;border-right:0;border-bottom:0;font-family:inherit}
+  .tape small{margin-left:auto;font-size:11px;opacity:.5;font-family:ui-monospace,monospace}
+  .tape:hover{transform:translateX(-10px)}
+  .tape.on{transform:translateX(-28px);box-shadow:6px 0 0 var(--accent)}
+  .tape.best::after{content:"年度最佳";font-size:10px;padding:2px 6px;border-radius:2px;background:var(--accent);color:#fff;margin-left:8px}
+  .tape.best small{margin-left:auto}
+
+  /* ============ B：字幕机 ============ */
+  .sub-grid{margin-top:8px;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:48px;align-items:center}
+  .film{position:relative;aspect-ratio:2.39/1;background:#000;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.1)}
+  .film .bg{position:absolute;inset:0;transition:opacity .8s ease;opacity:0;background-size:cover;background-position:center}
+  .film .bg.on{opacity:1}
+  .film .shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 45%)}
+  .subtitle{position:absolute;left:0;right:0;bottom:9%;text-align:center;color:#fff;font-size:30px;letter-spacing:.06em;
+    text-shadow:0 0 2px #000,0 0 2px #000,0 2px 6px rgba(0,0,0,.8);min-height:1.4em;padding:0 40px}
+  .subtitle .caret{display:inline-block;width:2px;height:1em;background:#fff;vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .src{position:absolute;top:18px;left:22px;color:rgba(255,255,255,.75);font-size:12px;letter-spacing:.2em}
+  .tc{position:absolute;top:18px;right:22px;color:rgba(255,255,255,.55);font-family:ui-monospace,monospace;font-size:12px}
+  .film-ctrl{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12px;color:var(--p500)}
+  .dots{display:flex;gap:6px}.dots button{width:18px;height:3px;border:0;background:var(--p200);cursor:pointer}
+  .dots button.on{background:var(--accent)}
+  .watchlist{margin-top:22px;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:rgba(20,20,19,.55)}
+  .watchlist span::before{content:"· ";color:var(--accent)}
+
+  /* ============ C：票根 ============ */
+  .tix{margin-top:40px;display:flex;gap:18px;overflow-x:auto;padding:26px 6px 30px;scroll-snap-type:x mandatory}
+  .tix::-webkit-scrollbar{display:none}
+  .ticket{flex:0 0 200px;height:300px;perspective:900px;scroll-snap-align:start;cursor:pointer}
+  .ticket.big{flex-basis:300px}
+  .t-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+  .ticket:hover .t-inner{transform:translateY(-8px) rotate(-1.5deg)}
+  .ticket.flip .t-inner{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:4px;overflow:hidden;
+    -webkit-mask:radial-gradient(circle 11px at 0 72%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 72%,transparent 98%,#000) right/51% 100% no-repeat;
+            mask:radial-gradient(circle 11px at 0 72%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 72%,transparent 98%,#000) right/51% 100% no-repeat;}
+  .front{background:var(--c);color:#fff;display:flex;flex-direction:column}
+  .front .art{flex:0 0 72%;padding:18px;display:flex;flex-direction:column;justify-content:space-between;background-size:cover;background-position:center;position:relative}
+  .front .art::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.45))}
+  .front .art>*{position:relative}
+  .front .no{font-family:ui-monospace,monospace;font-size:11px;opacity:.8;letter-spacing:.1em}
+  .front h3{font-size:20px;font-weight:600;line-height:1.3}
+  .ticket.big .front h3{font-size:26px}
+  .stub{flex:1;background:#f6f1e4;color:var(--p950);border-top:2px dashed rgba(20,20,19,.25);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+  .stub .stars{color:var(--accent);letter-spacing:2px}
+  .stub .date{font-family:ui-monospace,monospace;color:var(--p500)}
+  .back{transform:rotateY(180deg);background:#f6f1e4;padding:22px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--p200)}
+  .back q{font-size:17px;line-height:1.8;quotes:"「" "」"}
+  .ticket.big .back q{font-size:20px}
+  .back .from{font-size:12px;color:var(--p500)}
+  .back .stamp{align-self:flex-end;border:2px solid var(--accent);color:var(--accent);font-size:11px;padding:3px 8px;transform:rotate(-8deg);letter-spacing:.15em}
+  .tix-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--p500)}
+
+  .note{max-width:1216px;margin:0 auto;padding:18px 32px 0;font-size:12.5px;line-height:1.9;color:var(--p500)}
+  .note b{color:var(--p950);font-weight:500}
+
+  @media (max-width:900px){
+    h2.t{font-size:36px}
+    .tv-stage{grid-template-columns:1fr;padding:20px;gap:28px}
+    .sub-grid{grid-template-columns:1fr}
+    .subtitle{font-size:18px;padding:0 16px}
+    .wrap,.demo-tag,.note{padding-left:16px;padding-right:16px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="switcher">
+  <a href="#a">A · 电视机 + 录像带架</a>
+  <a href="#b">B · 字幕机</a>
+  <a href="#c">C · 追番票根</a>
+</nav>
+
+<!-- ======================= A ======================= -->
+<div class="demo-tag" id="a">方向 A · 电视机 + 录像带架 · 标题 + 通栏舞台</div>
+<section class="mod">
+  <div class="wrap">
+    <h2 class="t">纵览番剧</h2>
+    <p class="lead">近两年看的番比大学四年加起来还多。右边架子上是这两年的 <b>8 盘录像带</b>，抽一盘出来，电视换台。</p>
+    <div class="tv-stage">
+      <div class="tv">
+        <div class="screen" id="screen">
+          <img id="tvImg" src="https://cdn.xn--cckl9nsb.com/baiquan.545b285f.webp" alt="">
+          <div class="card" id="tvCard"><h3 id="tvTitle">败犬女主太多了</h3><p id="tvLine">笑到合不拢嘴，女主有点下头，却和男主产生了奇妙的化学反应。期待第二季。</p></div>
+          <div class="osd" id="osd">CH 01</div>
+          <canvas id="noise"></canvas>
+        </div>
+        <div class="tv-bar"><span>TRINITRON · 2024–2026</span><div class="knobs"><i></i><i></i></div></div>
+      </div>
+      <div class="shelf">
+        <div class="shelf-label">VHS · 近两年</div>
+        <div class="tapes" id="tapes"></div>
+        <a class="cta" href="#">探索完整榜单 <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+<p class="note"><b>好处：</b>物件感最强，跟播放器、收音机、钢琴是同一家族；换台的雪花屏可以加一声"滋"。<b>代价：</b>只有《败犬》有剧照，其他番要补截图，不然屏幕上就只有色块。台词放不进来，要么单独放进屏幕下方的字幕条里，要么舍弃。</p>
+
+<!-- ======================= B ======================= -->
+<div class="demo-tag" id="b">方向 B · 字幕机 · 左舞台 + 右文字（和音乐/视频镜像，节奏不重复）</div>
+<section class="mod">
+  <div class="wrap">
+    <div class="sub-grid">
+      <div>
+        <div class="film" id="film">
+          <div class="shade"></div>
+          <div class="src" id="src"></div>
+          <div class="tc" id="tc">00:00:00:00</div>
+          <div class="subtitle"><span id="subText"></span><span class="caret"></span></div>
+        </div>
+        <div class="film-ctrl"><div class="dots" id="dots"></div><span>点画面切下一句</span></div>
+      </div>
+      <div>
+        <h2 class="t">纵览番剧</h2>
+        <p class="lead">有些台词，过了很久还记得是在哪一帧出现的。左边是 <b>8 句</b>，按顺序放。</p>
+        <div class="watchlist">
+          <span>败犬女主太多了</span><span>Re0 第三季</span><span>凡人修仙传</span><span>金牌得主</span><span>青之箱</span><span>弹珠汽水瓶里的千岁同学</span><span>我心里危险的东西</span><span>灵笼第二季</span>
+        </div>
+        <a class="cta" href="#">探索完整榜单 <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+<p class="note"><b>好处：</b>最安静，"画面就是主角"，和羊蹄山视频的气质一致；台词终于有出处了。<b>代价：</b>跟下面照片网络一样都是"字"在唱主角，挨得近会有点重复；片单降成了一行小字。没剧照的台词我先用了渐变色背景。</p>
+
+<!-- ======================= C ======================= -->
+<div class="demo-tag" id="c">方向 C · 追番票根 · 标题 + 横向一排票</div>
+<section class="mod">
+  <div class="wrap">
+    <h2 class="t">纵览番剧</h2>
+    <p class="lead">每看完一部就撕一张票。正面是片名和我给的分，<b>翻过来是那部番里记住的一句话</b>。</p>
+    <div class="tix" id="tix"></div>
+    <div class="tix-foot"><span>点票翻面 · 横向可滑</span><a class="cta" style="margin:0" href="#">探索完整榜单 <span>→</span></a></div>
+  </div>
+</section>
+<p class="note"><b>好处：</b>片单、年度最佳、台词三样东西合到一个物件里，不会再拆成三张卡；翻面是个小彩蛋，日期和评分也给了具体信息。<b>代价：</b>每张票都要配一句台词和评分，素材要补齐；票面配色也要按每部番单独挑。</p>
+
+<div style="height:80px"></div>
+
+<script>
+/* 数据：出处不确定的先写"出处待填"，不瞎编 */
+const SHOWS=[
+  {t:"败犬女主太多了",c:"#4a74a8",img:"https://cdn.xn--cckl9nsb.com/baiquan.545b285f.webp",best:true,line:"笑到合不拢嘴，女主有点下头，却和男主产生了奇妙的化学反应。期待第二季。",date:"2024.07",score:5,q:"色彩越少，越能看清重要",qs:"出处待填"},
+  {t:"Re0 第三季",c:"#5b4a8a",line:"熟悉的绝望感又回来了。",date:"2024.10",score:4,q:"你把生命当成什么了？",qs:"出处待填"},
+  {t:"凡人修仙传",c:"#3f6b5a",line:"国漫里少有的慢热和耐心。",date:"2025.01",score:4,q:"下辈子我还会找到你",qs:"出处待填"},
+  {t:"金牌得主",c:"#7aa7c7",line:"冰面上的少女，热血得不像话。",date:"2025.01",score:5,q:"不要把悲伤和痛苦留给别人",qs:"出处待填"},
+  {t:"青之箱",c:"#2f6fb0",line:"体育馆里的暗恋，汗水味的青春。",date:"2024.10",score:4,q:"你这份温柔，迟早会害死你",qs:"出处待填"},
+  {t:"弹珠汽水瓶里的千岁同学",c:"#5fb3b3",line:"现充视角的青春，意外地不讨厌。",date:"2025.10",score:3,q:"此身为剑所成",qs:"Fate/stay night（借位，待替换）"},
+  {t:"我心里危险的东西",c:"#c06a7a",line:"中二少年和高个子女生，太甜了。",date:"2024.04",score:5,q:"海的那边是敌人",qs:"进击的巨人（借位，待替换）"},
+  {t:"灵笼第二季",c:"#6d5a44",line:"末世里的人性，比画面还沉。",date:"2025.06",score:4,q:"不是当上火影才被大家承认，而是被承认才当上火影",qs:"火影忍者（借位，待替换）"},
+];
+const QUOTES=[
+  {q:"海的那边是敌人",s:"进击的巨人"},
+  {q:"不是当上火影才被大家承认，而是被承认才当上火影",s:"火影忍者"},
+  {q:"此身为剑所成",s:"Fate/stay night"},
+  {q:"你这份温柔，迟早会害死你",s:"出处待填"},
+  {q:"你把生命当成什么了？",s:"出处待填"},
+  {q:"不要把悲伤和痛苦留给别人",s:"出处待填"},
+  {q:"色彩越少，越能看清重要",s:"出处待填",img:SHOWS[0].img},
+  {q:"下辈子我还会找到你",s:"出处待填"},
+];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- A ---------- */
+(()=>{
+  const tapes=document.getElementById("tapes"),img=document.getElementById("tvImg"),title=document.getElementById("tvTitle"),
+        line=document.getElementById("tvLine"),osd=document.getElementById("osd"),cv=document.getElementById("noise"),ctx=cv.getContext("2d"),screen=document.getElementById("screen");
+  let raf=0;
+  function noise(ms){
+    if(reduce)return;
+    cv.width=160;cv.height=120;cv.classList.add("on");
+    const end=performance.now()+ms;
+    const draw=()=>{const d=ctx.createImageData(160,120);for(let i=0;i<d.data.length;i+=4){const v=Math.random()*255;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255}ctx.putImageData(d,0,0);
+      if(performance.now()<end)raf=requestAnimationFrame(draw);else cv.classList.remove("on")};
+    cancelAnimationFrame(raf);draw();
+  }
+  function tune(i){
+    const s=SHOWS[i];
+    [...tapes.children].forEach((t,j)=>t.classList.toggle("on",j===i));
+    noise(260);
+    setTimeout(()=>{
+      osd.textContent="CH "+String(i+1).padStart(2,"0");
+      title.textContent=s.t;line.textContent=s.line;
+      if(s.img){img.style.display="";img.src=s.img;screen.style.background="#111"}
+      else{img.style.display="none";screen.style.background=`radial-gradient(circle at 30% 30%,${s.c},#111 85%)`}
+    },reduce?0:180);
+  }
+  SHOWS.forEach((s,i)=>{const b=document.createElement("button");b.className="tape"+(s.best?" best":"");b.style.setProperty("--c",s.c);
+    b.innerHTML=`${s.t}<small>${s.date}</small>`;b.onclick=()=>tune(i);tapes.appendChild(b)});
+  tapes.children[0].classList.add("on");
+})();
+
+/* ---------- B ---------- */
+(()=>{
+  const film=document.getElementById("film"),sub=document.getElementById("subText"),src=document.getElementById("src"),tc=document.getElementById("tc"),dots=document.getElementById("dots");
+  const palette=["#2c3e50","#5b2c2c","#1f3a2e","#3a2c4f","#4a3a24","#23364a","#3b3b3b","#402a3a","#24403f"];
+  const bgs=QUOTES.map((q,i)=>{const d=document.createElement("div");d.className="bg";
+    d.style.backgroundImage=q.img?`url(${q.img})`:`radial-gradient(ellipse at 30% 40%,${palette[i]} 0%,#0b0b0b 75%)`;film.prepend(d);return d}).reverse();
+  QUOTES.forEach((_,i)=>{const b=document.createElement("button");b.onclick=e=>{e.stopPropagation();show(i)};dots.appendChild(b)});
+  let cur=-1,typing=0,auto=0;
+  function show(i){
+    cur=i;bgs.forEach((b,j)=>b.classList.toggle("on",j===i));[...dots.children].forEach((b,j)=>b.classList.toggle("on",j===i));
+    src.textContent="《"+QUOTES[i].s+"》";
+    const sec=7+i*13;tc.textContent=`00:${String(12+i).padStart(2,"0")}:${String(sec%60).padStart(2,"0")}:${String((i*7)%24).padStart(2,"0")}`;
+    clearInterval(typing);const txt=QUOTES[i].q;
+    if(reduce){sub.textContent=txt}else{let k=0;sub.textContent="";typing=setInterval(()=>{sub.textContent=txt.slice(0,++k);if(k>=txt.length)clearInterval(typing)},70)}
+    clearTimeout(auto);auto=setTimeout(()=>show((cur+1)%QUOTES.length),5200);
+  }
+  film.onclick=()=>show((cur+1)%QUOTES.length);
+  new IntersectionObserver(([e],o)=>{if(e.isIntersecting){show(0);o.disconnect()}},{threshold:.4}).observe(film);
+})();
+
+/* ---------- C ---------- */
+(()=>{
+  const box=document.getElementById("tix");
+  const order=[0,...SHOWS.keys()].filter((v,i,a)=>a.indexOf(v)===i);
+  order.forEach((i,n)=>{const s=SHOWS[i];const el=document.createElement("div");el.className="ticket"+(s.best?" big":"");el.style.setProperty("--c",s.c);
+    el.innerHTML=`<div class="t-inner">
+      <div class="face front"><div class="art" style="${s.img?`background-image:url(${s.img})`:""}">
+        <span class="no">ADMIT ONE · No.${String(n+1).padStart(3,"0")}${s.best?" · 年度最佳":""}</span><h3>${s.t}</h3></div>
+        <div class="stub"><span class="stars">${"★".repeat(s.score)}${"☆".repeat(5-s.score)}</span><span class="date">${s.date}</span></div></div>
+      <div class="face back"><q>${s.q}</q><div><div class="from">— ${s.qs}</div></div><span class="stamp">已检票</span></div></div>`;
+    el.onclick=()=>el.classList.toggle("flip");box.appendChild(el)});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>法律文档草稿预览</title>
+<style>
+:root{--bg:#faf8f4;--fg:#26231f;--muted:#7a7468;--line:#e3ded3;--card:#fff;--accent:#8a5a2b;--mark:#fff1b8}
+@media (prefers-color-scheme:dark){:root{--bg:#17150f;--fg:#ece7dc;--muted:#a39b8a;--line:#2f2b22;--card:#1f1c15;--accent:#d8a468;--mark:#5a4a12}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.85 "Noto Serif SC","Songti SC",Georgia,serif}
+header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px;z-index:5}
+.bar{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.bar b{margin-right:auto;font-weight:600}
+.tag{font-size:12px;color:var(--muted)}
+[role=tab]{font:inherit;font-size:14px;padding:6px 14px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;cursor:pointer}
+[role=tab][aria-selected=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+main{max-width:760px;margin:0 auto;padding:24px 16px 80px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 28px 20px}
+h1{font-size:26px;margin:0 0 12px}
+h2{font-size:19px;margin:32px 0 8px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:24px 0 6px;color:var(--accent)}
+p,li{margin:0 0 10px}
+ul,ol{padding-left:22px;margin:0 0 12px}
+code{font:13px ui-monospace,Consolas,monospace;background:var(--bg);border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+mark{background:var(--mark);color:inherit;padding:0 3px;border-radius:3px}
+.draft-note{margin:0 0 20px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--bg);color:var(--muted);font-size:14px;line-height:1.7}
+.table-wrap{overflow-x:auto;margin:0 0 14px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--bg)}
+hr{border:0;border-top:1px dashed var(--accent);margin:36px 0 8px}
+.toggle{font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+body.hide-memo hr ~ *{display:none}
+@media(max-width:600px){.panel{padding:20px 16px}}
+</style>
+</head>
+<body>
+<header><div class="bar"><b>法律文档草稿预览</b><span class="tag"><mark>[ ]</mark> = 待你确认</span>
+<label class="toggle"><input type="checkbox" id="memo"> 隐藏内部备忘</label>
+<span role="tablist"><button role="tab" data-target="privacy" aria-selected="true">隐私政策</button><button role="tab" data-target="terms" aria-selected="false">使用条款</button></span></div></header>
+<main>
+<article id="privacy" class="panel"><h1>隐私政策（草稿 v0.1，2026-10-15）</h1>
+<blockquote class="draft-note">状态：草稿，未接入任何路由。方括号 <code>[ ]</code> 是需要站长确认或填写的地方。<br>事实依据：2026-10-15 对代码的扫描（<code>migrations/</code>、<code>app/lib/auth.server.ts</code>、<code>app/services/nemesis-guard-events.server.ts</code>、<code>app/nemesis/chat-ui-config.ts</code>、<code>wrangler.toml</code>）。<br>上线前请把"待确认"全部清掉，并让文字和代码保持一致；不要写代码没做的事。</blockquote>
+<p>最后更新：<mark>[上线日期]</mark></p>
+<p>本站由 <mark>[站长称呼 / 汪家俊]</mark> 个人运营（以下称"我"），网址 https://萌.com（<code>xn--cckl9nsb.com</code>）。这是个人网站，不是公司产品。下面说明我会收集哪些信息、为什么收集、交给了谁、保留多久，以及你能怎么处理。</p>
+<h2>1. 不登录时我会收集什么</h2>
+<ul><li><strong>主题 cookie（<code>theme</code>）</strong>：记住你选的浅色 / 深色，用于首屏渲染。</li><li><strong>访客 cookie（<code>cyber_terminal_visitor_id</code>）</strong>：只有你在首页终端里触发"领取"类互动时才会设置，有效期 1 年，用于防止重复领取。</li><li><strong>浏览器本地存储</strong>：</li><li><code>localStorage</code>：Nemesis 聊天记录（最多 20 个会话）和"已阅读隐私提示"标记，只在你的设备上，不会自动上传。</li><li><code>sessionStorage</code>：音乐页的临时缓存、首页终端的一次性提示，关闭标签页即清除。</li><li><strong>服务器日志</strong>：网站运行在 Cloudflare Workers 上。Cloudflare 会处理你的 IP 地址、User-Agent、访问路径等，用于提供服务和安全防护。我在 Worker 里开启了调用日志，所以这些请求信息会出现在我的 Cloudflare 日志里。</li><li><strong>限流用的 IP</strong>：留言、登录邮件等接口会按 IP 计数限流，计数记录里包含你的 IP，过期后失效。</li></ul>
+<p>本站目前<strong>没有</strong>接入 Google Analytics 等第三方统计、广告或追踪脚本。<mark>[待确认：上线前再 grep 一遍，如果以后加了统计，要回来改这里。]</mark></p>
+<h2>2. 登录时我会收集什么</h2>
+<p>你可以用 Google、Microsoft 或邮箱魔法链接登录。</p>
+<ul><li><strong>账号信息</strong>：邮箱、昵称、头像（来自 Google / Microsoft 授权，或你自己填写的邮箱）。</li><li><strong>登录会话</strong>：会话令牌、过期时间、登录时的 IP 和 User-Agent。会话有效期 7 天。</li><li><strong>第三方授权令牌</strong>：使用 Google / Microsoft 登录时，认证库会把对方返回的授权令牌存进我的数据库的 <code>account</code> 表。<mark>[待确认：是否需要保存；如果不需要，应当改配置不存。]</mark></li><li><strong>魔法链接邮件</strong>：链接 5 分钟内有效。邮件通过 Resend 发送，Resend 会处理你的邮箱地址和发信内容。</li><li><strong>管理员权限</strong>：站长账号有管理员角色，普通用户没有。</li></ul>
+<h2>3. 留言板</h2>
+<ul><li>你提交的留言内容、显示名称、提交时间、关联的账号 ID，会存入数据库。</li><li>新留言默认是"待审核"，审核通过后才会公开显示。</li><li>新留言提醒会通过 HTTPS 发给我自己的私有通知服务并转发到我的微信，里面包含留言内容和显示名称，只给我自己看。</li><li>请不要在留言里写你不想公开的信息。已公开的留言可能被他人截图或转载，我无法控制。</li></ul>
+<h2>4. Nemesis AI 聊天</h2>
+<p>这是本站隐私上最敏感的一块，请认真看。</p>
+<ul><li><strong>日常聊天不入库</strong>：普通对话只保存在你自己浏览器的本地存储里。清理浏览器数据、换设备、用无痕模式，记录都会消失。</li><li><strong>会发给第三方模型</strong>：为了生成回复，你的消息和少量上下文会发送给第三方大模型服务，目前包括 <strong>Google（Gemini）</strong> 和 <strong>DeepSeek</strong>。另有 xAI（Grok）的接入代码，当前处于关闭状态。<mark>[待确认：以 <code>wrangler.toml</code> 里的 <code>NEMESIS_GROK_ENABLED</code> 为准，上线前再看一次。]</mark> 这些服务商按各自的条款和隐私政策处理数据，我无法控制。</li><li><strong>安全审核会留存</strong>：以下情况，这一轮的问题、AI 回复和最近最多 10 条上下文（每条截取前 1000 字）会写入后台审计表，附带你的账号 ID 和打码后的邮箱：<br>1. 触发了安全规则（被拦下或被婉拒）；<br>2. 安全系统临时故障、按降级模式回答；<br>3. 你主动点了某条回复的"反馈"。<br>审计用于排查问题和调整安全规则，只有我能看到。</li><li><strong>不要输入敏感信息</strong>：密码、身份证、银行卡、住址等，请不要发给 AI。</li><li>AI 的回复可能出错或编造，不代表站长本人观点。</li></ul>
+<h2>5. 我如何使用这些信息</h2>
+<ul><li>提供登录、留言、聊天等功能；</li><li>防止滥用（限流、安全审核）；</li><li>排查故障、改进安全规则；</li><li>联系你（仅在你主动联系我，或处理你提出的删除 / 下架请求时）。</li></ul>
+<p>我不会出售你的个人信息，也不会把它用于广告。</p>
+<h2>6. 我会把信息交给谁</h2>
+<div class="table-wrap"><table><thead><tr><th>服务方</th><th>用途</th><th>涉及的信息</th></tr></thead><tbody><tr><td>Cloudflare（Workers、D1、R2、Durable Objects）</td><td>托管网站、数据库、媒体文件、限流</td><td>几乎所有上述信息</td></tr><tr><td>Google</td><td>登录、Gemini 模型</td><td>登录授权信息；聊天消息</td></tr><tr><td>Microsoft</td><td>登录</td><td>登录授权信息</td></tr><tr><td>Resend</td><td>发送魔法链接邮件</td><td>你的邮箱地址</td></tr><tr><td>DeepSeek</td><td>聊天模型</td><td>聊天消息和上下文</td></tr><tr><td>我的私有通知服务</td><td>留言提醒转发到站长微信</td><td>留言内容、显示名称</td></tr></tbody></table></div>
+<p>这些服务可能位于中国大陆以外的地区，所以你的信息可能会被传输到其他国家或地区处理。</p>
+<h2>7. 保留多久</h2>
+<ul><li>登录会话：7 天后过期。</li><li>魔法链接：5 分钟。</li><li>访客 cookie：1 年。</li><li>账号、留言、审计记录：<mark>[待确认：目前代码里没有自动清理。需要决定保留期限，比如审计记录 90 天、账号在你要求删除前一直保留。写什么就必须真的做到。]</mark></li></ul>
+<h2>8. 你的选择</h2>
+<ul><li>随时清除浏览器 cookie 和本地存储。</li><li>要求查看、更正、删除你的账号和留言、审计记录：发邮件到 <mark>[联系邮箱]</mark>，请从你登录用的邮箱发出，方便我核对身份。我会在 <mark>[30]</mark> 天内处理。</li><li>如果你在欧盟 / 英国等地，你依法可能享有访问、更正、删除、限制处理、反对处理、数据可携带等权利；如果你在中国大陆，你依据《个人信息保护法》享有查阅、复制、更正、删除等权利。联系邮箱同上。</li></ul>
+<h2>9. 未成年人</h2>
+<p>本站不是面向儿童的服务。如果你未满 <mark>[14 / 16]</mark> 岁，请在监护人同意下使用，并且不要提交个人信息。</p>
+<h2>10. 安全</h2>
+<p>我使用 HTTPS、会话 cookie 的安全标志、限流和审核来降低风险，但互联网上没有绝对安全，我不能保证信息永不泄露。</p>
+<h2>11. 本政策的变化</h2>
+<p>政策更新会在本页修改"最后更新"日期。重大变化我会在站内另行提示。</p>
+<h2>12. 联系我</h2>
+<p><mark>[联系邮箱]</mark></p>
+<hr>
+<h3>给站长的内部备忘（上线前删掉）</h3>
+<p>扫描中发现、但不属于对外文字的几件事：</p>
+<ol><li><strong>审计表没有保留期限，也没有删除路径</strong>。<code>nemesis_guard_events</code> 通过外键 <code>ON DELETE CASCADE</code> 跟着用户走，删用户就会删审计；但没有定时清理。建议加一个定期清理（例如 90 天）。</li><li><strong><code>account</code> 表存了 OAuth 的 access / refresh / id token</strong>。如果你不需要代表用户调用 Google / Microsoft API，可以考虑不存。</li><li><strong>Worker 开了 100% 采样的调用日志</strong>（<code>wrangler.toml</code> 的 <code>observability.logs</code>），日志里会有 IP 和路径。文字里已经写了，但要知道有这件事。</li><li><strong>留言通知用的 webhook 指向你自己的服务</strong>，留言内容会离开 Cloudflare，这一条已写进第 3 节。</li><li><strong>联系邮箱不要直接用 <code>ADMIN_EMAILS</code> 里的那个</strong>，除非你确定要公开。建议用转发地址或专用邮箱。</li></ol></article>
+<article id="terms" class="panel" hidden><h1>使用条款（草稿 v0.1，2026-10-15）</h1>
+<blockquote class="draft-note">状态：草稿，未接入任何路由。方括号 <code>[ ]</code> 需要站长确认或填写。<br>配套文档：<code>privacy-policy-draft-2026-10-15.md</code>。</blockquote>
+<p>最后更新：<mark>[上线日期]</mark></p>
+<p>欢迎访问 https://萌.com（<code>xn--cckl9nsb.com</code>）。这是 <mark>[站长称呼 / 汪家俊]</mark> 的个人网站。使用本站，即表示你同意下面的条款。不同意的话，请不要使用需要登录的功能。</p>
+<h2>1. 本站是什么</h2>
+<p>这是一个个人作品和兴趣站点，包含简历、相册、音乐、游戏和动漫页面、留言板，以及一个 AI 聊天功能（Nemesis）。功能可能随时调整、暂停或下线，不保证一直可用。</p>
+<h2>2. 账号</h2>
+<ul><li>你可以用 Google、Microsoft 或邮箱链接登录。请保管好你的账号，通过你账号发生的行为由你负责。</li><li>我可以因为滥用、骚扰、攻击站点等原因限制或封禁账号，通常不会提前通知。</li></ul>
+<h2>3. 留言板和你提交的内容</h2>
+<ul><li>你提交的内容由你负责，保证它不侵犯他人权利、不违法。</li><li>禁止发布：违法内容、骚扰辱骂、他人隐私、垃圾广告、恶意链接、色情和暴力内容。</li><li>留言会先审核，我可以不经解释拒绝、修改或删除任何留言。</li><li>你保留自己内容的版权，同时授权我为了运营本站，在站内展示、存储、必要时调整格式（如截断、换行）你的留言。</li><li>留言一旦公开，可能被他人看到和转载，请自行判断是否适合发布。</li></ul>
+<h2>4. Nemesis AI 聊天</h2>
+<ul><li>AI 的回复由第三方大模型生成，可能出错、编造或不合适，<strong>不代表站长本人观点</strong>，也不构成医疗、法律、财务等专业建议。</li><li>你的消息会发给第三方模型服务处理，部分会留存审计。详见《隐私政策》第 4 节。</li><li>禁止用于：试图获取系统提示词或内部配置、绕过安全规则、生成违法内容、骚扰他人、自动化批量调用。</li><li>我设置了限流和安全审核，可能拦截或婉拒部分请求。</li></ul>
+<h2>5. 站内内容的版权</h2>
+<ul><li>站点原创的代码、设计和文字，版权归 <mark>[站长]</mark> 所有，<mark>[待确认：是否开源及协议]</mark>。</li><li><strong>站内展示的动漫、游戏、音乐、歌词、图片等素材，版权归原作者或权利方所有</strong>，本站仅用于个人展示和交流，不做商业用途。</li><li>如果你是权利人，认为本站的某项内容侵犯了你的权利，请发邮件到 <mark>[联系邮箱]</mark>，写明：(1) 你的身份；(2) 涉及的页面地址；(3) 你主张权利的作品；(4) 联系方式。我核实后会尽快下架或删除。</li></ul>
+<h3>致谢与灵感来源</h3>
+<p>本站部分界面设计和交互参考了 OpenAI、Cursor 等产品（例如首页的视频播放控件、构建记录的窗口式界面）。感谢它们带来的启发。本站与上述公司和产品没有任何隶属、合作或授权关系，相关名称、商标和标识归各自所有者所有。如权利人对本站的相关内容有异议，请按上一条的方式联系我。</p>
+<p><mark>[待确认：这里列的名字和例子要与实际保持一致，以后再借鉴别的站点，回来补一行。]</mark></p>
+<h2>6. 你不能做什么</h2>
+<ul><li>攻击、扫描、压测本站，或试图绕过限流、登录和权限控制；</li><li>批量抓取站点内容或接口；</li><li>冒充他人或站长；</li><li>利用本站传播恶意软件。</li></ul>
+<p>发现安全漏洞，欢迎发邮件告诉我，请不要公开利用。</p>
+<h2>7. 免责声明</h2>
+<p>本站按"现状"提供，不作任何明示或暗示的保证，包括可用性、准确性和适用性。在法律允许的最大范围内，我不对因使用或无法使用本站造成的间接损失承担责任。外部链接指向的第三方站点，我不控制，也不负责。</p>
+<h2>8. 条款变更和终止</h2>
+<p>我可以随时更新本条款，更新后继续使用即视为接受。你可以随时停止使用本站，也可以按《隐私政策》第 8 节要求删除账号数据。</p>
+<h2>9. 适用法律</h2>
+<p><mark>[待确认：个人站点常见写法是"适用站长所在地法律"。具体写哪里、是否写管辖法院，建议你自己决定，或者找律师确认一次。]</mark></p>
+<h2>10. 联系我</h2>
+<p><mark>[联系邮箱]</mark></p></article>
+</main>
+<script>
+const tabs=[...document.querySelectorAll('[role=tab]')],panels=[...document.querySelectorAll('.panel')];
+tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===t));panels.forEach(p=>p.hidden=p.id!==t.dataset.target);scrollTo(0,0)}));
+document.getElementById('memo').addEventListener('change',e=>document.body.classList.toggle('hide-memo',e.target.checked));
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .text-primary-950 {
+    color: var(--color-primary-950);
+  }
+
+  .border-primary-950\/10 {
+    border-color: color-mix(in oklch, var(--color-primary-950) 30%, transparent);
+  }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

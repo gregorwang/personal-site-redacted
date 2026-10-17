@@ -1,0 +1,1667 @@
+[
+  {
+    "start": 23.339,
+    "text": "That snowflake once fell on my nose",
+    "end": 28.385,
+    "translation": "那片雪花曾落在我的鼻尖",
+    "time": 23.339,
+    "words": [
+      {
+        "text": "That ",
+        "start": 23.339,
+        "duration": 0.696,
+        "end": 24.035
+      },
+      {
+        "text": "snowflake ",
+        "start": 24.035,
+        "duration": 1.566,
+        "end": 25.601
+      },
+      {
+        "text": "once ",
+        "start": 25.601,
+        "duration": 0.696,
+        "end": 26.297
+      },
+      {
+        "text": "fell ",
+        "start": 26.297,
+        "duration": 0.696,
+        "end": 26.993
+      },
+      {
+        "text": "on ",
+        "start": 26.993,
+        "duration": 0.348,
+        "end": 27.341
+      },
+      {
+        "text": "my ",
+        "start": 27.341,
+        "duration": 0.348,
+        "end": 27.689
+      },
+      {
+        "text": "nose",
+        "start": 27.689,
+        "duration": 0.696,
+        "end": 28.385
+      }
+    ]
+  },
+  {
+    "start": 28.385,
+    "text": "now flying backwards to last winter",
+    "end": 34.597,
+    "translation": "现在正倒飞回往年冬天",
+    "time": 28.385,
+    "words": [
+      {
+        "text": "now ",
+        "start": 28.385,
+        "duration": 0.621,
+        "end": 29.006
+      },
+      {
+        "text": "flying ",
+        "start": 29.006,
+        "duration": 1.242,
+        "end": 30.248
+      },
+      {
+        "text": "backwards ",
+        "start": 30.248,
+        "duration": 1.864,
+        "end": 32.112
+      },
+      {
+        "text": "to ",
+        "start": 32.112,
+        "duration": 0.414,
+        "end": 32.526
+      },
+      {
+        "text": "last ",
+        "start": 32.526,
+        "duration": 0.828,
+        "end": 33.354
+      },
+      {
+        "text": "winter",
+        "start": 33.354,
+        "duration": 1.242,
+        "end": 34.596
+      }
+    ]
+  },
+  {
+    "start": 34.597,
+    "text": "I realize that hellos are goodbyes",
+    "end": 39.707,
+    "translation": "我意识到，问候即告别",
+    "time": 34.597,
+    "words": [
+      {
+        "text": "I ",
+        "start": 34.597,
+        "duration": 0.176,
+        "end": 34.773
+      },
+      {
+        "text": "realize ",
+        "start": 34.773,
+        "duration": 1.233,
+        "end": 36.006
+      },
+      {
+        "text": "that ",
+        "start": 36.006,
+        "duration": 0.705,
+        "end": 36.711
+      },
+      {
+        "text": "hellos ",
+        "start": 36.711,
+        "duration": 1.057,
+        "end": 37.768
+      },
+      {
+        "text": "are ",
+        "start": 37.768,
+        "duration": 0.529,
+        "end": 38.297
+      },
+      {
+        "text": "goodbyes",
+        "start": 38.297,
+        "duration": 1.41,
+        "end": 39.707
+      }
+    ]
+  },
+  {
+    "start": 39.707,
+    "text": "The moment I softly let go of your hand",
+    "end": 46.145,
+    "translation": "当我轻轻松开你的手",
+    "time": 39.707,
+    "words": [
+      {
+        "text": "The ",
+        "start": 39.707,
+        "duration": 0.623,
+        "end": 40.33
+      },
+      {
+        "text": "moment ",
+        "start": 40.33,
+        "duration": 1.246,
+        "end": 41.576
+      },
+      {
+        "text": "I ",
+        "start": 41.576,
+        "duration": 0.208,
+        "end": 41.784
+      },
+      {
+        "text": "softly ",
+        "start": 41.784,
+        "duration": 1.246,
+        "end": 43.03
+      },
+      {
+        "text": "let ",
+        "start": 43.03,
+        "duration": 0.623,
+        "end": 43.653
+      },
+      {
+        "text": "go ",
+        "start": 43.653,
+        "duration": 0.415,
+        "end": 44.068
+      },
+      {
+        "text": "of ",
+        "start": 44.068,
+        "duration": 0.415,
+        "end": 44.483
+      },
+      {
+        "text": "your ",
+        "start": 44.483,
+        "duration": 0.831,
+        "end": 45.314
+      },
+      {
+        "text": "hand",
+        "start": 45.314,
+        "duration": 0.831,
+        "end": 46.145
+      }
+    ]
+  },
+  {
+    "start": 46.145,
+    "text": "Winds hum through the trembling branches",
+    "end": 51.118,
+    "translation": "风在颤抖的枝桠间呼啸而过",
+    "time": 46.145,
+    "words": [
+      {
+        "text": "Winds ",
+        "start": 46.145,
+        "duration": 0.71,
+        "end": 46.855
+      },
+      {
+        "text": "hum ",
+        "start": 46.855,
+        "duration": 0.426,
+        "end": 47.281
+      },
+      {
+        "text": "through ",
+        "start": 47.281,
+        "duration": 0.995,
+        "end": 48.276
+      },
+      {
+        "text": "the ",
+        "start": 48.276,
+        "duration": 0.426,
+        "end": 48.702
+      },
+      {
+        "text": "trembling ",
+        "start": 48.702,
+        "duration": 1.279,
+        "end": 49.981
+      },
+      {
+        "text": "branches",
+        "start": 49.981,
+        "duration": 1.137,
+        "end": 51.118
+      }
+    ]
+  },
+  {
+    "start": 51.118,
+    "text": "A song for a soul bound to soar to",
+    "end": 54.672,
+    "translation": "唱着一首歌",
+    "time": 51.118,
+    "words": [
+      {
+        "text": "A ",
+        "start": 51.118,
+        "duration": 0.137,
+        "end": 51.255
+      },
+      {
+        "text": "song ",
+        "start": 51.255,
+        "duration": 0.547,
+        "end": 51.802
+      },
+      {
+        "text": "for ",
+        "start": 51.802,
+        "duration": 0.41,
+        "end": 52.212
+      },
+      {
+        "text": "a ",
+        "start": 52.212,
+        "duration": 0.137,
+        "end": 52.349
+      },
+      {
+        "text": "soul ",
+        "start": 52.349,
+        "duration": 0.547,
+        "end": 52.896
+      },
+      {
+        "text": "bound ",
+        "start": 52.896,
+        "duration": 0.683,
+        "end": 53.579
+      },
+      {
+        "text": "to ",
+        "start": 53.579,
+        "duration": 0.273,
+        "end": 53.852
+      },
+      {
+        "text": "soar ",
+        "start": 53.852,
+        "duration": 0.547,
+        "end": 54.399
+      },
+      {
+        "text": "to",
+        "start": 54.399,
+        "duration": 0.273,
+        "end": 54.672
+      }
+    ]
+  },
+  {
+    "start": 54.672,
+    "text": "The very edge of the starry ocean",
+    "end": 57.623,
+    "translation": "献给注定飞往星海尽头的灵魂",
+    "time": 54.672,
+    "words": [
+      {
+        "text": "The ",
+        "start": 54.672,
+        "duration": 0.328,
+        "end": 55.0
+      },
+      {
+        "text": "very ",
+        "start": 55.0,
+        "duration": 0.437,
+        "end": 55.437
+      },
+      {
+        "text": "edge ",
+        "start": 55.437,
+        "duration": 0.437,
+        "end": 55.874
+      },
+      {
+        "text": "of ",
+        "start": 55.874,
+        "duration": 0.219,
+        "end": 56.093
+      },
+      {
+        "text": "the ",
+        "start": 56.093,
+        "duration": 0.328,
+        "end": 56.421
+      },
+      {
+        "text": "starry ",
+        "start": 56.421,
+        "duration": 0.656,
+        "end": 57.077
+      },
+      {
+        "text": "ocean",
+        "start": 57.077,
+        "duration": 0.546,
+        "end": 57.623
+      }
+    ]
+  },
+  {
+    "start": 57.623,
+    "text": "Even if we're meant to fall apart",
+    "end": 62.467,
+    "translation": "即便我们注定分道扬镳",
+    "time": 57.623,
+    "words": [
+      {
+        "text": "Even ",
+        "start": 57.623,
+        "duration": 0.718,
+        "end": 58.341
+      },
+      {
+        "text": "if ",
+        "start": 58.341,
+        "duration": 0.359,
+        "end": 58.7
+      },
+      {
+        "text": "we're ",
+        "start": 58.7,
+        "duration": 0.897,
+        "end": 59.597
+      },
+      {
+        "text": "meant ",
+        "start": 59.597,
+        "duration": 0.897,
+        "end": 60.494
+      },
+      {
+        "text": "to ",
+        "start": 60.494,
+        "duration": 0.359,
+        "end": 60.853
+      },
+      {
+        "text": "fall ",
+        "start": 60.853,
+        "duration": 0.718,
+        "end": 61.571
+      },
+      {
+        "text": "apart",
+        "start": 61.571,
+        "duration": 0.897,
+        "end": 62.468
+      }
+    ]
+  },
+  {
+    "start": 62.467,
+    "text": "I will gaze at where you are for all time",
+    "end": 67.614,
+    "translation": "在所有的时间里，我都会朝着你的方向凝望",
+    "time": 62.467,
+    "words": [
+      {
+        "text": "I ",
+        "start": 62.467,
+        "duration": 0.161,
+        "end": 62.628
+      },
+      {
+        "text": "will ",
+        "start": 62.628,
+        "duration": 0.643,
+        "end": 63.271
+      },
+      {
+        "text": "gaze ",
+        "start": 63.271,
+        "duration": 0.643,
+        "end": 63.914
+      },
+      {
+        "text": "at ",
+        "start": 63.914,
+        "duration": 0.322,
+        "end": 64.236
+      },
+      {
+        "text": "where ",
+        "start": 64.236,
+        "duration": 0.804,
+        "end": 65.04
+      },
+      {
+        "text": "you ",
+        "start": 65.04,
+        "duration": 0.483,
+        "end": 65.523
+      },
+      {
+        "text": "are ",
+        "start": 65.523,
+        "duration": 0.483,
+        "end": 66.006
+      },
+      {
+        "text": "for ",
+        "start": 66.006,
+        "duration": 0.483,
+        "end": 66.489
+      },
+      {
+        "text": "all ",
+        "start": 66.489,
+        "duration": 0.483,
+        "end": 66.972
+      },
+      {
+        "text": "time",
+        "start": 66.972,
+        "duration": 0.643,
+        "end": 67.615
+      }
+    ]
+  },
+  {
+    "start": 67.614,
+    "text": "Bon voyage",
+    "end": 70.441,
+    "translation": "旅途愉快",
+    "time": 67.614,
+    "words": [
+      {
+        "text": "Bon ",
+        "start": 67.614,
+        "duration": 0.942,
+        "end": 68.556
+      },
+      {
+        "text": "voyage",
+        "start": 68.556,
+        "duration": 1.885,
+        "end": 70.441
+      }
+    ]
+  },
+  {
+    "start": 70.441,
+    "text": "May your path be clear",
+    "end": 73.28,
+    "translation": "愿你的道路清晰无阻",
+    "time": 70.441,
+    "words": [
+      {
+        "text": "May ",
+        "start": 70.441,
+        "duration": 0.473,
+        "end": 70.914
+      },
+      {
+        "text": "your ",
+        "start": 70.914,
+        "duration": 0.631,
+        "end": 71.545
+      },
+      {
+        "text": "path ",
+        "start": 71.545,
+        "duration": 0.631,
+        "end": 72.176
+      },
+      {
+        "text": "be ",
+        "start": 72.176,
+        "duration": 0.315,
+        "end": 72.491
+      },
+      {
+        "text": "clear",
+        "start": 72.491,
+        "duration": 0.789,
+        "end": 73.28
+      }
+    ]
+  },
+  {
+    "start": 73.28,
+    "text": "May you get to where dreams are all crystalline and sweet",
+    "end": 80.412,
+    "translation": "愿你抵达之处，美梦都晶莹甜美",
+    "time": 73.28,
+    "words": [
+      {
+        "text": "May ",
+        "start": 73.28,
+        "duration": 0.455,
+        "end": 73.735
+      },
+      {
+        "text": "you ",
+        "start": 73.735,
+        "duration": 0.455,
+        "end": 74.19
+      },
+      {
+        "text": "get ",
+        "start": 74.19,
+        "duration": 0.455,
+        "end": 74.645
+      },
+      {
+        "text": "to ",
+        "start": 74.645,
+        "duration": 0.303,
+        "end": 74.948
+      },
+      {
+        "text": "where ",
+        "start": 74.948,
+        "duration": 0.759,
+        "end": 75.707
+      },
+      {
+        "text": "dreams ",
+        "start": 75.707,
+        "duration": 0.91,
+        "end": 76.617
+      },
+      {
+        "text": "are ",
+        "start": 76.617,
+        "duration": 0.455,
+        "end": 77.072
+      },
+      {
+        "text": "all ",
+        "start": 77.072,
+        "duration": 0.455,
+        "end": 77.527
+      },
+      {
+        "text": "crystalline ",
+        "start": 77.527,
+        "duration": 1.669,
+        "end": 79.196
+      },
+      {
+        "text": "and ",
+        "start": 79.196,
+        "duration": 0.455,
+        "end": 79.651
+      },
+      {
+        "text": "sweet",
+        "start": 79.651,
+        "duration": 0.759,
+        "end": 80.41
+      }
+    ]
+  },
+  {
+    "start": 80.412,
+    "text": "Please crack a little smile",
+    "end": 84.73,
+    "translation": "笑一笑吧",
+    "time": 80.412,
+    "words": [
+      {
+        "text": "Please ",
+        "start": 80.412,
+        "duration": 1.126,
+        "end": 81.538
+      },
+      {
+        "text": "crack ",
+        "start": 81.538,
+        "duration": 0.939,
+        "end": 82.477
+      },
+      {
+        "text": "a ",
+        "start": 82.477,
+        "duration": 0.188,
+        "end": 82.665
+      },
+      {
+        "text": "little ",
+        "start": 82.665,
+        "duration": 1.126,
+        "end": 83.791
+      },
+      {
+        "text": "smile",
+        "start": 83.791,
+        "duration": 0.939,
+        "end": 84.73
+      }
+    ]
+  },
+  {
+    "start": 84.73,
+    "text": "You won't be alone",
+    "end": 87.337,
+    "translation": "在你选择的世界里",
+    "time": 84.73,
+    "words": [
+      {
+        "text": "You ",
+        "start": 84.73,
+        "duration": 0.521,
+        "end": 85.251
+      },
+      {
+        "text": "won't ",
+        "start": 85.251,
+        "duration": 0.869,
+        "end": 86.12
+      },
+      {
+        "text": "be ",
+        "start": 86.12,
+        "duration": 0.348,
+        "end": 86.468
+      },
+      {
+        "text": "alone",
+        "start": 86.468,
+        "duration": 0.869,
+        "end": 87.337
+      }
+    ]
+  },
+  {
+    "start": 87.337,
+    "text": "In this world you've chosen as your own",
+    "end": 91.921,
+    "translation": "你不会孤单",
+    "time": 87.337,
+    "words": [
+      {
+        "text": "In ",
+        "start": 87.337,
+        "duration": 0.287,
+        "end": 87.624
+      },
+      {
+        "text": "this ",
+        "start": 87.624,
+        "duration": 0.573,
+        "end": 88.197
+      },
+      {
+        "text": "world ",
+        "start": 88.197,
+        "duration": 0.716,
+        "end": 88.913
+      },
+      {
+        "text": "you've ",
+        "start": 88.913,
+        "duration": 0.86,
+        "end": 89.773
+      },
+      {
+        "text": "chosen ",
+        "start": 89.773,
+        "duration": 0.86,
+        "end": 90.633
+      },
+      {
+        "text": "as ",
+        "start": 90.633,
+        "duration": 0.287,
+        "end": 90.92
+      },
+      {
+        "text": "your ",
+        "start": 90.92,
+        "duration": 0.573,
+        "end": 91.493
+      },
+      {
+        "text": "own",
+        "start": 91.493,
+        "duration": 0.43,
+        "end": 91.923
+      }
+    ]
+  },
+  {
+    "start": 91.921,
+    "text": "Don't worry",
+    "end": 93.886,
+    "translation": "别担心",
+    "time": 91.921,
+    "words": [
+      {
+        "text": "Don't ",
+        "start": 91.921,
+        "duration": 0.982,
+        "end": 92.903
+      },
+      {
+        "text": "worry",
+        "start": 92.903,
+        "duration": 0.982,
+        "end": 93.885
+      }
+    ]
+  },
+  {
+    "start": 93.886,
+    "text": "I'm well aware that all snowflakes melt in the end",
+    "end": 103.271,
+    "translation": "我深知所有雪花最终都会融化",
+    "time": 93.886,
+    "words": [
+      {
+        "text": "I'm ",
+        "start": 93.886,
+        "duration": 0.687,
+        "end": 94.573
+      },
+      {
+        "text": "well ",
+        "start": 94.573,
+        "duration": 0.916,
+        "end": 95.489
+      },
+      {
+        "text": "aware ",
+        "start": 95.489,
+        "duration": 1.145,
+        "end": 96.634
+      },
+      {
+        "text": "that ",
+        "start": 96.634,
+        "duration": 0.916,
+        "end": 97.55
+      },
+      {
+        "text": "all ",
+        "start": 97.55,
+        "duration": 0.687,
+        "end": 98.237
+      },
+      {
+        "text": "snowflakes ",
+        "start": 98.237,
+        "duration": 2.289,
+        "end": 100.526
+      },
+      {
+        "text": "melt ",
+        "start": 100.526,
+        "duration": 0.916,
+        "end": 101.442
+      },
+      {
+        "text": "in ",
+        "start": 101.442,
+        "duration": 0.458,
+        "end": 101.9
+      },
+      {
+        "text": "the ",
+        "start": 101.9,
+        "duration": 0.687,
+        "end": 102.587
+      },
+      {
+        "text": "end",
+        "start": 102.587,
+        "duration": 0.687,
+        "end": 103.274
+      }
+    ]
+  },
+  {
+    "start": 103.271,
+    "text": "Which is sign of warmth and hope of spring",
+    "end": 107.958,
+    "translation": "这也是开春温暖与希望的信号",
+    "time": 103.271,
+    "words": [
+      {
+        "text": "Which ",
+        "start": 103.271,
+        "duration": 0.689,
+        "end": 103.96
+      },
+      {
+        "text": "is ",
+        "start": 103.96,
+        "duration": 0.276,
+        "end": 104.236
+      },
+      {
+        "text": "sign ",
+        "start": 104.236,
+        "duration": 0.551,
+        "end": 104.787
+      },
+      {
+        "text": "of ",
+        "start": 104.787,
+        "duration": 0.276,
+        "end": 105.063
+      },
+      {
+        "text": "warmth ",
+        "start": 105.063,
+        "duration": 0.827,
+        "end": 105.89
+      },
+      {
+        "text": "and ",
+        "start": 105.89,
+        "duration": 0.414,
+        "end": 106.304
+      },
+      {
+        "text": "hope ",
+        "start": 106.304,
+        "duration": 0.551,
+        "end": 106.855
+      },
+      {
+        "text": "of ",
+        "start": 106.855,
+        "duration": 0.276,
+        "end": 107.131
+      },
+      {
+        "text": "spring",
+        "start": 107.131,
+        "duration": 0.827,
+        "end": 107.958
+      }
+    ]
+  },
+  {
+    "start": 107.958,
+    "text": "So I'll dance flamboyantly into that good night",
+    "end": 124.741,
+    "translation": "所以我将明艳地舞进那良夜",
+    "time": 107.958,
+    "words": [
+      {
+        "text": "So ",
+        "start": 107.958,
+        "duration": 0.839,
+        "end": 108.797
+      },
+      {
+        "text": "I'll ",
+        "start": 108.797,
+        "duration": 1.678,
+        "end": 110.475
+      },
+      {
+        "text": "dance ",
+        "start": 110.475,
+        "duration": 2.098,
+        "end": 112.573
+      },
+      {
+        "text": "flamboyantly ",
+        "start": 112.573,
+        "duration": 5.035,
+        "end": 117.608
+      },
+      {
+        "text": "into ",
+        "start": 117.608,
+        "duration": 1.678,
+        "end": 119.286
+      },
+      {
+        "text": "that ",
+        "start": 119.286,
+        "duration": 1.678,
+        "end": 120.964
+      },
+      {
+        "text": "good ",
+        "start": 120.964,
+        "duration": 1.678,
+        "end": 122.642
+      },
+      {
+        "text": "night",
+        "start": 122.642,
+        "duration": 2.098,
+        "end": 124.74
+      }
+    ]
+  },
+  {
+    "start": 124.741,
+    "text": "Bon voyage",
+    "end": 127.595,
+    "translation": "旅途愉快",
+    "time": 124.741,
+    "words": [
+      {
+        "text": "Bon ",
+        "start": 124.741,
+        "duration": 0.951,
+        "end": 125.692
+      },
+      {
+        "text": "voyage",
+        "start": 125.692,
+        "duration": 1.903,
+        "end": 127.595
+      }
+    ]
+  },
+  {
+    "start": 127.595,
+    "text": "May your path be clear",
+    "end": 130.385,
+    "translation": "愿你的道路清晰无阻",
+    "time": 127.595,
+    "words": [
+      {
+        "text": "May ",
+        "start": 127.595,
+        "duration": 0.465,
+        "end": 128.06
+      },
+      {
+        "text": "your ",
+        "start": 128.06,
+        "duration": 0.62,
+        "end": 128.68
+      },
+      {
+        "text": "path ",
+        "start": 128.68,
+        "duration": 0.62,
+        "end": 129.3
+      },
+      {
+        "text": "be ",
+        "start": 129.3,
+        "duration": 0.31,
+        "end": 129.61
+      },
+      {
+        "text": "clear",
+        "start": 129.61,
+        "duration": 0.775,
+        "end": 130.385
+      }
+    ]
+  },
+  {
+    "start": 130.385,
+    "text": "May you get to where dreams are all crystalline and sweet",
+    "end": 137.597,
+    "translation": "愿你抵达之处，美梦都晶莹甜美",
+    "time": 130.385,
+    "words": [
+      {
+        "text": "May ",
+        "start": 130.385,
+        "duration": 0.46,
+        "end": 130.845
+      },
+      {
+        "text": "you ",
+        "start": 130.845,
+        "duration": 0.46,
+        "end": 131.305
+      },
+      {
+        "text": "get ",
+        "start": 131.305,
+        "duration": 0.46,
+        "end": 131.765
+      },
+      {
+        "text": "to ",
+        "start": 131.765,
+        "duration": 0.307,
+        "end": 132.072
+      },
+      {
+        "text": "where ",
+        "start": 132.072,
+        "duration": 0.767,
+        "end": 132.839
+      },
+      {
+        "text": "dreams ",
+        "start": 132.839,
+        "duration": 0.921,
+        "end": 133.76
+      },
+      {
+        "text": "are ",
+        "start": 133.76,
+        "duration": 0.46,
+        "end": 134.22
+      },
+      {
+        "text": "all ",
+        "start": 134.22,
+        "duration": 0.46,
+        "end": 134.68
+      },
+      {
+        "text": "crystalline ",
+        "start": 134.68,
+        "duration": 1.688,
+        "end": 136.368
+      },
+      {
+        "text": "and ",
+        "start": 136.368,
+        "duration": 0.46,
+        "end": 136.828
+      },
+      {
+        "text": "sweet",
+        "start": 136.828,
+        "duration": 0.767,
+        "end": 137.595
+      }
+    ]
+  },
+  {
+    "start": 137.597,
+    "text": "Please crack a little smile",
+    "end": 141.888,
+    "translation": "笑一笑吧",
+    "time": 137.597,
+    "words": [
+      {
+        "text": "Please ",
+        "start": 137.597,
+        "duration": 1.119,
+        "end": 138.716
+      },
+      {
+        "text": "crack ",
+        "start": 138.716,
+        "duration": 0.933,
+        "end": 139.649
+      },
+      {
+        "text": "a ",
+        "start": 139.649,
+        "duration": 0.187,
+        "end": 139.836
+      },
+      {
+        "text": "little ",
+        "start": 139.836,
+        "duration": 1.119,
+        "end": 140.955
+      },
+      {
+        "text": "smile",
+        "start": 140.955,
+        "duration": 0.933,
+        "end": 141.888
+      }
+    ]
+  },
+  {
+    "start": 141.888,
+    "text": "You won't be alone",
+    "end": 144.501,
+    "translation": "在你选择的世界里",
+    "time": 141.888,
+    "words": [
+      {
+        "text": "You ",
+        "start": 141.888,
+        "duration": 0.523,
+        "end": 142.411
+      },
+      {
+        "text": "won't ",
+        "start": 142.411,
+        "duration": 0.871,
+        "end": 143.282
+      },
+      {
+        "text": "be ",
+        "start": 143.282,
+        "duration": 0.348,
+        "end": 143.63
+      },
+      {
+        "text": "alone",
+        "start": 143.63,
+        "duration": 0.871,
+        "end": 144.501
+      }
+    ]
+  },
+  {
+    "start": 144.501,
+    "text": "In this world you've chosen as your own",
+    "end": 149.12,
+    "translation": "你不会孤单",
+    "time": 144.501,
+    "words": [
+      {
+        "text": "In ",
+        "start": 144.501,
+        "duration": 0.289,
+        "end": 144.79
+      },
+      {
+        "text": "this ",
+        "start": 144.79,
+        "duration": 0.577,
+        "end": 145.367
+      },
+      {
+        "text": "world ",
+        "start": 145.367,
+        "duration": 0.722,
+        "end": 146.089
+      },
+      {
+        "text": "you've ",
+        "start": 146.089,
+        "duration": 0.866,
+        "end": 146.955
+      },
+      {
+        "text": "chosen ",
+        "start": 146.955,
+        "duration": 0.866,
+        "end": 147.821
+      },
+      {
+        "text": "as ",
+        "start": 147.821,
+        "duration": 0.289,
+        "end": 148.11
+      },
+      {
+        "text": "your ",
+        "start": 148.11,
+        "duration": 0.577,
+        "end": 148.687
+      },
+      {
+        "text": "own",
+        "start": 148.687,
+        "duration": 0.433,
+        "end": 149.12
+      }
+    ]
+  },
+  {
+    "start": 149.12,
+    "text": "Timing is such a dazzling riddle",
+    "end": 154.699,
+    "translation": "时间是个如此令人眼花缭乱的谜题",
+    "time": 149.12,
+    "words": [
+      {
+        "text": "Timing ",
+        "start": 149.12,
+        "duration": 1.24,
+        "end": 150.36
+      },
+      {
+        "text": "is ",
+        "start": 150.36,
+        "duration": 0.413,
+        "end": 150.773
+      },
+      {
+        "text": "such ",
+        "start": 150.773,
+        "duration": 0.827,
+        "end": 151.6
+      },
+      {
+        "text": "a ",
+        "start": 151.6,
+        "duration": 0.207,
+        "end": 151.807
+      },
+      {
+        "text": "dazzling ",
+        "start": 151.807,
+        "duration": 1.653,
+        "end": 153.46
+      },
+      {
+        "text": "riddle",
+        "start": 153.46,
+        "duration": 1.24,
+        "end": 154.7
+      }
+    ]
+  },
+  {
+    "start": 154.699,
+    "text": "Guess I'll spend my whole life unraveling it",
+    "end": 160.469,
+    "translation": "看来我得用一生来解开它了",
+    "time": 154.699,
+    "words": [
+      {
+        "text": "Guess ",
+        "start": 154.699,
+        "duration": 0.78,
+        "end": 155.479
+      },
+      {
+        "text": "I'll ",
+        "start": 155.479,
+        "duration": 0.624,
+        "end": 156.103
+      },
+      {
+        "text": "spend ",
+        "start": 156.103,
+        "duration": 0.78,
+        "end": 156.883
+      },
+      {
+        "text": "my ",
+        "start": 156.883,
+        "duration": 0.312,
+        "end": 157.195
+      },
+      {
+        "text": "whole ",
+        "start": 157.195,
+        "duration": 0.78,
+        "end": 157.975
+      },
+      {
+        "text": "life ",
+        "start": 157.975,
+        "duration": 0.624,
+        "end": 158.599
+      },
+      {
+        "text": "unraveling ",
+        "start": 158.599,
+        "duration": 1.559,
+        "end": 160.158
+      },
+      {
+        "text": "it",
+        "start": 160.158,
+        "duration": 0.312,
+        "end": 160.47
+      }
+    ]
+  },
+  {
+    "start": 160.469,
+    "text": "Though it might cost me everything I have",
+    "end": 166.114,
+    "translation": "尽管这可能会让我付出拥有的一切",
+    "time": 160.469,
+    "words": [
+      {
+        "text": "Though ",
+        "start": 160.469,
+        "duration": 0.996,
+        "end": 161.465
+      },
+      {
+        "text": "it ",
+        "start": 161.465,
+        "duration": 0.332,
+        "end": 161.797
+      },
+      {
+        "text": "might ",
+        "start": 161.797,
+        "duration": 0.83,
+        "end": 162.627
+      },
+      {
+        "text": "cost ",
+        "start": 162.627,
+        "duration": 0.664,
+        "end": 163.291
+      },
+      {
+        "text": "me ",
+        "start": 163.291,
+        "duration": 0.332,
+        "end": 163.623
+      },
+      {
+        "text": "everything ",
+        "start": 163.623,
+        "duration": 1.66,
+        "end": 165.283
+      },
+      {
+        "text": "I ",
+        "start": 165.283,
+        "duration": 0.166,
+        "end": 165.449
+      },
+      {
+        "text": "have",
+        "start": 165.449,
+        "duration": 0.664,
+        "end": 166.113
+      }
+    ]
+  },
+  {
+    "start": 166.114,
+    "text": "I never regret it, wouldn't have it any other way cuz",
+    "end": 171.922,
+    "translation": "我心已决，这就是我想要的注定",
+    "time": 166.114,
+    "words": [
+      {
+        "text": "I ",
+        "start": 166.114,
+        "duration": 0.135,
+        "end": 166.249
+      },
+      {
+        "text": "never ",
+        "start": 166.249,
+        "duration": 0.675,
+        "end": 166.924
+      },
+      {
+        "text": "regret ",
+        "start": 166.924,
+        "duration": 0.81,
+        "end": 167.734
+      },
+      {
+        "text": "it, ",
+        "start": 167.734,
+        "duration": 0.405,
+        "end": 168.139
+      },
+      {
+        "text": "wouldn't ",
+        "start": 168.139,
+        "duration": 1.081,
+        "end": 169.22
+      },
+      {
+        "text": "have ",
+        "start": 169.22,
+        "duration": 0.54,
+        "end": 169.76
+      },
+      {
+        "text": "it ",
+        "start": 169.76,
+        "duration": 0.27,
+        "end": 170.03
+      },
+      {
+        "text": "any ",
+        "start": 170.03,
+        "duration": 0.405,
+        "end": 170.435
+      },
+      {
+        "text": "other ",
+        "start": 170.435,
+        "duration": 0.675,
+        "end": 171.11
+      },
+      {
+        "text": "way ",
+        "start": 171.11,
+        "duration": 0.405,
+        "end": 171.515
+      },
+      {
+        "text": "cuz",
+        "start": 171.515,
+        "duration": 0.405,
+        "end": 171.92
+      }
+    ]
+  },
+  {
+    "start": 171.922,
+    "text": "Those who trace starlight on their lonely roads",
+    "end": 177.507,
+    "translation": "因为那些在孤独道路上追寻星光的人",
+    "time": 171.922,
+    "words": [
+      {
+        "text": "Those ",
+        "start": 171.922,
+        "duration": 0.698,
+        "end": 172.62
+      },
+      {
+        "text": "who ",
+        "start": 172.62,
+        "duration": 0.419,
+        "end": 173.039
+      },
+      {
+        "text": "trace ",
+        "start": 173.039,
+        "duration": 0.698,
+        "end": 173.737
+      },
+      {
+        "text": "starlight ",
+        "start": 173.737,
+        "duration": 1.257,
+        "end": 174.994
+      },
+      {
+        "text": "on ",
+        "start": 174.994,
+        "duration": 0.279,
+        "end": 175.273
+      },
+      {
+        "text": "their ",
+        "start": 175.273,
+        "duration": 0.698,
+        "end": 175.971
+      },
+      {
+        "text": "lonely ",
+        "start": 175.971,
+        "duration": 0.838,
+        "end": 176.809
+      },
+      {
+        "text": "roads",
+        "start": 176.809,
+        "duration": 0.698,
+        "end": 177.507
+      }
+    ]
+  },
+  {
+    "start": 177.507,
+    "text": "Will find their destinations in the cosmos",
+    "end": 183.284,
+    "translation": "终将在宇宙中寻找到他们的归处",
+    "time": 177.507,
+    "words": [
+      {
+        "text": "Will ",
+        "start": 177.507,
+        "duration": 0.642,
+        "end": 178.149
+      },
+      {
+        "text": "find ",
+        "start": 178.149,
+        "duration": 0.642,
+        "end": 178.791
+      },
+      {
+        "text": "their ",
+        "start": 178.791,
+        "duration": 0.802,
+        "end": 179.593
+      },
+      {
+        "text": "destinations ",
+        "start": 179.593,
+        "duration": 1.926,
+        "end": 181.519
+      },
+      {
+        "text": "in ",
+        "start": 181.519,
+        "duration": 0.321,
+        "end": 181.84
+      },
+      {
+        "text": "the ",
+        "start": 181.84,
+        "duration": 0.481,
+        "end": 182.321
+      },
+      {
+        "text": "cosmos",
+        "start": 182.321,
+        "duration": 0.963,
+        "end": 183.284
+      }
+    ]
+  },
+  {
+    "start": 183.284,
+    "text": "Meeting you in that swirling snowfall's",
+    "end": 188.841,
+    "translation": "那天在漫天纷扬的雪花中与你相遇",
+    "time": 183.284,
+    "words": [
+      {
+        "text": "Meeting ",
+        "start": 183.284,
+        "duration": 1.144,
+        "end": 184.428
+      },
+      {
+        "text": "you ",
+        "start": 184.428,
+        "duration": 0.49,
+        "end": 184.918
+      },
+      {
+        "text": "in ",
+        "start": 184.918,
+        "duration": 0.327,
+        "end": 185.245
+      },
+      {
+        "text": "that ",
+        "start": 185.245,
+        "duration": 0.654,
+        "end": 185.899
+      },
+      {
+        "text": "swirling ",
+        "start": 185.899,
+        "duration": 1.308,
+        "end": 187.207
+      },
+      {
+        "text": "snowfall's",
+        "start": 187.207,
+        "duration": 1.634,
+        "end": 188.841
+      }
+    ]
+  },
+  {
+    "start": 188.841,
+    "text": "the most beautiful thing ever happened to me",
+    "end": 192.841,
+    "translation": "是在我身上发生过的最美好的事情",
+    "time": 188.841,
+    "words": [
+      {
+        "text": "the ",
+        "start": 188.841,
+        "duration": 0.324,
+        "end": 189.165
+      },
+      {
+        "text": "most ",
+        "start": 189.165,
+        "duration": 0.432,
+        "end": 189.597
+      },
+      {
+        "text": "beautiful ",
+        "start": 189.597,
+        "duration": 0.973,
+        "end": 190.57
+      },
+      {
+        "text": "thing ",
+        "start": 190.57,
+        "duration": 0.541,
+        "end": 191.111
+      },
+      {
+        "text": "ever ",
+        "start": 191.111,
+        "duration": 0.432,
+        "end": 191.543
+      },
+      {
+        "text": "happened ",
+        "start": 191.543,
+        "duration": 0.865,
+        "end": 192.408
+      },
+      {
+        "text": "to ",
+        "start": 192.408,
+        "duration": 0.216,
+        "end": 192.624
+      },
+      {
+        "text": "me",
+        "start": 192.624,
+        "duration": 0.216,
+        "end": 192.84
+      }
+    ]
+  }
+]

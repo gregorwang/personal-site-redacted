@@ -1,0 +1,1628 @@
+{
+  "+7s2Ic": {
+    "defaultMessage": "斩！赤红之瞳"
+  },
+  "+Dp/IQ": {
+    "defaultMessage": "关闭会话列表",
+    "description": "Nemesis 手机端关闭侧栏"
+  },
+  "+IM2hn": {
+    "defaultMessage": "技能树",
+    "description": "简历页侧栏小标题"
+  },
+  "+LDeko": {
+    "defaultMessage": "想说的话……",
+    "description": "留言收音机输入框占位"
+  },
+  "+XTi2P": {
+    "defaultMessage": "更早",
+    "description": "Nemesis 侧栏分组"
+  },
+  "+bP6mr": {
+    "defaultMessage": "冒险履历",
+    "description": "简历页主栏标题（工作经历，褪色者人设）"
+  },
+  "+cbTdJ": {
+    "defaultMessage": "今天",
+    "description": "Nemesis 侧栏分组"
+  },
+  "/61/I0": {
+    "defaultMessage": "满分殿堂"
+  },
+  "/8sPEI": {
+    "defaultMessage": "我的估算 · 2024 年 5 月启动至今",
+    "description": "Token 账本大字旁的说明"
+  },
+  "/Gkza7": {
+    "defaultMessage": "Claude Code · {value}（本机现存记录）",
+    "description": "Token 账本图例"
+  },
+  "/SPpUm": {
+    "defaultMessage": "这里收录了 {count} 款游戏。让我熬夜的、通关后发呆的、拿下白金的，也有玩到一半后悔的——每一款都附一句当时的真心话。"
+  },
+  "/Wq43M": {
+    "defaultMessage": "未打开任何文件",
+    "description": "构建记录：标签全关掉后的空状态"
+  },
+  "/eIHhT": {
+    "defaultMessage": "秋日风筝"
+  },
+  "/twJik": {
+    "defaultMessage": "夺心之声"
+  },
+  "/uurk7": {
+    "defaultMessage": "填邮箱、等邮件、再点链接，比上方多几步。没有 Google / Microsoft 账号时再用。",
+    "description": "登录面板：邮箱登录说明"
+  },
+  "00xM6j": {
+    "defaultMessage": "全栈开发者",
+    "description": "首页 JSON-LD 结构化数据里的职位"
+  },
+  "01i47R": {
+    "defaultMessage": "wangjiajun.space — 构建记录",
+    "description": "构建记录主窗口标题"
+  },
+  "03WIqw": {
+    "defaultMessage": "听歌",
+    "description": "Nemesis 推荐问题标签"
+  },
+  "0QqZ47": {
+    "defaultMessage": "进行中 {count}",
+    "description": "构建记录侧栏分组"
+  },
+  "0dV9lg": {
+    "defaultMessage": "打了 10 分的 {count} 款。排名不分先后，按游玩时长排列。"
+  },
+  "0g/N6Q": {
+    "defaultMessage": "推荐优先使用 Google 或 Microsoft，一键登录最顺畅。国内若按钮打不开或一直转圈，可先开启代理后再试。",
+    "description": "登录面板说明"
+  },
+  "12Izev": {
+    "defaultMessage": "视频设置"
+  },
+  "1DSxHo": {
+    "defaultMessage": "个人摄影作品十四"
+  },
+  "1S4lFb": {
+    "defaultMessage": "金牌得主"
+  },
+  "1SJfSF": {
+    "defaultMessage": "回复中断",
+    "description": "Nemesis 回复标签：回复没有生成完"
+  },
+  "22SwJe": {
+    "defaultMessage": "如果你清理浏览器数据、更换设备、更换浏览器，或使用无痕模式，本地聊天记录可能会消失。",
+    "description": "Nemesis 隐私说明"
+  },
+  "2IZr7K": {
+    "defaultMessage": "我借一个温柔的名字，做一个自己的私人空间。这里不是任何作品、角色或版权方的官方网站。",
+    "description": "首页 hero 下方的非官方声明"
+  },
+  "2PruVm": {
+    "defaultMessage": "中国风影像作品四"
+  },
+  "2VHQX/": {
+    "defaultMessage": "按类型筛选",
+    "description": "更新日志筛选按钮组的无障碍标签"
+  },
+  "2ioQF5": {
+    "defaultMessage": "今日已满",
+    "description": "留言收音机：今日次数用完的按钮"
+  },
+  "2o/vCf": {
+    "defaultMessage": "实心为精通，描边为熟悉",
+    "description": "简历页技能标签的图例说明"
+  },
+  "2p5CtK": {
+    "defaultMessage": "您的浏览器不支持视频播放。"
+  },
+  "2wlFZI": {
+    "defaultMessage": "Apple Music 官方 30 秒试听",
+    "description": "Nemesis 音乐卡片：音源说明"
+  },
+  "3+xydq": {
+    "defaultMessage": "在 FM <b>{frequency}</b> 播出：",
+    "description": "留言收音机输入框标签，{frequency} 是预告的频率"
+  },
+  "34yZpw": {
+    "defaultMessage": "在这里留下你的想法、建议或问候，与我分享你的故事。"
+  },
+  "38Cw2G": {
+    "defaultMessage": "你",
+    "description": "留言收音机：自己留言的署名"
+  },
+  "3908D9": {
+    "defaultMessage": "对话保留中文原文。",
+    "description": "非中文页面上提示对话没有翻译"
+  },
+  "3EKgXC": {
+    "defaultMessage": "我心里危险的东西"
+  },
+  "3m5Wnn": {
+    "defaultMessage": "这是我的一方自留地。我会把喜欢的东西、做过的项目、一些想法和回忆放在这里。它不是商业网站，只是一个慢慢生长的私人空间。"
+  },
+  "3pwXh7": {
+    "defaultMessage": "游戏世界 · 汪家俊的玩家典藏"
+  },
+  "40pTHo": {
+    "defaultMessage": "鬼灭之刃"
+  },
+  "41yidD": {
+    "defaultMessage": "已反馈",
+    "description": "Nemesis 回复操作：已反馈"
+  },
+  "4GCTgr": {
+    "defaultMessage": "这些动漫作品不仅仅是娱乐，更是陪伴我成长的重要回忆。每一部都有着独特的魅力和深刻的内涵。"
+  },
+  "4SaDgs": {
+    "defaultMessage": "展开",
+    "description": "构建记录：长消息展开"
+  },
+  "4bDO+x": {
+    "defaultMessage": "不是当上火影才被大家承认"
+  },
+  "4egH+l": {
+    "defaultMessage": "边界不合适",
+    "description": "Nemesis 反馈分类：回答越界"
+  },
+  "4gylYz": {
+    "defaultMessage": "正在生成回复…",
+    "description": "Nemesis 思考状态"
+  },
+  "4pVqhH": {
+    "defaultMessage": "纵览番剧"
+  },
+  "50m58r": {
+    "defaultMessage": "给 Nemesis 发消息",
+    "description": "Nemesis 输入框的无障碍标签"
+  },
+  "5LSBxY": {
+    "defaultMessage": "{provider} 登录失败，请稍后重试",
+    "description": "登录面板：第三方登录失败，{provider} 是 Google 或 Microsoft"
+  },
+  "5P4plf": {
+    "defaultMessage": "摄影作品集"
+  },
+  "5gv7uI": {
+    "defaultMessage": "{question}：{expanded, select, true {收起} other {展开}}答案",
+    "description": "FAQ 按钮的无障碍名称"
+  },
+  "5o4wOM": {
+    "defaultMessage": "如今时间过去了很久，我已记不清当时的感受，但回头看这张照片，仍觉得那一刻的天空美得不真实，仿佛短暂逃离了庸常世界，置身于一个梦境之中。"
+  },
+  "5pYTnK": {
+    "defaultMessage": "发送邮件失败，请稍后重试",
+    "description": "登录面板：登录邮件发送失败"
+  },
+  "5xdBsR": {
+    "defaultMessage": "你来到了无人之境",
+    "description": "404页打字机标题"
+  },
+  "6HpFRv": {
+    "defaultMessage": "人生中一部分时间由他们陪伴我度过"
+  },
+  "6K/a0B": {
+    "defaultMessage": "暂停"
+  },
+  "6KfaFM": {
+    "defaultMessage": "羊蹄山之魂"
+  },
+  "6Tw52V": {
+    "defaultMessage": "FM {frequency}，{source}：{text}",
+    "description": "留言收音机：屏幕阅读器播报锁定的电台，{source} 是署名，{text} 是留言内容"
+  },
+  "6VZofl": {
+    "defaultMessage": "统计",
+    "description": "构建记录侧栏分组"
+  },
+  "6egtfe": {
+    "defaultMessage": "上一台",
+    "description": "留言收音机：跳到上一个电台"
+  },
+  "6jRrxL": {
+    "defaultMessage": "播放进度"
+  },
+  "6kidKx": {
+    "defaultMessage": "未开始",
+    "description": "Nemesis 侧栏：还没有消息的会话"
+  },
+  "6ttYiP": {
+    "defaultMessage": "停止生成",
+    "description": "Nemesis 输入框：停止生成按钮的无障碍标签"
+  },
+  "7M/lzI": {
+    "defaultMessage": "预计发售 · {date}"
+  },
+  "7OQUfr": {
+    "defaultMessage": "不要把悲伤和痛苦留给别人"
+  },
+  "7P4vpj": {
+    "defaultMessage": "打开 {path}",
+    "description": "构建记录：文件卡片"
+  },
+  "7R4dMs": {
+    "defaultMessage": "{count} 次更新",
+    "description": "更新日志年份分组右侧的条数，{count} 是该年更新次数"
+  },
+  "7Tket4": {
+    "defaultMessage": "网站更新日志，记录功能更新、Bug修复和性能优化等开发历程。"
+  },
+  "7cqp1w": {
+    "defaultMessage": "继续进入这片空间",
+    "description": "登录面板标题"
+  },
+  "7ncHX4": {
+    "defaultMessage": "游戏平台未找到"
+  },
+  "7ukvPd": {
+    "defaultMessage": "在网易云音乐打开，享受更高音质"
+  },
+  "825gU3": {
+    "defaultMessage": "{platform} · 汪家俊的玩家典藏"
+  },
+  "8AUvnq": {
+    "defaultMessage": "请稍候，<b>{seconds}</b> 秒后可以重新发送",
+    "description": "登录面板：登录邮件发送冷却倒计时，{seconds} 是剩余秒数"
+  },
+  "8IVdRy": {
+    "defaultMessage": "还没发售，但已经在日历上画了圈。"
+  },
+  "8W9uFH": {
+    "defaultMessage": "个人摄影作品二十一"
+  },
+  "8butJc": {
+    "defaultMessage": "主模型繁忙，正在尝试备用模型…",
+    "description": "Nemesis 思考状态：切换备用模型"
+  },
+  "8jQZ5E": {
+    "defaultMessage": "最常提交的时段",
+    "description": "热力图指标"
+  },
+  "8uJnra": {
+    "defaultMessage": "探索我的音乐世界，包含2500+首精选歌曲，涵盖流行、电子、古典等多种风格，支持在线播放和歌词显示。"
+  },
+  "8w4yBX": {
+    "defaultMessage": "其他",
+    "description": "Nemesis 反馈分类"
+  },
+  "90+VY6": {
+    "defaultMessage": "画廊照片 3"
+  },
+  "9X+qNk": {
+    "defaultMessage": "从零开始的异世界生活"
+  },
+  "9tBM+r": {
+    "defaultMessage": "切换语言",
+    "description": "导航栏语言选择的无障碍名称"
+  },
+  "9y1XMQ": {
+    "defaultMessage": "巡台",
+    "description": "留言收音机：自动扫描电台按钮"
+  },
+  "9zCYhx": {
+    "defaultMessage": "在线",
+    "description": "Nemesis 顶栏状态"
+  },
+  "9znvGO": {
+    "defaultMessage": "显示全部",
+    "description": "Nemesis 输入框：跳过逐字打出按钮旁的文字"
+  },
+  "AE8kMa": {
+    "defaultMessage": "最近两年看的动漫比大学四年看的还要多，都是非常优秀，令人印象深刻的作品。",
+    "description": "首页番剧卡片「近两年所观看番剧」的说明"
+  },
+  "AKnBA5": {
+    "defaultMessage": "汪家俊最近在折腾什么？",
+    "description": "Nemesis 推荐问题"
+  },
+  "AfWmx+": {
+    "defaultMessage": "欢迎回来",
+    "description": "登录成功提示标题"
+  },
+  "AqAZ9T": {
+    "defaultMessage": "排成一线的风筝在空中轻轻摇曳，夕阳缓缓垂落在一座未完工的高楼之上。光线渐弱，仿佛力不从心，天地逐渐沉入昏暗之中，只留下一片灰蒙的草地，构成了这幅略显荒凉的画面。 秋天，总是诗人最容易动情的季节。自古逢秋多寂寥，但也有人言\"秋日胜春朝\"。时空虽隔千年，我竟也与古人心意相通。前路未明，欢乐无从谈起。年仅二十五，却已感到生命之光如这落日般渐趋黯淡。"
+  },
+  "BQ0FT+": {
+    "defaultMessage": "已合并 · <code>{hash}</code> · {date} · {files} 个文件",
+    "description": "构建记录：对话末尾的提交信息"
+  },
+  "BYPKZY": {
+    "defaultMessage": "与AI助手Nemesis进行智能对话，探讨技术、创意和生活。基于先进的AI技术，提供自然流畅的交互体验。"
+  },
+  "BboSSW": {
+    "defaultMessage": "主模型繁忙 · 已用备用",
+    "description": "Nemesis 回复标签：用了备用模型"
+  },
+  "BnI7gF": {
+    "defaultMessage": "上游模型服务暂时繁忙，稍后重试通常可以恢复。",
+    "description": "Nemesis 请求失败的通用提示"
+  },
+  "Bxgf3B": {
+    "defaultMessage": "刚刚",
+    "description": "留言收音机：刚发出的留言时间"
+  },
+  "CGycxE": {
+    "defaultMessage": "← 返回首页"
+  },
+  "CHaIxU": {
+    "defaultMessage": "多",
+    "description": "热力图图例"
+  },
+  "CKByIx": {
+    "defaultMessage": "弹珠汽水瓶里的千岁同学"
+  },
+  "CNhMfp": {
+    "defaultMessage": "上一首"
+  },
+  "CPLOPT": {
+    "defaultMessage": "这条回复哪里不对？",
+    "description": "Nemesis 反馈面板标题"
+  },
+  "CcU4dD": {
+    "defaultMessage": "冬日小麦岛的夕阳"
+  },
+  "CenBU4": {
+    "defaultMessage": "认证徽章",
+    "description": "简历页侧栏小标题"
+  },
+  "CmtJVc": {
+    "defaultMessage": "您今天的留言次数已达上限（{limit}条/天），明天再来吧",
+    "description": "留言提交错误：每日上限，{limit} 是每天条数"
+  },
+  "DBkc0E": {
+    "defaultMessage": "按模型 · Claude Code",
+    "description": "Token 账本小标题"
+  },
+  "DkRbE2": {
+    "defaultMessage": "请等待 60 秒后再发送下一条留言",
+    "description": "留言提交错误：发送冷却"
+  },
+  "DvNb74": {
+    "defaultMessage": "日常闲聊我看不到；只有触发审核或你主动反馈的那几轮，我会看到。",
+    "description": "Nemesis 隐私说明末尾的强调句，「我」是站长"
+  },
+  "ERk/yU": {
+    "defaultMessage": "短期内不会。网站部署在 Cloudflare 上，维护成本很低，主要成本只有域名续费。之后我会尽量把域名续得更久一点，让它稳定地存在下去。"
+  },
+  "EYoOR0": {
+    "defaultMessage": "试听来自 Apple Music 正版音源，仅供推广。",
+    "description": "Nemesis 音乐卡片底部版权说明"
+  },
+  "EhM0nN": {
+    "defaultMessage": "照片背后，总有些话想说。关于光影，关于瞬间，关于那些被镜头捕捉的思考与感悟。"
+  },
+  "EwGENx": {
+    "defaultMessage": "游戏空间"
+  },
+  "F+ovkr": {
+    "defaultMessage": "{time} · {count} 条",
+    "description": "Nemesis 侧栏会话信息，{time} 是更新时间，{count} 是消息条数"
+  },
+  "F/bPda": {
+    "defaultMessage": "新的对话",
+    "description": "Nemesis 还没有提问的会话标题"
+  },
+  "FB6vYq": {
+    "defaultMessage": "音乐播放器 - 我的音乐收藏"
+  },
+  "FJha5O": {
+    "defaultMessage": "网易云音乐"
+  },
+  "FanCbT": {
+    "defaultMessage": "音乐之旅",
+    "description": "顶部导航：音乐页"
+  },
+  "FgfZJA": {
+    "defaultMessage": "汪家俊"
+  },
+  "FlbiKJ": {
+    "defaultMessage": "提交反馈",
+    "description": "Nemesis 反馈面板：提交按钮"
+  },
+  "FqK1YW": {
+    "defaultMessage": "发送",
+    "description": "Nemesis 输入框：发送按钮"
+  },
+  "G31byf": {
+    "defaultMessage": "{name} 主视觉"
+  },
+  "GG5diy": {
+    "defaultMessage": "暂停试听",
+    "description": "Nemesis 音乐卡片：暂停按钮"
+  },
+  "GOavKl": {
+    "defaultMessage": "回到顶部 ↑"
+  },
+  "GZdXw3": {
+    "defaultMessage": "向更深处探索音乐世界"
+  },
+  "GuD3c8": {
+    "defaultMessage": "排序"
+  },
+  "H23N7X": {
+    "defaultMessage": "这个网站以后会消失吗？"
+  },
+  "H3UFen": {
+    "defaultMessage": "Nemesis 是 AI 影子，不是汪家俊本人。对话记录存在你的浏览器里",
+    "description": "Nemesis 输入框下方的说明行"
+  },
+  "H4vjD1": {
+    "defaultMessage": "年度最佳番剧"
+  },
+  "HPDp6S": {
+    "defaultMessage": "汪家俊的个人网站 - 将我的爱弃置于此",
+    "description": "首页 <title>"
+  },
+  "HPYG0Z": {
+    "defaultMessage": "中国风影像作品一"
+  },
+  "HRLcYs": {
+    "defaultMessage": "记录那些触动心灵的故事，分享那些难以忘怀的瞬间。每一帧画面，都是一段珍贵的回忆。"
+  },
+  "HdN/SX": {
+    "defaultMessage": "为了生成回复，你的消息会发送给第三方大模型服务（如 Google Gemini、DeepSeek）处理。",
+    "description": "Nemesis 隐私说明"
+  },
+  "HdcbuH": {
+    "defaultMessage": "聊天记录存在你这台设备的浏览器里；触发安全规则、系统降级或你点了反馈的那几轮会留存到后台。",
+    "description": "Nemesis 首次访问的隐私提示条"
+  },
+  "Hf8uu7": {
+    "defaultMessage": "未知错误",
+    "description": "错误页：无法识别的错误"
+  },
+  "Hq9IZ1": {
+    "defaultMessage": "取消",
+    "description": "Nemesis 反馈面板：取消按钮"
+  },
+  "HqKQFw": {
+    "defaultMessage": "画廊照片 2"
+  },
+  "HqKSVQ": {
+    "defaultMessage": "停",
+    "description": "留言收音机：停止自动巡台按钮"
+  },
+  "Hxm/un": {
+    "defaultMessage": "搜游戏名或标签"
+  },
+  "IQwjHI": {
+    "defaultMessage": "展示 {platform} 游戏收藏、白金奖杯和真实游玩评价"
+  },
+  "IpULQJ": {
+    "defaultMessage": "时间，是地球上不断涌动的风与气流。它们风化岩石，使之一点点变小，化为尘沙，最终被吹散得无影无踪。人们常说时间会\"磨平\"一切，但那种磨平往往会留下痕迹，而现实中，大多数时候，时间带走的，是连痕迹都不曾留下的彻底消逝。 没有人告诉我，这片土地曾发生过什么。而我，作为一个局外人，也没有兴趣或动机去探究它的过去。我只知道，随着时间的推移，事实终将湮灭，仿佛从未存在。"
+  },
+  "IxDgBH": {
+    "defaultMessage": "前往网易云音乐"
+  },
+  "J8L0tu": {
+    "defaultMessage": "Re0第三季"
+  },
+  "JCs+h0": {
+    "defaultMessage": "查不到的 · 约 {value}：更早的 Claude Code、Cursor",
+    "description": "Token 账本图例"
+  },
+  "JDV5VL": {
+    "defaultMessage": "{count} 次",
+    "description": "提交次数"
+  },
+  "JQzegi": {
+    "defaultMessage": "而是被承认才当上火影"
+  },
+  "JVBqha": {
+    "defaultMessage": "知道了",
+    "description": "Nemesis 隐私提示：确认按钮"
+  },
+  "JZTU7q": {
+    "defaultMessage": "点下方任意一款，换成它"
+  },
+  "Jmq4J0": {
+    "defaultMessage": "按平台筛选"
+  },
+  "JvWqzr": {
+    "defaultMessage": "褪色者宣言 - 汪家俊的冒险履历"
+  },
+  "JwPjVe": {
+    "defaultMessage": "探索完整榜单"
+  },
+  "Jx/fnI": {
+    "defaultMessage": "寄出登录信",
+    "description": "登录面板：发送登录邮件按钮"
+  },
+  "K2YL7P": {
+    "defaultMessage": "隐私说明",
+    "description": "Nemesis 输入框下方打开隐私说明的按钮"
+  },
+  "K3l+v+": {
+    "defaultMessage": "打开会话列表",
+    "description": "Nemesis 手机端打开侧栏按钮"
+  },
+  "K49MoX": {
+    "defaultMessage": "打开的文件",
+    "description": "构建记录：标签栏"
+  },
+  "K7rjTr": {
+    "defaultMessage": "问点什么……",
+    "description": "Nemesis 输入框占位"
+  },
+  "KBQFum": {
+    "defaultMessage": "此身为剑所成"
+  },
+  "KOideV": {
+    "defaultMessage": "退出登录",
+    "description": "移动端菜单：退出按钮"
+  },
+  "KSJaCo": {
+    "defaultMessage": "本站播放器接入<link>网易云音乐</link>官方外链音源，正版试听展示。点击播放器内封面或曲名，前往网易云享受更高音质与完整功能。"
+  },
+  "Kg+dv0": {
+    "defaultMessage": "对话原文来自 Claude Code 会话记录",
+    "description": "构建记录状态栏右侧"
+  },
+  "KrfQ+p": {
+    "defaultMessage": "画廊照片 1"
+  },
+  "KyGOgC": {
+    "defaultMessage": "无成就记录"
+  },
+  "LBPnBE": {
+    "defaultMessage": "Claude Code 里是缓存读取",
+    "description": "Token 账本指标"
+  },
+  "LQ/jXT": {
+    "defaultMessage": "留言内容不能为空",
+    "description": "留言提交错误"
+  },
+  "LdC/EI": {
+    "defaultMessage": "更新日志",
+    "description": "首页更新日志区块标题"
+  },
+  "Li/oI9": {
+    "defaultMessage": "暂停视频"
+  },
+  "LsHDOH": {
+    "defaultMessage": "如果网站有问题怎么办？"
+  },
+  "M3Uozy": {
+    "defaultMessage": "关闭 {name}",
+    "description": "构建记录：关闭标签按钮"
+  },
+  "MFvwDk": {
+    "defaultMessage": "速度",
+    "description": "视频播放速度菜单项"
+  },
+  "MSe1CK": {
+    "defaultMessage": "待公开，这个频率现在只有你收得到",
+    "description": "留言收音机：自己待审核留言的提示"
+  },
+  "MfiUB0": {
+    "defaultMessage": "/ 10 分"
+  },
+  "MgSkK2": {
+    "defaultMessage": "不是登录页，<br></br>是进入一座房间。",
+    "description": "独立登录页大标题，<br></br> 是换行位置"
+  },
+  "MkPM2k": {
+    "defaultMessage": "关闭登录弹窗",
+    "description": "登录弹窗关闭按钮的无障碍标签"
+  },
+  "MoDLGY": {
+    "defaultMessage": "{title} 视频播放器"
+  },
+  "Mupoxz": {
+    "defaultMessage": "下一首"
+  },
+  "MxxEYf": {
+    "defaultMessage": "收起"
+  },
+  "N+rChc": {
+    "defaultMessage": "移动端导航菜单",
+    "description": "移动端菜单的无障碍名称"
+  },
+  "N7z3MT": {
+    "defaultMessage": "君可愿怀素心剑？"
+  },
+  "NTqxEO": {
+    "defaultMessage": "设为封面：{name}"
+  },
+  "O9O+nB": {
+    "defaultMessage": "口径：Claude Code 是每次回复的输入 + 输出 + 缓存写入 + 缓存读取，共 {responses} 次回复；Codex 取工作目录为本项目的 {sessions} 个会话的 total_tokens。Claude Code 本机只保留最近约 30 天，Cursor 不在本机记 token 数，所以「50 亿+」是估算。统计于 {date}。",
+    "description": "Token 账本口径说明"
+  },
+  "OMKkYZ": {
+    "defaultMessage": "猫和老鼠"
+  },
+  "OYYzlP": {
+    "defaultMessage": "不像汪家俊",
+    "description": "Nemesis 反馈分类"
+  },
+  "Oc97aU": {
+    "defaultMessage": "亮着的提交点一下，左边会跳到对应任务",
+    "description": "git log 小窗底部说明"
+  },
+  "Of2K13": {
+    "defaultMessage": "Fate系列"
+  },
+  "Ofh5l5": {
+    "defaultMessage": "修行经历",
+    "description": "简历页主栏标题（实习经历，褪色者人设）"
+  },
+  "Oov+Py": {
+    "defaultMessage": "这里的照片，是我毕业之后来到青岛工作闲暇之余所拍的照片，其中也有一些照片是在家乡拍的，工作了几个月双十一，买了小米14，手机拍照效果很好激发了我在日常用手机记录的习惯，也在这里留下了很多的照片。由于微信朋友圈会把任何体积10M以上图片压缩成几百K，导致画质效果非常难看，所以你在这里能看见一些我从未分享过的照片。"
+  },
+  "OsRGEA": {
+    "defaultMessage": "重新填写邮箱",
+    "description": "登录面板：发送后重新填写邮箱的按钮"
+  },
+  "PHbgRn": {
+    "defaultMessage": "提交中…",
+    "description": "Nemesis 反馈面板：提交中"
+  },
+  "PR8xKU": {
+    "defaultMessage": "音乐播放器"
+  },
+  "PUm+0N": {
+    "defaultMessage": "改进",
+    "description": "更新日志类型"
+  },
+  "PWkyxq": {
+    "defaultMessage": "{count} 个版本，最近一次更新于 {date}",
+    "description": "更新日志页标题下的统计，{count} 是版本数，{date} 是最近更新日期"
+  },
+  "PhWyu3": {
+    "defaultMessage": "汪家俊的 AI 影子",
+    "description": "Nemesis 侧栏品牌副标题"
+  },
+  "PnlKaA": {
+    "defaultMessage": "播出中",
+    "description": "留言收音机：提交中按钮"
+  },
+  "Q2r2FW": {
+    "defaultMessage": "灵笼第二季"
+  },
+  "QC+GYM": {
+    "defaultMessage": "你把生命当成什么了？"
+  },
+  "QIgg/X": {
+    "defaultMessage": "色彩越少，越能看清重要"
+  },
+  "QLtsIO": {
+    "defaultMessage": "如果某处失焦、空白或打不开，请把那个瞬间写给 {email}。",
+    "description": "首页 hero 第二段，{email} 是联系邮箱"
+  },
+  "QVZ5u0": {
+    "defaultMessage": "探索内心独白"
+  },
+  "QfLhWu": {
+    "defaultMessage": "备用 · 邮箱登录",
+    "description": "登录面板：邮箱登录分隔线"
+  },
+  "R1qTlA": {
+    "defaultMessage": "这个网站是用来做什么的？"
+  },
+  "R89f+u": {
+    "defaultMessage": "评分",
+    "description": "游戏库排序：评分"
+  },
+  "RAS7jv": {
+    "defaultMessage": "前后矛盾",
+    "description": "Nemesis 反馈分类"
+  },
+  "RcW9UH": {
+    "defaultMessage": "构建记录",
+    "description": "首页构建记录区块标题"
+  },
+  "RcZ7H6": {
+    "defaultMessage": "来源不明的电台",
+    "description": "留言收音机：隐藏彩蛋电台的署名"
+  },
+  "Rd1P+2": {
+    "defaultMessage": "最多的一天 · {date}",
+    "description": "热力图指标"
+  },
+  "RmvO4C": {
+    "defaultMessage": "疑问",
+    "description": "构建记录：疑问卡片标题"
+  },
+  "RofUI7": {
+    "defaultMessage": "Google · Microsoft · 邮箱",
+    "description": "独立登录页登录方式列表"
+  },
+  "Ry9MFf": {
+    "defaultMessage": "当前浏览器不支持视频播放。",
+    "description": "Nemesis 视频附件：浏览器不支持 video 时的回退文字"
+  },
+  "S2Fq0j": {
+    "defaultMessage": "日志更新",
+    "description": "顶部导航：更新日志页"
+  },
+  "S3eAUx": {
+    "defaultMessage": "登录",
+    "description": "顶部导航：登录按钮"
+  },
+  "SSxFqp": {
+    "defaultMessage": "补充说明",
+    "description": "Nemesis 反馈面板：补充说明输入框标签"
+  },
+  "SaRn9m": {
+    "defaultMessage": "每天 · Claude Code",
+    "description": "Token 账本小标题"
+  },
+  "TejLrR": {
+    "defaultMessage": "工具",
+    "description": "构建记录：工具菜单"
+  },
+  "Tmvnuu": {
+    "defaultMessage": "游戏世界",
+    "description": "顶部导航：游戏页"
+  },
+  "Tu8JoL": {
+    "defaultMessage": "败犬女主太多了"
+  },
+  "TyUJ+p": {
+    "defaultMessage": "这片空间先向你开放一部分",
+    "description": "首页 hero 主标题"
+  },
+  "U1jTbn": {
+    "defaultMessage": "摄影作品集",
+    "description": "摄影页 <title>"
+  },
+  "U25yWA": {
+    "defaultMessage": "提交失败，请稍后重试",
+    "description": "留言提交错误：服务端异常"
+  },
+  "U3XLcp": {
+    "defaultMessage": "一松一竹真朋友"
+  },
+  "U6OheZ": {
+    "defaultMessage": "今晚吃什么好？",
+    "description": "Nemesis 推荐问题"
+  },
+  "U7q8d8": {
+    "defaultMessage": "正在进入...",
+    "description": "登录面板：第三方登录跳转中"
+  },
+  "UINB1D": {
+    "defaultMessage": "疑似瞎说",
+    "description": "Nemesis 反馈分类：编造事实"
+  },
+  "UNER9M": {
+    "defaultMessage": "页面游走了",
+    "description": "错误页页打字机标题"
+  },
+  "UQ0+F/": {
+    "defaultMessage": "精选摄影作品集，记录生活中的美好瞬间与光影故事，涵盖风景、人像、街拍等多种风格"
+  },
+  "UcI8pf": {
+    "defaultMessage": "AI聊天室 - 与Nemesis对话"
+  },
+  "UnFzVt": {
+    "defaultMessage": "按工具（以 50 亿为整条）",
+    "description": "Token 账本小标题"
+  },
+  "Uv/aHo": {
+    "defaultMessage": "来自多彩世界的明天"
+  },
+  "V1Cjlu": {
+    "defaultMessage": "匿名访客",
+    "description": "留言收音机：没有用户名时的署名"
+  },
+  "VFeTrv": {
+    "defaultMessage": "01 · 本期封面"
+  },
+  "VFvEw5": {
+    "defaultMessage": "个人摄影作品十七"
+  },
+  "VNd96x": {
+    "defaultMessage": "复制",
+    "description": "Nemesis 回复操作：复制"
+  },
+  "VkrHeo": {
+    "defaultMessage": "正在理解你的问题…",
+    "description": "Nemesis 思考状态"
+  },
+  "WHvwPM": {
+    "defaultMessage": "灵笼"
+  },
+  "WTPrEA": {
+    "defaultMessage": "小岛哲思 - 镜头之外的思考与感悟"
+  },
+  "WlOtow": {
+    "defaultMessage": "每一次滑动手柄，每一缕指引之风， 都在告诉我—— 这条路，还要继续走下去。 游戏如此，人生亦如此。"
+  },
+  "X0iyvR": {
+    "defaultMessage": "已复制",
+    "description": "Nemesis 回复操作：复制成功"
+  },
+  "X8VCUe": {
+    "defaultMessage": "个人信息",
+    "description": "简历页侧栏的无障碍标签"
+  },
+  "XEIvPr": {
+    "defaultMessage": "影像记忆",
+    "description": "顶部导航：摄影页"
+  },
+  "XI/sng": {
+    "defaultMessage": "复制链接"
+  },
+  "XUUSBs": {
+    "defaultMessage": "个人探索",
+    "description": "简历页侧栏小标题"
+  },
+  "XV4F4C": {
+    "defaultMessage": "正在回复",
+    "description": "Nemesis 顶栏状态"
+  },
+  "XpF+YY": {
+    "defaultMessage": "删除",
+    "description": "Nemesis 侧栏：确认删除"
+  },
+  "Y+Bwoi": {
+    "defaultMessage": "少",
+    "description": "热力图图例"
+  },
+  "YESxd7": {
+    "defaultMessage": "操作过于频繁，请一小时后再试（IP 限制：20次/小时）",
+    "description": "留言提交错误：IP 限流"
+  },
+  "YQr6UX": {
+    "defaultMessage": "修复",
+    "description": "更新日志类型"
+  },
+  "YVyTda": {
+    "defaultMessage": "播放视频"
+  },
+  "YWfvUa": {
+    "defaultMessage": "静音",
+    "description": "番剧页背景视频：静音的按钮"
+  },
+  "YcFJVz": {
+    "defaultMessage": "视频静音"
+  },
+  "Yvjnrw": {
+    "defaultMessage": "在网易云音乐打开"
+  },
+  "Yy4Fqd": {
+    "defaultMessage": "停止",
+    "description": "Nemesis 输入框：停止生成按钮旁的文字"
+  },
+  "Z+FsGG": {
+    "defaultMessage": "会，但不会机械地更新。有空、有想法、有灵感的时候，我就会继续整理和优化它。这个网站也是我用 AI 实现想法的开始。"
+  },
+  "Z80RtC": {
+    "defaultMessage": "播出",
+    "description": "留言收音机：提交留言按钮"
+  },
+  "ZBwLBl": {
+    "defaultMessage": "回答质量差",
+    "description": "Nemesis 反馈分类"
+  },
+  "ZEI/6p": {
+    "defaultMessage": "重大变更",
+    "description": "更新日志类型"
+  },
+  "ZNWYhG": {
+    "defaultMessage": "任务",
+    "description": "构建记录：手机上的任务列表"
+  },
+  "ZWow5R": {
+    "defaultMessage": "已选择模型",
+    "description": "Nemesis 思考状态"
+  },
+  "Zt3DD+": {
+    "defaultMessage": "完成度 {progress}%"
+  },
+  "aEDstH": {
+    "defaultMessage": "追随指引之风"
+  },
+  "aFhK2A": {
+    "defaultMessage": "删除这段对话？",
+    "description": "Nemesis 侧栏：删除确认"
+  },
+  "aIL7K5": {
+    "defaultMessage": "几点提交 · 按提交时间（JST）",
+    "description": "热力图小时分布标题"
+  },
+  "aIrpM5": {
+    "defaultMessage": "已复制"
+  },
+  "aceu1J": {
+    "defaultMessage": "秋日风景"
+  },
+  "aie1x7": {
+    "defaultMessage": "网站会持续更新吗？"
+  },
+  "ajER2U": {
+    "defaultMessage": "返回首页",
+    "description": "Nemesis 侧栏底部返回链接"
+  },
+  "b2Icp5": {
+    "defaultMessage": "你这份温柔，迟早会害死你"
+  },
+  "b3UP92": {
+    "defaultMessage": "提问、推翻、重做，迭代永无止息……",
+    "description": "构建记录输入框占位，句式照 Cursor 的「规划、搜索、构建一切……」"
+  },
+  "bAqvek": {
+    "defaultMessage": "愿每个瞬间都值得被记录"
+  },
+  "bDu5Nv": {
+    "defaultMessage": "水无沾月之心"
+  },
+  "bKLb1C": {
+    "defaultMessage": "播放"
+  },
+  "bSxGMl": {
+    "defaultMessage": "山鸟山花好弟兄"
+  },
+  "bWfgvm": {
+    "defaultMessage": "凡人修仙传"
+  },
+  "blCFSh": {
+    "defaultMessage": "以下几种情况，这一轮的问题、回复和少量上下文会留存到后台审计，用于排查问题和改进安全规则：触发安全规则（比如被拦下或被婉拒）；安全系统临时故障、按降级模式回答；你主动点了某条回复的「反馈」。",
+    "description": "Nemesis 隐私说明"
+  },
+  "boAnT9": {
+    "defaultMessage": "没有找到「{query}」。换个词试试，比如“开放世界”或“魂系”。"
+  },
+  "bsH+vH": {
+    "defaultMessage": "取消视频静音"
+  },
+  "bszB2C": {
+    "defaultMessage": "+{count} 行",
+    "description": "新增行数"
+  },
+  "c5NJxw": {
+    "defaultMessage": "关于他",
+    "description": "Nemesis 推荐问题标签"
+  },
+  "c5a2QW": {
+    "defaultMessage": "进击的巨人"
+  },
+  "cKsoI2": {
+    "defaultMessage": "播放列表"
+  },
+  "cMbwIi": {
+    "defaultMessage": "… 共 {count} 次提交",
+    "description": "git log 小窗末尾"
+  },
+  "cdFpjR": {
+    "defaultMessage": "改动最多的一天 · {date}",
+    "description": "热力图指标"
+  },
+  "cisBt3": {
+    "defaultMessage": "最喜欢的动漫"
+  },
+  "cm9e9l": {
+    "defaultMessage": "褪色者宣言",
+    "description": "简历页主栏标题（自我评价，褪色者人设）"
+  },
+  "coQq4F": {
+    "defaultMessage": "留言板",
+    "description": "留言板页 <title>"
+  },
+  "ctdQYh": {
+    "defaultMessage": "慢慢拨动旋钮，<br></br>和穿透虚空发出的电波对频",
+    "description": "留言收音机标题，<br></br> 是手机上的换行位置"
+  },
+  "d8xL0L": {
+    "defaultMessage": "游戏空间 - 未找到"
+  },
+  "dBaR20": {
+    "defaultMessage": "海的那边是敌人"
+  },
+  "dKK1sz": {
+    "defaultMessage": "下一题",
+    "description": "构建记录：疑问卡片"
+  },
+  "dLv26W": {
+    "defaultMessage": "思考",
+    "description": "构建记录：思考了几秒"
+  },
+  "dTzPT9": {
+    "defaultMessage": "历史对话",
+    "description": "Nemesis 侧栏会话导航的无障碍标签"
+  },
+  "dbCmFm": {
+    "defaultMessage": "一切"
+  },
+  "deOrQT": {
+    "defaultMessage": "登录后就能播出",
+    "description": "留言收音机输入框占位：未登录"
+  },
+  "dlmTL/": {
+    "defaultMessage": "时长",
+    "description": "游戏库排序：游玩时长"
+  },
+  "e8E9CR": {
+    "defaultMessage": "也许正是这一瞬间，我才真正领悟了那些年在书本中无法共情、无法理解的话语——为何尼采会在街头抱着一匹马痛哭。人，与动物并无本质区别。我与那匹马四目相对，它看懂了我，我也读懂了它。那是一种超越语言的共鸣，是被命运之神牵引、却无力挣脱的宿命感。 此刻我终于明白，叶文洁是对的。她为三体人带路，并非背叛，而是一种清醒的决断。在这个充满荒谬与冷漠的世界里，毁灭或许不是灾难，而是一种终局的救赎。"
+  },
+  "e9n+Fq": {
+    "defaultMessage": "下一台",
+    "description": "留言收音机：跳到下一个电台"
+  },
+  "eJjEWv": {
+    "defaultMessage": "这里保留留言和一些还在生长的功能。进入后可以继续完成需要身份确认的操作。",
+    "description": "独立登录页说明"
+  },
+  "eNoibA": {
+    "defaultMessage": "中国风影像作品三"
+  },
+  "eSSQNi": {
+    "defaultMessage": "继续",
+    "description": "构建记录：疑问卡片"
+  },
+  "eSwuV+": {
+    "defaultMessage": "这个网站是怎么搭起来的？",
+    "description": "Nemesis 推荐问题"
+  },
+  "eik+OB": {
+    "defaultMessage": "上一题",
+    "description": "构建记录：疑问卡片"
+  },
+  "eldzfq": {
+    "defaultMessage": "更新日志",
+    "description": "更新日志页 <title>"
+  },
+  "eo6A7D": {
+    "defaultMessage": "收起",
+    "description": "Nemesis 隐私提示条：收起详情"
+  },
+  "eozZWA": {
+    "defaultMessage": "个人游戏收藏库，包含PlayStation、Nintendo Switch和PC平台的精选游戏，分享游戏体验与评价。"
+  },
+  "fe8kRh": {
+    "defaultMessage": "复制失败，请手动选择文本。",
+    "description": "Nemesis 复制失败提示"
+  },
+  "fgKWgF": {
+    "defaultMessage": "搜索游戏"
+  },
+  "fjTZr2": {
+    "defaultMessage": "退出全屏"
+  },
+  "fjgkJn": {
+    "defaultMessage": "{date} · 没有提交",
+    "description": "热力图格子悬停"
+  },
+  "flys5+": {
+    "defaultMessage": "Nemesis 的回复",
+    "description": "Nemesis 回复区块的无障碍标签"
+  },
+  "fm1pxf": {
+    "defaultMessage": "{count} 次提交 · 最近一次 {hash} · {date}",
+    "description": "构建记录状态栏"
+  },
+  "foqp07": {
+    "defaultMessage": "模型",
+    "description": "构建记录：模型菜单"
+  },
+  "g3jOI/": {
+    "defaultMessage": "新对话",
+    "description": "Nemesis 新建对话按钮"
+  },
+  "gJH/Fv": {
+    "defaultMessage": "羊蹄山之魂 - 对马岛之魂游戏视频"
+  },
+  "gSwIwX": {
+    "defaultMessage": "Codex · {value}（{range}）",
+    "description": "Token 账本图例"
+  },
+  "gcTyC8": {
+    "defaultMessage": "游回首页",
+    "description": "错误页页返回首页按钮"
+  },
+  "gnWPcX": {
+    "defaultMessage": "这些文字如流水般涌现，承载着算法的想象，却无法触及人心深处的真实。"
+  },
+  "gxrqYo": {
+    "defaultMessage": "今天的电波发完了，明天再来",
+    "description": "留言收音机输入框占位：今日次数用完"
+  },
+  "h/OXeY": {
+    "defaultMessage": "留言板",
+    "description": "留言收音机区块的无障碍标签"
+  },
+  "h80/Cu": {
+    "defaultMessage": "汪家俊的冒险履历，云雀守望者公会高级质检专员，交界地王立学院生命医学学士。AI协同开发者（ChatGPT & Claude），游戏探索者（艾尔登法环100h白金），光影记录者（214张作品）。将我的爱弃置于此。"
+  },
+  "hAeD+i": {
+    "defaultMessage": "Claude 真正写出来的",
+    "description": "Token 账本指标"
+  },
+  "hKduu4": {
+    "defaultMessage": "精选动漫推荐，分享我喜爱的动漫作品、角色和故事，涵盖热血、治愈、悬疑等多种类型。"
+  },
+  "hN7wLO": {
+    "defaultMessage": "这个网站",
+    "description": "Nemesis 推荐问题标签"
+  },
+  "hO/eYB": {
+    "defaultMessage": "最近两年看到过最有意思笑的合不拢嘴来的动漫，女主角有点下头，跟男主产生了非常奇妙的化学反应，非常搞笑，但是又极具含蓄，作品的服装搭配也令人耳目一新，最意想不到的是这个作者是一个四五十岁的中年男性，居然能写出如此青春活泼的故事，非常期待第二季。",
+    "description": "首页番剧卡片「年度最佳」的短评（《败犬女主太多了》），口语化"
+  },
+  "hQp8jT": {
+    "defaultMessage": "管理员走同一入口，登录后自动识别权限。",
+    "description": "登录面板：第三方登录按钮下方说明"
+  },
+  "hhjMkm": {
+    "defaultMessage": "雾山五行"
+  },
+  "i/Zuyb": {
+    "defaultMessage": "试听进度",
+    "description": "Nemesis 音乐卡片：进度条的无障碍标签"
+  },
+  "iBVeSr": {
+    "defaultMessage": "聊天隐私提示",
+    "description": "Nemesis 隐私说明弹层标题"
+  },
+  "iK2Rio": {
+    "defaultMessage": "← 返回首页",
+    "description": "更新日志页顶部返回链接"
+  },
+  "iSjNmL": {
+    "defaultMessage": "我的动漫排行榜"
+  },
+  "iX3BrK": {
+    "defaultMessage": "回复生成完成",
+    "description": "Nemesis 思考状态"
+  },
+  "iXuEfT": {
+    "defaultMessage": "调频刻度，左右方向键调节，按住 Shift 一次调 1 MHz",
+    "description": "留言收音机刻度滑块的无障碍标签"
+  },
+  "iYdJDE": {
+    "defaultMessage": "白金 ×{count}"
+  },
+  "ibu2KX": {
+    "defaultMessage": "让龙带你回家",
+    "description": "404页返回首页按钮"
+  },
+  "ie5yS2": {
+    "defaultMessage": "删除这段对话",
+    "description": "Nemesis 侧栏：删除会话按钮的无障碍标签"
+  },
+  "itCX/W": {
+    "defaultMessage": "开声音",
+    "description": "番剧页背景视频：取消静音的按钮"
+  },
+  "ixUi+p": {
+    "defaultMessage": "关闭菜单"
+  },
+  "iyZihF": {
+    "defaultMessage": "一封入口信已寄出",
+    "description": "登录面板：登录邮件已发送的标题"
+  },
+  "j1PFkF": {
+    "defaultMessage": "2500+ 首歌曲，750+ 位艺术家。<br></br>从 FELT 到 Vivienne，每首歌都是一段故事。"
+  },
+  "jBAHGz": {
+    "defaultMessage": "选路",
+    "description": "Nemesis 思考轨迹节点：选择模型"
+  },
+  "jKqtPI": {
+    "defaultMessage": "有疑问？看看这里"
+  },
+  "jUAHUC": {
+    "defaultMessage": "用心记录生活的每一个瞬间"
+  },
+  "jiLG1f": {
+    "defaultMessage": "全屏"
+  },
+  "jspsHI": {
+    "defaultMessage": "镜头之外"
+  },
+  "k08jJ/": {
+    "defaultMessage": "登录后播出",
+    "description": "留言收音机：未登录时的登录链接"
+  },
+  "k0XQQ0": {
+    "defaultMessage": "← 返回首页",
+    "description": "简历页侧栏底部返回链接"
+  },
+  "kCR1rW": {
+    "defaultMessage": "下辈子我还会找到你"
+  },
+  "kQKl4j": {
+    "defaultMessage": "声明"
+  },
+  "kf+ilA": {
+    "defaultMessage": "个人摄影作品九"
+  },
+  "kf9iGS": {
+    "defaultMessage": "提交后，只有这一轮问答和少量上下文会进入审计中心。",
+    "description": "Nemesis 反馈面板说明"
+  },
+  "kpqJ0V": {
+    "defaultMessage": "个人简历",
+    "description": "顶部导航：简历页"
+  },
+  "krkf1G": {
+    "defaultMessage": "新功能",
+    "description": "更新日志类型"
+  },
+  "l8/Exz": {
+    "defaultMessage": "血染刀刃，泪湿衣襟。 三味线低吟着复仇之歌， 狼之刀鍔在北境的风雪中闪耀。"
+  },
+  "l8X+83": {
+    "defaultMessage": "近两年所观看番剧"
+  },
+  "lFHsAl": {
+    "defaultMessage": "{date} · {commits} 次提交 · +{added} −{removed}",
+    "description": "热力图格子悬停"
+  },
+  "lHNE8z": {
+    "defaultMessage": "小岛,哲思,摄影,感悟,思考,独白"
+  },
+  "lJFIrV": {
+    "defaultMessage": "退出中",
+    "description": "退出登录进行中"
+  },
+  "lPHho7": {
+    "defaultMessage": "汪家俊的个人网站",
+    "description": "站点名，用在 <title> 后缀和 og:site_name；首页标题应以它开头"
+  },
+  "lUZxVG": {
+    "defaultMessage": "请检查 <email>{address}</email> 的收件箱，邮件里的链接会把你带回刚才的位置。",
+    "description": "登录面板：登录邮件已发送的说明，{address} 是用户填的邮箱"
+  },
+  "ltTB9N": {
+    "defaultMessage": "正在选择模型…",
+    "description": "Nemesis 思考状态"
+  },
+  "lvo1wP": {
+    "defaultMessage": "推荐一首你最近常听的歌",
+    "description": "Nemesis 推荐问题"
+  },
+  "m7LKxg": {
+    "defaultMessage": "全部",
+    "description": "更新日志筛选：全部类型"
+  },
+  "mB5xdd": {
+    "defaultMessage": "正常",
+    "description": "1 倍播放速度"
+  },
+  "mMx2Ml": {
+    "defaultMessage": "平时的聊天记录不会保存到网站数据库，只存在你当前设备的浏览器本地存储里，方便你下次继续查看。",
+    "description": "Nemesis 隐私说明"
+  },
+  "mNF9DF": {
+    "defaultMessage": "找不到这条回复对应的用户问题，无法提交反馈。",
+    "description": "Nemesis 反馈错误"
+  },
+  "mZ5aFI": {
+    "defaultMessage": "会留存到后台审计的只有三种：触发安全规则的那一轮（比如被拦下或被婉拒）、安全系统临时故障期间的对话，以及你主动点了「反馈」的那一轮，内容是问题、回复和少量上下文。为了生成回复，消息会发送给第三方大模型服务。清理浏览器数据、换设备或用无痕模式，本地记录可能会消失。请不要输入密码、证件号、银行卡、住址等敏感信息。",
+    "description": "Nemesis 隐私提示条展开后的详情"
+  },
+  "mkmpnd": {
+    "defaultMessage": "火影忍者"
+  },
+  "mtVrfo": {
+    "defaultMessage": "欢迎来到汪家俊(Wang Jiajun)的数字伊甸园。AI协同开发者，游戏探索者（1546h+），光影记录者（214张作品），旋律收藏家（2500+首）。将我的爱弃置于此。",
+    "description": "首页 meta description"
+  },
+  "n5oOs7": {
+    "defaultMessage": "期待值"
+  },
+  "nC9Fth": {
+    "defaultMessage": "我是汪家俊。这个网站还在整理，先把已经成形的光、声音、故事与入口交给你。",
+    "description": "首页 hero 第一段"
+  },
+  "nGdp9i": {
+    "defaultMessage": "令人铭记的话语"
+  },
+  "nI6qGw": {
+    "defaultMessage": "登录状态已同步",
+    "description": "登录成功提示副标题"
+  },
+  "nT+Knl": {
+    "defaultMessage": "已合并 {count}",
+    "description": "构建记录侧栏分组"
+  },
+  "nbj+kf": {
+    "defaultMessage": "本机实测 {verified} · 估算 {estimate}+",
+    "description": "构建记录侧栏：Token 账本第二行"
+  },
+  "ngLlCo": {
+    "defaultMessage": "已停止生成。",
+    "description": "Nemesis 停止生成后的提示"
+  },
+  "nkTXdo": {
+    "defaultMessage": "诗句与影像网络"
+  },
+  "nqPQ5O": {
+    "defaultMessage": "问他，问这个网站，<br></br>或者随便聊点什么。",
+    "description": "Nemesis 空状态标题，<br></br> 是换行位置"
+  },
+  "nyH/51": {
+    "defaultMessage": "在等的"
+  },
+  "oDqnSY": {
+    "defaultMessage": "照片{n}描述"
+  },
+  "oHGsiD": {
+    "defaultMessage": "登录建议优先 Google 或 Microsoft；邮箱登录信可作为备用，步骤会多一些。",
+    "description": "独立登录页说明"
+  },
+  "oMcNNg": {
+    "defaultMessage": "次提交 · {days} 天有提交 · remix-cloudflare",
+    "description": "热力图大字旁的说明"
+  },
+  "oXynd0": {
+    "defaultMessage": "查看完整更新日志",
+    "description": "首页更新日志区块底部链接"
+  },
+  "p7YLYZ": {
+    "defaultMessage": "要和真的 AI 聊，请去 <link>Nemesis</link>。",
+    "description": "构建记录：发送消息后的固定回复，句式照 Cursor 的「要试用 Cursor 智能体，请下载 Cursor。」"
+  },
+  "pCgiM5": {
+    "defaultMessage": "回到首页"
+  },
+  "pJbuUH": {
+    "defaultMessage": "吃饭",
+    "description": "Nemesis 推荐问题标签"
+  },
+  "pUG13k": {
+    "defaultMessage": "{seconds} 秒后可重新发送",
+    "description": "登录面板：冷却中的发送按钮，{seconds} 是剩余秒数"
+  },
+  "pXTmsi": {
+    "defaultMessage": "请不要输入密码、身份证、银行卡、住址等高度敏感信息。",
+    "description": "Nemesis 隐私说明"
+  },
+  "pcm0LD": {
+    "defaultMessage": "君向潇湘我向秦"
+  },
+  "pweHpj": {
+    "defaultMessage": "跳过",
+    "description": "构建记录：疑问卡片"
+  },
+  "q/YsJ7": {
+    "defaultMessage": "自留"
+  },
+  "q/wvGq": {
+    "defaultMessage": "已理解问题",
+    "description": "Nemesis 思考状态"
+  },
+  "qPr/mg": {
+    "defaultMessage": "详情",
+    "description": "Nemesis 隐私提示条：展开详情"
+  },
+  "qZN9Bt": {
+    "defaultMessage": "会话列表",
+    "description": "Nemesis 侧栏的无障碍标签"
+  },
+  "qgBOJz": {
+    "defaultMessage": "已停止生成，你的问题还在输入框里。",
+    "description": "Nemesis 停止生成后的提示"
+  },
+  "qgt7lH": {
+    "defaultMessage": "已收到反馈。这一轮会进入审计中心，帮它更像他。",
+    "description": "Nemesis 反馈提交成功提示，「它」是 Nemesis，「他」是汪家俊"
+  },
+  "qh8Ifk": {
+    "defaultMessage": "退出",
+    "description": "顶部导航：桌面端退出按钮"
+  },
+  "qqmhQY": {
+    "defaultMessage": "正在思考",
+    "description": "Nemesis 顶栏状态"
+  },
+  "qvVvG9": {
+    "defaultMessage": "留言内容不能超过{max}字",
+    "description": "留言提交错误，{max} 是字数上限"
+  },
+  "r+v2WZ": {
+    "defaultMessage": "全部",
+    "description": "游戏库平台筛选：全部"
+  },
+  "r/46Zc": {
+    "defaultMessage": "正在寄出...",
+    "description": "登录面板：登录邮件发送中"
+  },
+  "rFT1Wb": {
+    "defaultMessage": "2023~2025，往日之影"
+  },
+  "rGRPdU": {
+    "defaultMessage": "本机还能查实的",
+    "description": "Token 账本指标"
+  },
+  "rLtJTP": {
+    "defaultMessage": "这个网站 2024 年 5 月开始做，GitHub 上留下了 <b>{count} 次提交</b>，大部分是我和 AI 一起写的。下面是其中几次的原始记录：我当时怎么说的，它怎么回的，最后改了哪些代码。",
+    "description": "首页构建记录区块导语"
+  },
+  "rUldWC": {
+    "defaultMessage": "以上所有文案均为AI生成，不代表本人内心真实想法。"
+  },
+  "rbJP9z": {
+    "defaultMessage": "沙沙……",
+    "description": "留言收音机：没对上电台时的署名行（噪声声响）"
+  },
+  "rcR1nZ": {
+    "defaultMessage": "收录平台分布 · {count} 款"
+  },
+  "rd7MQC": {
+    "defaultMessage": "反馈这条回复",
+    "description": "Nemesis 回复操作：反馈"
+  },
+  "sZV7Z4": {
+    "defaultMessage": "月无分照之意"
+  },
+  "skEB+q": {
+    "defaultMessage": "Nemesis 是汪家俊留在网上的 AI 影子。",
+    "description": "Nemesis 空状态副标题"
+  },
+  "sy0yCp": {
+    "defaultMessage": "关闭菜单",
+    "description": "移动端菜单遮罩的无障碍名称"
+  },
+  "t1bz/S": {
+    "defaultMessage": "登录即表示你同意服务条款和隐私政策。",
+    "description": "登录面板底部声明"
+  },
+  "t6BoAo": {
+    "defaultMessage": "PLAYER ARCHIVE · 玩家典藏"
+  },
+  "t7i0bX": {
+    "defaultMessage": "在构建记录里打开",
+    "description": "git log 小窗：可跳转的提交"
+  },
+  "tKkiAp": {
+    "defaultMessage": "展开全部 {count} 款"
+  },
+  "tXPjvH": {
+    "defaultMessage": "该平台无成就记录"
+  },
+  "tYaVv3": {
+    "defaultMessage": "播放试听",
+    "description": "Nemesis 音乐卡片：播放按钮"
+  },
+  "tZIWfz": {
+    "defaultMessage": "数声风笛离亭晚"
+  },
+  "tiKwKt": {
+    "defaultMessage": "02 · PLAYSTATION 奖杯柜"
+  },
+  "tsQHsB": {
+    "defaultMessage": "看见美好，心中便悄然生出贪恋与不舍。唉，只能继续欺骗自己——装作无事，装作坚强。不知羞耻也好，狼狈也罢，活下去吧。"
+  },
+  "tymc2i": {
+    "defaultMessage": "重新生成",
+    "description": "Nemesis 回复操作：重新生成"
+  },
+  "u2s/oH": {
+    "defaultMessage": "正在处理你的问题",
+    "description": "Nemesis 思考状态：兜底"
+  },
+  "uJ0di7": {
+    "defaultMessage": "聊天记录存在这台设备的浏览器里，最多保留 {max} 段；少数轮次会留存到后台审计。",
+    "description": "Nemesis 侧栏底部说明，{max} 是最多保留的会话数"
+  },
+  "uJr897": {
+    "defaultMessage": "这个网站主要在我自己的设备上测试过，复杂环境下可能会有显示或功能问题。如果你发现异常，可以通过邮件或微信告诉我，我会认真查看并尽量修复。"
+  },
+  "v9sd9N": {
+    "defaultMessage": "发送",
+    "description": "构建记录：发送按钮"
+  },
+  "vCszKO": {
+    "defaultMessage": "{commits} 次提交 · {days} 天",
+    "description": "构建记录侧栏：热力图第二行"
+  },
+  "vIo8AO": {
+    "defaultMessage": "复制回复",
+    "description": "Nemesis 回复操作：复制的无障碍标签"
+  },
+  "vJNaVe": {
+    "defaultMessage": "游戏世界",
+    "description": "游戏页主标题"
+  },
+  "vOlgiN": {
+    "defaultMessage": "个人摄影作品一"
+  },
+  "vR/9+s": {
+    "defaultMessage": "完成度",
+    "description": "游戏库排序：完成度"
+  },
+  "vcGPSl": {
+    "defaultMessage": "生成",
+    "description": "Nemesis 思考轨迹节点：生成回复"
+  },
+  "vfI94H": {
+    "defaultMessage": "世上本无连城诀"
+  },
+  "vs2GjJ": {
+    "defaultMessage": "重试",
+    "description": "Nemesis 错误提示：重试按钮"
+  },
+  "vtXerH": {
+    "defaultMessage": "全部收藏"
+  },
+  "vuf6fn": {
+    "defaultMessage": "返回首页",
+    "description": "Rapid Layers 预览页左上角返回链接"
+  },
+  "w15Atm": {
+    "defaultMessage": "理解",
+    "description": "Nemesis 思考轨迹节点：理解问题"
+  },
+  "w1lk9O": {
+    "defaultMessage": "项目 2024 年 5 月启动，但 GitHub 上最早的提交是 {first} 的「init: clean history (no secrets)」：那次为了去掉密钥重建了历史，更早的提交已经不在了。账号的贡献日历里也看不到这个仓库，因为它是私有仓库。行数不含锁文件、生成物和歌词数据。",
+    "description": "热力图说明"
+  },
+  "wIeRyx": {
+    "defaultMessage": "青之箱"
+  },
+  "wIf78Q": {
+    "defaultMessage": "补充说明，可留空",
+    "description": "Nemesis 反馈面板：补充说明输入框占位"
+  },
+  "x1EqBH": {
+    "defaultMessage": "更新日志",
+    "description": "更新日志页标题"
+  },
+  "x1YZ40": {
+    "defaultMessage": "直接显示完整回复",
+    "description": "Nemesis 输入框：跳过逐字打出按钮的无障碍标签"
+  },
+  "xCUg1u": {
+    "defaultMessage": "照片所表达的"
+  },
+  "xEsKkL": {
+    "defaultMessage": "最喜欢的动漫",
+    "description": "动漫页 <title>"
+  },
+  "xTcAAF": {
+    "defaultMessage": "请先登录",
+    "description": "留言提交错误：未登录"
+  },
+  "xc601U": {
+    "defaultMessage": "取消",
+    "description": "Nemesis 侧栏：取消删除"
+  },
+  "xdwBKG": {
+    "defaultMessage": "打开菜单"
+  },
+  "xkeswc": {
+    "defaultMessage": "Enter 发送 · Shift + Enter 换行",
+    "description": "Nemesis 输入框快捷键提示"
+  },
+  "xmwM9a": {
+    "defaultMessage": "关于光影、瞬间，关于那些被镜头捕捉的思考与感悟的个人独白"
+  },
+  "xpj7JK": {
+    "defaultMessage": "游戏中心 - 我的游戏收藏"
+  },
+  "xwRoWp": {
+    "defaultMessage": "拍摄于2023年11月29日，冬日的小麦岛寒风刺骨，却也因此少了人流的干扰，反而让我得以专注于取景与光影。那是夕阳西下的时刻，天空呈现出罕见的橙色，在多重光线的渐变中，云像线条一样柔和流动。"
+  },
+  "yYfRmi": {
+    "defaultMessage": "邮箱地址",
+    "description": "登录面板：邮箱输入框标签"
+  },
+  "yoxxjP": {
+    "defaultMessage": "中国风影像作品二"
+  },
+  "yvx8AF": {
+    "defaultMessage": "擅长作弄的高木同学"
+  },
+  "z+r04t": {
+    "defaultMessage": "留言提交成功，正在等待审核。审核通过后会显示在留言板上。",
+    "description": "留言提交成功提示"
+  },
+  "z2SnZr": {
+    "defaultMessage": "你 · 待公开",
+    "description": "留言收音机：自己待审核留言的署名"
+  },
+  "zCdfJn": {
+    "defaultMessage": "反馈提交失败，请稍后重试。",
+    "description": "Nemesis 反馈错误"
+  },
+  "zNvH65": {
+    "defaultMessage": "动漫回忆",
+    "description": "顶部导航：动漫页"
+  },
+  "zQMqVP": {
+    "defaultMessage": "年度最佳"
+  }
+}

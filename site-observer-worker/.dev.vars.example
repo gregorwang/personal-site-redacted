@@ -1,0 +1,4 @@
+# Copy to .dev.vars for local development. Never commit real values.
+CF_OBSERVABILITY_API_TOKEN=replace-with-workers-observability-write-token
+SITE_INCIDENT_WEBHOOK_URL=https://your-vps.example.com/webhooks/site-incident
+SITE_INCIDENT_WEBHOOK_SECRET=replace-with-a-new-random-secret

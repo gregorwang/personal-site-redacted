@@ -1,0 +1,2360 @@
+[
+  {
+    "start": 2.135,
+    "text": "I remember the time we met by the shore",
+    "end": 7.322,
+    "translation": "记得我们在海边相遇的时候",
+    "time": 2.135,
+    "words": [
+      {
+        "text": "I ",
+        "start": 2.135,
+        "duration": 0.167,
+        "end": 2.302
+      },
+      {
+        "text": "remember ",
+        "start": 2.302,
+        "duration": 1.339,
+        "end": 3.641
+      },
+      {
+        "text": "the ",
+        "start": 3.641,
+        "duration": 0.502,
+        "end": 4.143
+      },
+      {
+        "text": "time ",
+        "start": 4.143,
+        "duration": 0.669,
+        "end": 4.812
+      },
+      {
+        "text": "we ",
+        "start": 4.812,
+        "duration": 0.335,
+        "end": 5.147
+      },
+      {
+        "text": "met ",
+        "start": 5.147,
+        "duration": 0.502,
+        "end": 5.649
+      },
+      {
+        "text": "by ",
+        "start": 5.649,
+        "duration": 0.335,
+        "end": 5.984
+      },
+      {
+        "text": "the ",
+        "start": 5.984,
+        "duration": 0.502,
+        "end": 6.486
+      },
+      {
+        "text": "shore",
+        "start": 6.486,
+        "duration": 0.837,
+        "end": 7.323
+      }
+    ]
+  },
+  {
+    "start": 7.322,
+    "text": "I found you holding what I cannot say enough",
+    "end": 13.0,
+    "translation": "当时我发现 你心底藏着无法用言语形容的痛苦",
+    "time": 7.322,
+    "words": [
+      {
+        "text": "I ",
+        "start": 7.322,
+        "duration": 0.158,
+        "end": 7.48
+      },
+      {
+        "text": "found ",
+        "start": 7.48,
+        "duration": 0.789,
+        "end": 8.269
+      },
+      {
+        "text": "you ",
+        "start": 8.269,
+        "duration": 0.473,
+        "end": 8.742
+      },
+      {
+        "text": "holding ",
+        "start": 8.742,
+        "duration": 1.104,
+        "end": 9.846
+      },
+      {
+        "text": "what ",
+        "start": 9.846,
+        "duration": 0.631,
+        "end": 10.477
+      },
+      {
+        "text": "I ",
+        "start": 10.477,
+        "duration": 0.158,
+        "end": 10.635
+      },
+      {
+        "text": "cannot ",
+        "start": 10.635,
+        "duration": 0.946,
+        "end": 11.581
+      },
+      {
+        "text": "say ",
+        "start": 11.581,
+        "duration": 0.473,
+        "end": 12.054
+      },
+      {
+        "text": "enough",
+        "start": 12.054,
+        "duration": 0.946,
+        "end": 13.0
+      }
+    ]
+  },
+  {
+    "start": 13.0,
+    "text": "The tragedy on your back flowed in",
+    "end": 15.784,
+    "translation": "往昔的悲剧纠缠着你",
+    "time": 13.0,
+    "words": [
+      {
+        "text": "The ",
+        "start": 13.0,
+        "duration": 0.298,
+        "end": 13.298
+      },
+      {
+        "text": "tragedy ",
+        "start": 13.298,
+        "duration": 0.696,
+        "end": 13.994
+      },
+      {
+        "text": "on ",
+        "start": 13.994,
+        "duration": 0.199,
+        "end": 14.193
+      },
+      {
+        "text": "your ",
+        "start": 14.193,
+        "duration": 0.398,
+        "end": 14.591
+      },
+      {
+        "text": "back ",
+        "start": 14.591,
+        "duration": 0.398,
+        "end": 14.989
+      },
+      {
+        "text": "flowed ",
+        "start": 14.989,
+        "duration": 0.597,
+        "end": 15.586
+      },
+      {
+        "text": "in",
+        "start": 15.586,
+        "duration": 0.199,
+        "end": 15.785
+      }
+    ]
+  },
+  {
+    "start": 15.784,
+    "text": "The swaying little stars on the waltz",
+    "end": 18.809,
+    "translation": "后来我发现 你有着宛如跳起华尔兹舞时 受星光照耀般的浪漫的特点",
+    "time": 15.784,
+    "words": [
+      {
+        "text": "The ",
+        "start": 15.784,
+        "duration": 0.293,
+        "end": 16.077
+      },
+      {
+        "text": "swaying ",
+        "start": 16.077,
+        "duration": 0.683,
+        "end": 16.76
+      },
+      {
+        "text": "little ",
+        "start": 16.76,
+        "duration": 0.585,
+        "end": 17.345
+      },
+      {
+        "text": "stars ",
+        "start": 17.345,
+        "duration": 0.488,
+        "end": 17.833
+      },
+      {
+        "text": "on ",
+        "start": 17.833,
+        "duration": 0.195,
+        "end": 18.028
+      },
+      {
+        "text": "the ",
+        "start": 18.028,
+        "duration": 0.293,
+        "end": 18.321
+      },
+      {
+        "text": "waltz",
+        "start": 18.321,
+        "duration": 0.488,
+        "end": 18.809
+      }
+    ]
+  },
+  {
+    "start": 18.809,
+    "text": "A blink of life your eyes caught in that night",
+    "end": 27.608,
+    "translation": "那晚你的眼中 闪烁着生命的光辉",
+    "time": 18.809,
+    "words": [
+      {
+        "text": "A ",
+        "start": 18.809,
+        "duration": 0.238,
+        "end": 19.047
+      },
+      {
+        "text": "blink ",
+        "start": 19.047,
+        "duration": 1.189,
+        "end": 20.236
+      },
+      {
+        "text": "of ",
+        "start": 20.236,
+        "duration": 0.476,
+        "end": 20.712
+      },
+      {
+        "text": "life ",
+        "start": 20.712,
+        "duration": 0.951,
+        "end": 21.663
+      },
+      {
+        "text": "your ",
+        "start": 21.663,
+        "duration": 0.951,
+        "end": 22.614
+      },
+      {
+        "text": "eyes ",
+        "start": 22.614,
+        "duration": 0.951,
+        "end": 23.565
+      },
+      {
+        "text": "caught ",
+        "start": 23.565,
+        "duration": 1.427,
+        "end": 24.992
+      },
+      {
+        "text": "in ",
+        "start": 24.992,
+        "duration": 0.476,
+        "end": 25.468
+      },
+      {
+        "text": "that ",
+        "start": 25.468,
+        "duration": 0.951,
+        "end": 26.419
+      },
+      {
+        "text": "night",
+        "start": 26.419,
+        "duration": 1.189,
+        "end": 27.608
+      }
+    ]
+  },
+  {
+    "start": 27.608,
+    "text": "Hoping that no end rends us to be with you",
+    "end": 32.893,
+    "translation": "好希望和你在一起的时光 没有尽头",
+    "time": 27.608,
+    "words": [
+      {
+        "text": "Hoping ",
+        "start": 27.608,
+        "duration": 0.961,
+        "end": 28.569
+      },
+      {
+        "text": "that ",
+        "start": 28.569,
+        "duration": 0.641,
+        "end": 29.21
+      },
+      {
+        "text": "no ",
+        "start": 29.21,
+        "duration": 0.32,
+        "end": 29.53
+      },
+      {
+        "text": "end ",
+        "start": 29.53,
+        "duration": 0.48,
+        "end": 30.01
+      },
+      {
+        "text": "rends ",
+        "start": 30.01,
+        "duration": 0.801,
+        "end": 30.811
+      },
+      {
+        "text": "us ",
+        "start": 30.811,
+        "duration": 0.32,
+        "end": 31.131
+      },
+      {
+        "text": "to ",
+        "start": 31.131,
+        "duration": 0.32,
+        "end": 31.451
+      },
+      {
+        "text": "be ",
+        "start": 31.451,
+        "duration": 0.32,
+        "end": 31.771
+      },
+      {
+        "text": "with ",
+        "start": 31.771,
+        "duration": 0.641,
+        "end": 32.412
+      },
+      {
+        "text": "you",
+        "start": 32.412,
+        "duration": 0.48,
+        "end": 32.892
+      }
+    ]
+  },
+  {
+    "start": 32.893,
+    "text": "Embed a wish into the woven white flowers",
+    "end": 38.818,
+    "translation": "在我将这愿望和洁白的花儿编织时",
+    "time": 32.893,
+    "words": [
+      {
+        "text": "Embed ",
+        "start": 32.893,
+        "duration": 0.871,
+        "end": 33.764
+      },
+      {
+        "text": "a ",
+        "start": 33.764,
+        "duration": 0.174,
+        "end": 33.938
+      },
+      {
+        "text": "wish ",
+        "start": 33.938,
+        "duration": 0.697,
+        "end": 34.635
+      },
+      {
+        "text": "into ",
+        "start": 34.635,
+        "duration": 0.697,
+        "end": 35.332
+      },
+      {
+        "text": "the ",
+        "start": 35.332,
+        "duration": 0.523,
+        "end": 35.855
+      },
+      {
+        "text": "woven ",
+        "start": 35.855,
+        "duration": 0.871,
+        "end": 36.726
+      },
+      {
+        "text": "white ",
+        "start": 36.726,
+        "duration": 0.871,
+        "end": 37.597
+      },
+      {
+        "text": "flowers",
+        "start": 37.597,
+        "duration": 1.22,
+        "end": 38.817
+      }
+    ]
+  },
+  {
+    "start": 38.818,
+    "text": "The loving and full bright voice that You",
+    "end": 41.855,
+    "translation": "听见了充满爱意的 响亮的声音",
+    "time": 38.818,
+    "words": [
+      {
+        "text": "The ",
+        "start": 38.818,
+        "duration": 0.268,
+        "end": 39.086
+      },
+      {
+        "text": "loving ",
+        "start": 39.086,
+        "duration": 0.536,
+        "end": 39.622
+      },
+      {
+        "text": "and ",
+        "start": 39.622,
+        "duration": 0.268,
+        "end": 39.89
+      },
+      {
+        "text": "full ",
+        "start": 39.89,
+        "duration": 0.357,
+        "end": 40.247
+      },
+      {
+        "text": "bright ",
+        "start": 40.247,
+        "duration": 0.536,
+        "end": 40.783
+      },
+      {
+        "text": "voice ",
+        "start": 40.783,
+        "duration": 0.447,
+        "end": 41.23
+      },
+      {
+        "text": "that ",
+        "start": 41.23,
+        "duration": 0.357,
+        "end": 41.587
+      },
+      {
+        "text": "You",
+        "start": 41.587,
+        "duration": 0.268,
+        "end": 41.855
+      }
+    ]
+  },
+  {
+    "start": 41.855,
+    "text": "gave me no matter when you called my name",
+    "end": 44.516,
+    "translation": "那是你在呼唤我的名字",
+    "time": 41.855,
+    "words": [
+      {
+        "text": "gave ",
+        "start": 41.855,
+        "duration": 0.323,
+        "end": 42.178
+      },
+      {
+        "text": "me ",
+        "start": 42.178,
+        "duration": 0.161,
+        "end": 42.339
+      },
+      {
+        "text": "no ",
+        "start": 42.339,
+        "duration": 0.161,
+        "end": 42.5
+      },
+      {
+        "text": "matter ",
+        "start": 42.5,
+        "duration": 0.484,
+        "end": 42.984
+      },
+      {
+        "text": "when ",
+        "start": 42.984,
+        "duration": 0.323,
+        "end": 43.307
+      },
+      {
+        "text": "you ",
+        "start": 43.307,
+        "duration": 0.242,
+        "end": 43.549
+      },
+      {
+        "text": "called ",
+        "start": 43.549,
+        "duration": 0.484,
+        "end": 44.033
+      },
+      {
+        "text": "my ",
+        "start": 44.033,
+        "duration": 0.161,
+        "end": 44.194
+      },
+      {
+        "text": "name",
+        "start": 44.194,
+        "duration": 0.323,
+        "end": 44.517
+      }
+    ]
+  },
+  {
+    "start": 44.516,
+    "text": "Even as time goes by I can let it play now Refuses to fade out",
+    "end": 50.03,
+    "translation": "纵使时光流逝 你的声音也在我心中回响 永不淡去",
+    "time": 44.516,
+    "words": [
+      {
+        "text": "Even ",
+        "start": 44.516,
+        "duration": 0.46,
+        "end": 44.976
+      },
+      {
+        "text": "as ",
+        "start": 44.976,
+        "duration": 0.23,
+        "end": 45.206
+      },
+      {
+        "text": "time ",
+        "start": 45.206,
+        "duration": 0.46,
+        "end": 45.666
+      },
+      {
+        "text": "goes ",
+        "start": 45.666,
+        "duration": 0.46,
+        "end": 46.126
+      },
+      {
+        "text": "by ",
+        "start": 46.126,
+        "duration": 0.23,
+        "end": 46.356
+      },
+      {
+        "text": "I ",
+        "start": 46.356,
+        "duration": 0.115,
+        "end": 46.471
+      },
+      {
+        "text": "can ",
+        "start": 46.471,
+        "duration": 0.345,
+        "end": 46.816
+      },
+      {
+        "text": "let ",
+        "start": 46.816,
+        "duration": 0.345,
+        "end": 47.161
+      },
+      {
+        "text": "it ",
+        "start": 47.161,
+        "duration": 0.23,
+        "end": 47.391
+      },
+      {
+        "text": "play ",
+        "start": 47.391,
+        "duration": 0.46,
+        "end": 47.851
+      },
+      {
+        "text": "now ",
+        "start": 47.851,
+        "duration": 0.345,
+        "end": 48.196
+      },
+      {
+        "text": "Refuses ",
+        "start": 48.196,
+        "duration": 0.804,
+        "end": 49.0
+      },
+      {
+        "text": "to ",
+        "start": 49.0,
+        "duration": 0.23,
+        "end": 49.23
+      },
+      {
+        "text": "fade ",
+        "start": 49.23,
+        "duration": 0.46,
+        "end": 49.69
+      },
+      {
+        "text": "out",
+        "start": 49.69,
+        "duration": 0.345,
+        "end": 50.035
+      }
+    ]
+  },
+  {
+    "start": 50.03,
+    "text": "With the daisy crown",
+    "end": 52.104,
+    "translation": "戴上雏菊花冠",
+    "time": 50.03,
+    "words": [
+      {
+        "text": "With ",
+        "start": 50.03,
+        "duration": 0.488,
+        "end": 50.518
+      },
+      {
+        "text": "the ",
+        "start": 50.518,
+        "duration": 0.366,
+        "end": 50.884
+      },
+      {
+        "text": "daisy ",
+        "start": 50.884,
+        "duration": 0.61,
+        "end": 51.494
+      },
+      {
+        "text": "crown",
+        "start": 51.494,
+        "duration": 0.61,
+        "end": 52.104
+      }
+    ]
+  },
+  {
+    "start": 52.104,
+    "text": "The moonlight palely poured down",
+    "end": 54.986,
+    "translation": "那凄冷的月光悄然洒落",
+    "time": 52.104,
+    "words": [
+      {
+        "text": "The ",
+        "start": 52.104,
+        "duration": 0.309,
+        "end": 52.413
+      },
+      {
+        "text": "moonlight ",
+        "start": 52.413,
+        "duration": 0.926,
+        "end": 53.339
+      },
+      {
+        "text": "palely ",
+        "start": 53.339,
+        "duration": 0.618,
+        "end": 53.957
+      },
+      {
+        "text": "poured ",
+        "start": 53.957,
+        "duration": 0.618,
+        "end": 54.575
+      },
+      {
+        "text": "down",
+        "start": 54.575,
+        "duration": 0.412,
+        "end": 54.987
+      }
+    ]
+  },
+  {
+    "start": 54.986,
+    "text": "The humming of slumber",
+    "end": 57.776,
+    "translation": "听见睡时呓语",
+    "time": 54.986,
+    "words": [
+      {
+        "text": "The ",
+        "start": 54.986,
+        "duration": 0.441,
+        "end": 55.427
+      },
+      {
+        "text": "humming ",
+        "start": 55.427,
+        "duration": 1.028,
+        "end": 56.455
+      },
+      {
+        "text": "of ",
+        "start": 56.455,
+        "duration": 0.294,
+        "end": 56.749
+      },
+      {
+        "text": "slumber",
+        "start": 56.749,
+        "duration": 1.028,
+        "end": 57.777
+      }
+    ]
+  },
+  {
+    "start": 57.776,
+    "text": "A dream's tear made your cheek wet",
+    "end": 61.713,
+    "translation": "你梦中的泪水打湿脸颊",
+    "time": 57.776,
+    "words": [
+      {
+        "text": "A ",
+        "start": 57.776,
+        "duration": 0.141,
+        "end": 57.917
+      },
+      {
+        "text": "dream's ",
+        "start": 57.917,
+        "duration": 0.984,
+        "end": 58.901
+      },
+      {
+        "text": "tear ",
+        "start": 58.901,
+        "duration": 0.562,
+        "end": 59.463
+      },
+      {
+        "text": "made ",
+        "start": 59.463,
+        "duration": 0.562,
+        "end": 60.025
+      },
+      {
+        "text": "your ",
+        "start": 60.025,
+        "duration": 0.562,
+        "end": 60.587
+      },
+      {
+        "text": "cheek ",
+        "start": 60.587,
+        "duration": 0.703,
+        "end": 61.29
+      },
+      {
+        "text": "wet",
+        "start": 61.29,
+        "duration": 0.422,
+        "end": 61.712
+      }
+    ]
+  },
+  {
+    "start": 61.713,
+    "text": "Embracing soft and glowing warmth",
+    "end": 64.508,
+    "translation": "怀着这柔和 炽热的温暖",
+    "time": 61.713,
+    "words": [
+      {
+        "text": "Embracing ",
+        "start": 61.713,
+        "duration": 0.867,
+        "end": 62.58
+      },
+      {
+        "text": "soft ",
+        "start": 62.58,
+        "duration": 0.386,
+        "end": 62.966
+      },
+      {
+        "text": "and ",
+        "start": 62.966,
+        "duration": 0.289,
+        "end": 63.255
+      },
+      {
+        "text": "glowing ",
+        "start": 63.255,
+        "duration": 0.675,
+        "end": 63.93
+      },
+      {
+        "text": "warmth",
+        "start": 63.93,
+        "duration": 0.578,
+        "end": 64.508
+      }
+    ]
+  },
+  {
+    "start": 64.508,
+    "text": "Let me lie down beside you giving all my heart",
+    "end": 67.594,
+    "translation": "我躺在你身边 将心意赋予你",
+    "time": 64.508,
+    "words": [
+      {
+        "text": "Let ",
+        "start": 64.508,
+        "duration": 0.25,
+        "end": 64.758
+      },
+      {
+        "text": "me ",
+        "start": 64.758,
+        "duration": 0.167,
+        "end": 64.925
+      },
+      {
+        "text": "lie ",
+        "start": 64.925,
+        "duration": 0.25,
+        "end": 65.175
+      },
+      {
+        "text": "down ",
+        "start": 65.175,
+        "duration": 0.334,
+        "end": 65.509
+      },
+      {
+        "text": "beside ",
+        "start": 65.509,
+        "duration": 0.5,
+        "end": 66.009
+      },
+      {
+        "text": "you ",
+        "start": 66.009,
+        "duration": 0.25,
+        "end": 66.259
+      },
+      {
+        "text": "giving ",
+        "start": 66.259,
+        "duration": 0.5,
+        "end": 66.759
+      },
+      {
+        "text": "all ",
+        "start": 66.759,
+        "duration": 0.25,
+        "end": 67.009
+      },
+      {
+        "text": "my ",
+        "start": 67.009,
+        "duration": 0.167,
+        "end": 67.176
+      },
+      {
+        "text": "heart",
+        "start": 67.176,
+        "duration": 0.417,
+        "end": 67.593
+      }
+    ]
+  },
+  {
+    "start": 67.594,
+    "text": "Now I know by sharing our warmth",
+    "end": 70.381,
+    "translation": "我们将温暖分享给彼此",
+    "time": 67.594,
+    "words": [
+      {
+        "text": "Now ",
+        "start": 67.594,
+        "duration": 0.322,
+        "end": 67.916
+      },
+      {
+        "text": "I ",
+        "start": 67.916,
+        "duration": 0.107,
+        "end": 68.023
+      },
+      {
+        "text": "know ",
+        "start": 68.023,
+        "duration": 0.429,
+        "end": 68.452
+      },
+      {
+        "text": "by ",
+        "start": 68.452,
+        "duration": 0.214,
+        "end": 68.666
+      },
+      {
+        "text": "sharing ",
+        "start": 68.666,
+        "duration": 0.75,
+        "end": 69.416
+      },
+      {
+        "text": "our ",
+        "start": 69.416,
+        "duration": 0.322,
+        "end": 69.738
+      },
+      {
+        "text": "warmth",
+        "start": 69.738,
+        "duration": 0.643,
+        "end": 70.381
+      }
+    ]
+  },
+  {
+    "start": 70.381,
+    "text": "We came closer",
+    "end": 84.804,
+    "translation": "让你我灵魂靠得更近",
+    "time": 70.381,
+    "words": [
+      {
+        "text": "We ",
+        "start": 70.381,
+        "duration": 2.404,
+        "end": 72.785
+      },
+      {
+        "text": "came ",
+        "start": 72.785,
+        "duration": 4.808,
+        "end": 77.593
+      },
+      {
+        "text": "closer",
+        "start": 77.593,
+        "duration": 7.212,
+        "end": 84.805
+      }
+    ]
+  },
+  {
+    "start": 84.804,
+    "text": "I made myself fade into the deeper shadows",
+    "end": 90.211,
+    "translation": "我隐于深邃的阴影中",
+    "time": 84.804,
+    "words": [
+      {
+        "text": "I ",
+        "start": 84.804,
+        "duration": 0.154,
+        "end": 84.958
+      },
+      {
+        "text": "made ",
+        "start": 84.958,
+        "duration": 0.618,
+        "end": 85.576
+      },
+      {
+        "text": "myself ",
+        "start": 85.576,
+        "duration": 0.927,
+        "end": 86.503
+      },
+      {
+        "text": "fade ",
+        "start": 86.503,
+        "duration": 0.618,
+        "end": 87.121
+      },
+      {
+        "text": "into ",
+        "start": 87.121,
+        "duration": 0.618,
+        "end": 87.739
+      },
+      {
+        "text": "the ",
+        "start": 87.739,
+        "duration": 0.463,
+        "end": 88.202
+      },
+      {
+        "text": "deeper ",
+        "start": 88.202,
+        "duration": 0.927,
+        "end": 89.129
+      },
+      {
+        "text": "shadows",
+        "start": 89.129,
+        "duration": 1.081,
+        "end": 90.21
+      }
+    ]
+  },
+  {
+    "start": 90.211,
+    "text": "I listened to the ringing as you prayed more",
+    "end": 95.917,
+    "translation": "聆听你祈祷时 敲响的钟声",
+    "time": 90.211,
+    "words": [
+      {
+        "text": "I ",
+        "start": 90.211,
+        "duration": 0.159,
+        "end": 90.37
+      },
+      {
+        "text": "listened ",
+        "start": 90.37,
+        "duration": 1.268,
+        "end": 91.638
+      },
+      {
+        "text": "to ",
+        "start": 91.638,
+        "duration": 0.317,
+        "end": 91.955
+      },
+      {
+        "text": "the ",
+        "start": 91.955,
+        "duration": 0.476,
+        "end": 92.431
+      },
+      {
+        "text": "ringing ",
+        "start": 92.431,
+        "duration": 1.11,
+        "end": 93.541
+      },
+      {
+        "text": "as ",
+        "start": 93.541,
+        "duration": 0.317,
+        "end": 93.858
+      },
+      {
+        "text": "you ",
+        "start": 93.858,
+        "duration": 0.476,
+        "end": 94.334
+      },
+      {
+        "text": "prayed ",
+        "start": 94.334,
+        "duration": 0.951,
+        "end": 95.285
+      },
+      {
+        "text": "more",
+        "start": 95.285,
+        "duration": 0.634,
+        "end": 95.919
+      }
+    ]
+  },
+  {
+    "start": 95.917,
+    "text": "That was the only thing I could do",
+    "end": 98.792,
+    "translation": "我能做的 也只有如此",
+    "time": 95.917,
+    "words": [
+      {
+        "text": "That ",
+        "start": 95.917,
+        "duration": 0.426,
+        "end": 96.343
+      },
+      {
+        "text": "was ",
+        "start": 96.343,
+        "duration": 0.319,
+        "end": 96.662
+      },
+      {
+        "text": "the ",
+        "start": 96.662,
+        "duration": 0.319,
+        "end": 96.981
+      },
+      {
+        "text": "only ",
+        "start": 96.981,
+        "duration": 0.426,
+        "end": 97.407
+      },
+      {
+        "text": "thing ",
+        "start": 97.407,
+        "duration": 0.532,
+        "end": 97.939
+      },
+      {
+        "text": "I ",
+        "start": 97.939,
+        "duration": 0.106,
+        "end": 98.045
+      },
+      {
+        "text": "could ",
+        "start": 98.045,
+        "duration": 0.532,
+        "end": 98.577
+      },
+      {
+        "text": "do",
+        "start": 98.577,
+        "duration": 0.213,
+        "end": 98.79
+      }
+    ]
+  },
+  {
+    "start": 98.792,
+    "text": "I kept a silent secret just for you here",
+    "end": 101.848,
+    "translation": "我只为你 保守着秘密",
+    "time": 98.792,
+    "words": [
+      {
+        "text": "I ",
+        "start": 98.792,
+        "duration": 0.095,
+        "end": 98.887
+      },
+      {
+        "text": "kept ",
+        "start": 98.887,
+        "duration": 0.382,
+        "end": 99.269
+      },
+      {
+        "text": "a ",
+        "start": 99.269,
+        "duration": 0.095,
+        "end": 99.364
+      },
+      {
+        "text": "silent ",
+        "start": 99.364,
+        "duration": 0.573,
+        "end": 99.937
+      },
+      {
+        "text": "secret ",
+        "start": 99.937,
+        "duration": 0.573,
+        "end": 100.51
+      },
+      {
+        "text": "just ",
+        "start": 100.51,
+        "duration": 0.382,
+        "end": 100.892
+      },
+      {
+        "text": "for ",
+        "start": 100.892,
+        "duration": 0.286,
+        "end": 101.178
+      },
+      {
+        "text": "you ",
+        "start": 101.178,
+        "duration": 0.286,
+        "end": 101.464
+      },
+      {
+        "text": "here",
+        "start": 101.464,
+        "duration": 0.382,
+        "end": 101.846
+      }
+    ]
+  },
+  {
+    "start": 101.848,
+    "text": "What matters in the end is not the shape",
+    "end": 104.21,
+    "translation": "回忆的形式如何从不重要",
+    "time": 101.848,
+    "words": [
+      {
+        "text": "What ",
+        "start": 101.848,
+        "duration": 0.295,
+        "end": 102.143
+      },
+      {
+        "text": "matters ",
+        "start": 102.143,
+        "duration": 0.517,
+        "end": 102.66
+      },
+      {
+        "text": "in ",
+        "start": 102.66,
+        "duration": 0.148,
+        "end": 102.808
+      },
+      {
+        "text": "the ",
+        "start": 102.808,
+        "duration": 0.221,
+        "end": 103.029
+      },
+      {
+        "text": "end ",
+        "start": 103.029,
+        "duration": 0.221,
+        "end": 103.25
+      },
+      {
+        "text": "is ",
+        "start": 103.25,
+        "duration": 0.148,
+        "end": 103.398
+      },
+      {
+        "text": "not ",
+        "start": 103.398,
+        "duration": 0.221,
+        "end": 103.619
+      },
+      {
+        "text": "the ",
+        "start": 103.619,
+        "duration": 0.221,
+        "end": 103.84
+      },
+      {
+        "text": "shape",
+        "start": 103.84,
+        "duration": 0.369,
+        "end": 104.209
+      }
+    ]
+  },
+  {
+    "start": 104.21,
+    "text": "But you you hold it tight",
+    "end": 117.041,
+    "translation": "重要的是 你要一直记得",
+    "time": 104.21,
+    "words": [
+      {
+        "text": "But ",
+        "start": 104.21,
+        "duration": 1.925,
+        "end": 106.135
+      },
+      {
+        "text": "you ",
+        "start": 106.135,
+        "duration": 1.925,
+        "end": 108.06
+      },
+      {
+        "text": "you ",
+        "start": 108.06,
+        "duration": 1.925,
+        "end": 109.985
+      },
+      {
+        "text": "hold ",
+        "start": 109.985,
+        "duration": 2.566,
+        "end": 112.551
+      },
+      {
+        "text": "it ",
+        "start": 112.551,
+        "duration": 1.283,
+        "end": 113.834
+      },
+      {
+        "text": "tight",
+        "start": 113.834,
+        "duration": 3.208,
+        "end": 117.042
+      }
+    ]
+  },
+  {
+    "start": 117.041,
+    "text": "Purely satisfied only to play with toys together",
+    "end": 122.546,
+    "translation": "记得那份一同玩乐时的 纯粹的满足感",
+    "time": 117.041,
+    "words": [
+      {
+        "text": "Purely ",
+        "start": 117.041,
+        "duration": 0.806,
+        "end": 117.847
+      },
+      {
+        "text": "satisfied ",
+        "start": 117.847,
+        "duration": 1.208,
+        "end": 119.055
+      },
+      {
+        "text": "only ",
+        "start": 119.055,
+        "duration": 0.537,
+        "end": 119.592
+      },
+      {
+        "text": "to ",
+        "start": 119.592,
+        "duration": 0.269,
+        "end": 119.861
+      },
+      {
+        "text": "play ",
+        "start": 119.861,
+        "duration": 0.537,
+        "end": 120.398
+      },
+      {
+        "text": "with ",
+        "start": 120.398,
+        "duration": 0.537,
+        "end": 120.935
+      },
+      {
+        "text": "toys ",
+        "start": 120.935,
+        "duration": 0.537,
+        "end": 121.472
+      },
+      {
+        "text": "together",
+        "start": 121.472,
+        "duration": 1.074,
+        "end": 122.546
+      }
+    ]
+  },
+  {
+    "start": 122.546,
+    "text": "Maybe I'm shaped by thousands of memories of you",
+    "end": 128.159,
+    "translation": "不过 也许如今我的心绪 已经被关于你的无数回忆所定型",
+    "time": 122.546,
+    "words": [
+      {
+        "text": "Maybe ",
+        "start": 122.546,
+        "duration": 0.702,
+        "end": 123.248
+      },
+      {
+        "text": "I'm ",
+        "start": 123.248,
+        "duration": 0.421,
+        "end": 123.669
+      },
+      {
+        "text": "shaped ",
+        "start": 123.669,
+        "duration": 0.842,
+        "end": 124.511
+      },
+      {
+        "text": "by ",
+        "start": 124.511,
+        "duration": 0.281,
+        "end": 124.792
+      },
+      {
+        "text": "thousands ",
+        "start": 124.792,
+        "duration": 1.263,
+        "end": 126.055
+      },
+      {
+        "text": "of ",
+        "start": 126.055,
+        "duration": 0.281,
+        "end": 126.336
+      },
+      {
+        "text": "memories ",
+        "start": 126.336,
+        "duration": 1.123,
+        "end": 127.459
+      },
+      {
+        "text": "of ",
+        "start": 127.459,
+        "duration": 0.281,
+        "end": 127.74
+      },
+      {
+        "text": "you",
+        "start": 127.74,
+        "duration": 0.421,
+        "end": 128.161
+      }
+    ]
+  },
+  {
+    "start": 128.159,
+    "text": "Together we hold the old dusty film",
+    "end": 131.138,
+    "translation": "我们都不要丢弃 那尘封的旧胶片",
+    "time": 128.159,
+    "words": [
+      {
+        "text": "Together ",
+        "start": 128.159,
+        "duration": 0.822,
+        "end": 128.981
+      },
+      {
+        "text": "we ",
+        "start": 128.981,
+        "duration": 0.205,
+        "end": 129.186
+      },
+      {
+        "text": "hold ",
+        "start": 129.186,
+        "duration": 0.411,
+        "end": 129.597
+      },
+      {
+        "text": "the ",
+        "start": 129.597,
+        "duration": 0.308,
+        "end": 129.905
+      },
+      {
+        "text": "old ",
+        "start": 129.905,
+        "duration": 0.308,
+        "end": 130.213
+      },
+      {
+        "text": "dusty ",
+        "start": 130.213,
+        "duration": 0.514,
+        "end": 130.727
+      },
+      {
+        "text": "film",
+        "start": 130.727,
+        "duration": 0.411,
+        "end": 131.138
+      }
+    ]
+  },
+  {
+    "start": 131.138,
+    "text": "Even though it no longer goes the way it used to",
+    "end": 133.337,
+    "translation": "即使它早已不能像从前那样运转",
+    "time": 131.138,
+    "words": [
+      {
+        "text": "Even ",
+        "start": 131.138,
+        "duration": 0.231,
+        "end": 131.369
+      },
+      {
+        "text": "though ",
+        "start": 131.369,
+        "duration": 0.347,
+        "end": 131.716
+      },
+      {
+        "text": "it ",
+        "start": 131.716,
+        "duration": 0.116,
+        "end": 131.832
+      },
+      {
+        "text": "no ",
+        "start": 131.832,
+        "duration": 0.116,
+        "end": 131.948
+      },
+      {
+        "text": "longer ",
+        "start": 131.948,
+        "duration": 0.347,
+        "end": 132.295
+      },
+      {
+        "text": "goes ",
+        "start": 132.295,
+        "duration": 0.231,
+        "end": 132.526
+      },
+      {
+        "text": "the ",
+        "start": 132.526,
+        "duration": 0.174,
+        "end": 132.7
+      },
+      {
+        "text": "way ",
+        "start": 132.7,
+        "duration": 0.174,
+        "end": 132.874
+      },
+      {
+        "text": "it ",
+        "start": 132.874,
+        "duration": 0.116,
+        "end": 132.99
+      },
+      {
+        "text": "used ",
+        "start": 132.99,
+        "duration": 0.231,
+        "end": 133.221
+      },
+      {
+        "text": "to",
+        "start": 133.221,
+        "duration": 0.116,
+        "end": 133.337
+      }
+    ]
+  },
+  {
+    "start": 133.337,
+    "text": "Reach for a rest remember I'm here for you",
+    "end": 145.176,
+    "translation": "休息片刻吧 记着 我就在你身边",
+    "time": 133.337,
+    "words": [
+      {
+        "text": "Reach ",
+        "start": 133.337,
+        "duration": 1.741,
+        "end": 135.078
+      },
+      {
+        "text": "for ",
+        "start": 135.078,
+        "duration": 1.045,
+        "end": 136.123
+      },
+      {
+        "text": "a ",
+        "start": 136.123,
+        "duration": 0.348,
+        "end": 136.471
+      },
+      {
+        "text": "rest ",
+        "start": 136.471,
+        "duration": 1.393,
+        "end": 137.864
+      },
+      {
+        "text": "remember ",
+        "start": 137.864,
+        "duration": 2.786,
+        "end": 140.65
+      },
+      {
+        "text": "I'm ",
+        "start": 140.65,
+        "duration": 1.045,
+        "end": 141.695
+      },
+      {
+        "text": "here ",
+        "start": 141.695,
+        "duration": 1.393,
+        "end": 143.088
+      },
+      {
+        "text": "for ",
+        "start": 143.088,
+        "duration": 1.045,
+        "end": 144.133
+      },
+      {
+        "text": "you",
+        "start": 144.133,
+        "duration": 1.045,
+        "end": 145.178
+      }
+    ]
+  },
+  {
+    "start": 145.176,
+    "text": "With the daisy crown",
+    "end": 147.354,
+    "translation": "戴上雏菊花冠",
+    "time": 145.176,
+    "words": [
+      {
+        "text": "With ",
+        "start": 145.176,
+        "duration": 0.512,
+        "end": 145.688
+      },
+      {
+        "text": "the ",
+        "start": 145.688,
+        "duration": 0.384,
+        "end": 146.072
+      },
+      {
+        "text": "daisy ",
+        "start": 146.072,
+        "duration": 0.641,
+        "end": 146.713
+      },
+      {
+        "text": "crown",
+        "start": 146.713,
+        "duration": 0.641,
+        "end": 147.354
+      }
+    ]
+  },
+  {
+    "start": 147.354,
+    "text": "The moonlight palely poured down",
+    "end": 150.131,
+    "translation": "凄冷的月光悄然洒落",
+    "time": 147.354,
+    "words": [
+      {
+        "text": "The ",
+        "start": 147.354,
+        "duration": 0.298,
+        "end": 147.652
+      },
+      {
+        "text": "moonlight ",
+        "start": 147.652,
+        "duration": 0.893,
+        "end": 148.545
+      },
+      {
+        "text": "palely ",
+        "start": 148.545,
+        "duration": 0.595,
+        "end": 149.14
+      },
+      {
+        "text": "poured ",
+        "start": 149.14,
+        "duration": 0.595,
+        "end": 149.735
+      },
+      {
+        "text": "down",
+        "start": 149.735,
+        "duration": 0.397,
+        "end": 150.132
+      }
+    ]
+  },
+  {
+    "start": 150.131,
+    "text": "The humming of slumber",
+    "end": 153.013,
+    "translation": "听见睡时呓语",
+    "time": 150.131,
+    "words": [
+      {
+        "text": "The ",
+        "start": 150.131,
+        "duration": 0.455,
+        "end": 150.586
+      },
+      {
+        "text": "humming ",
+        "start": 150.586,
+        "duration": 1.062,
+        "end": 151.648
+      },
+      {
+        "text": "of ",
+        "start": 151.648,
+        "duration": 0.303,
+        "end": 151.951
+      },
+      {
+        "text": "slumber",
+        "start": 151.951,
+        "duration": 1.062,
+        "end": 153.013
+      }
+    ]
+  },
+  {
+    "start": 153.013,
+    "text": "A girl bathed in the pale light",
+    "end": 156.841,
+    "translation": "姑娘沐于凄冷月光下",
+    "time": 153.013,
+    "words": [
+      {
+        "text": "A ",
+        "start": 153.013,
+        "duration": 0.153,
+        "end": 153.166
+      },
+      {
+        "text": "girl ",
+        "start": 153.166,
+        "duration": 0.612,
+        "end": 153.778
+      },
+      {
+        "text": "bathed ",
+        "start": 153.778,
+        "duration": 0.919,
+        "end": 154.697
+      },
+      {
+        "text": "in ",
+        "start": 154.697,
+        "duration": 0.306,
+        "end": 155.003
+      },
+      {
+        "text": "the ",
+        "start": 155.003,
+        "duration": 0.459,
+        "end": 155.462
+      },
+      {
+        "text": "pale ",
+        "start": 155.462,
+        "duration": 0.612,
+        "end": 156.074
+      },
+      {
+        "text": "light",
+        "start": 156.074,
+        "duration": 0.766,
+        "end": 156.84
+      }
+    ]
+  },
+  {
+    "start": 156.841,
+    "text": "Embracing soft and glowing warmth",
+    "end": 159.947,
+    "translation": "怀着这柔和 炽热的温暖",
+    "time": 156.841,
+    "words": [
+      {
+        "text": "Embracing ",
+        "start": 156.841,
+        "duration": 0.964,
+        "end": 157.805
+      },
+      {
+        "text": "soft ",
+        "start": 157.805,
+        "duration": 0.428,
+        "end": 158.233
+      },
+      {
+        "text": "and ",
+        "start": 158.233,
+        "duration": 0.321,
+        "end": 158.554
+      },
+      {
+        "text": "glowing ",
+        "start": 158.554,
+        "duration": 0.75,
+        "end": 159.304
+      },
+      {
+        "text": "warmth",
+        "start": 159.304,
+        "duration": 0.643,
+        "end": 159.947
+      }
+    ]
+  },
+  {
+    "start": 159.947,
+    "text": "Do you remember me on the dark and lone night?",
+    "end": 162.843,
+    "translation": "在漆黑孤寂的夜晚 你还记得我吗",
+    "time": 159.947,
+    "words": [
+      {
+        "text": "Do ",
+        "start": 159.947,
+        "duration": 0.157,
+        "end": 160.104
+      },
+      {
+        "text": "you ",
+        "start": 160.104,
+        "duration": 0.235,
+        "end": 160.339
+      },
+      {
+        "text": "remember ",
+        "start": 160.339,
+        "duration": 0.626,
+        "end": 160.965
+      },
+      {
+        "text": "me ",
+        "start": 160.965,
+        "duration": 0.157,
+        "end": 161.122
+      },
+      {
+        "text": "on ",
+        "start": 161.122,
+        "duration": 0.157,
+        "end": 161.279
+      },
+      {
+        "text": "the ",
+        "start": 161.279,
+        "duration": 0.235,
+        "end": 161.514
+      },
+      {
+        "text": "dark ",
+        "start": 161.514,
+        "duration": 0.313,
+        "end": 161.827
+      },
+      {
+        "text": "and ",
+        "start": 161.827,
+        "duration": 0.235,
+        "end": 162.062
+      },
+      {
+        "text": "lone ",
+        "start": 162.062,
+        "duration": 0.313,
+        "end": 162.375
+      },
+      {
+        "text": "night?",
+        "start": 162.375,
+        "duration": 0.47,
+        "end": 162.845
+      }
+    ]
+  },
+  {
+    "start": 162.843,
+    "text": "It lets you know we're sharing our warmth however far",
+    "end": 170.814,
+    "translation": "雏菊花冠会告诉你 无论相隔多远 我们都会将温暖分享给彼此",
+    "time": 162.843,
+    "words": [
+      {
+        "text": "It ",
+        "start": 162.843,
+        "duration": 0.362,
+        "end": 163.205
+      },
+      {
+        "text": "lets ",
+        "start": 163.205,
+        "duration": 0.725,
+        "end": 163.93
+      },
+      {
+        "text": "you ",
+        "start": 163.93,
+        "duration": 0.543,
+        "end": 164.473
+      },
+      {
+        "text": "know ",
+        "start": 164.473,
+        "duration": 0.725,
+        "end": 165.198
+      },
+      {
+        "text": "we're ",
+        "start": 165.198,
+        "duration": 0.906,
+        "end": 166.104
+      },
+      {
+        "text": "sharing ",
+        "start": 166.104,
+        "duration": 1.268,
+        "end": 167.372
+      },
+      {
+        "text": "our ",
+        "start": 167.372,
+        "duration": 0.543,
+        "end": 167.915
+      },
+      {
+        "text": "warmth ",
+        "start": 167.915,
+        "duration": 1.087,
+        "end": 169.002
+      },
+      {
+        "text": "however ",
+        "start": 169.002,
+        "duration": 1.268,
+        "end": 170.27
+      },
+      {
+        "text": "far",
+        "start": 170.27,
+        "duration": 0.543,
+        "end": 170.813
+      }
+    ]
+  },
+  {
+    "start": 170.814,
+    "text": "On the daisy crown",
+    "end": 172.837,
+    "translation": "这雏菊花冠啊",
+    "time": 170.814,
+    "words": [
+      {
+        "text": "On ",
+        "start": 170.814,
+        "duration": 0.27,
+        "end": 171.084
+      },
+      {
+        "text": "the ",
+        "start": 171.084,
+        "duration": 0.405,
+        "end": 171.489
+      },
+      {
+        "text": "daisy ",
+        "start": 171.489,
+        "duration": 0.674,
+        "end": 172.163
+      },
+      {
+        "text": "crown",
+        "start": 172.163,
+        "duration": 0.674,
+        "end": 172.837
+      }
+    ]
+  },
+  {
+    "start": 172.837,
+    "text": "I had a dream so warm",
+    "end": 175.758,
+    "translation": "让我做了一个很温暖的梦",
+    "time": 172.837,
+    "words": [
+      {
+        "text": "I ",
+        "start": 172.837,
+        "duration": 0.183,
+        "end": 173.02
+      },
+      {
+        "text": "had ",
+        "start": 173.02,
+        "duration": 0.548,
+        "end": 173.568
+      },
+      {
+        "text": "a ",
+        "start": 173.568,
+        "duration": 0.183,
+        "end": 173.751
+      },
+      {
+        "text": "dream ",
+        "start": 173.751,
+        "duration": 0.913,
+        "end": 174.664
+      },
+      {
+        "text": "so ",
+        "start": 174.664,
+        "duration": 0.365,
+        "end": 175.029
+      },
+      {
+        "text": "warm",
+        "start": 175.029,
+        "duration": 0.73,
+        "end": 175.759
+      }
+    ]
+  },
+  {
+    "start": 175.758,
+    "text": "Than the midday sun and glow",
+    "end": 178.694,
+    "translation": "比正午照耀着我的阳光",
+    "time": 175.758,
+    "words": [
+      {
+        "text": "Than ",
+        "start": 175.758,
+        "duration": 0.511,
+        "end": 176.269
+      },
+      {
+        "text": "the ",
+        "start": 176.269,
+        "duration": 0.383,
+        "end": 176.652
+      },
+      {
+        "text": "midday ",
+        "start": 176.652,
+        "duration": 0.766,
+        "end": 177.418
+      },
+      {
+        "text": "sun ",
+        "start": 177.418,
+        "duration": 0.383,
+        "end": 177.801
+      },
+      {
+        "text": "and ",
+        "start": 177.801,
+        "duration": 0.383,
+        "end": 178.184
+      },
+      {
+        "text": "glow",
+        "start": 178.184,
+        "duration": 0.511,
+        "end": 178.695
+      }
+    ]
+  },
+  {
+    "start": 178.694,
+    "text": "A dream stays with me warmer",
+    "end": 182.317,
+    "translation": "还要温暖",
+    "time": 178.694,
+    "words": [
+      {
+        "text": "A ",
+        "start": 178.694,
+        "duration": 0.158,
+        "end": 178.852
+      },
+      {
+        "text": "dream ",
+        "start": 178.852,
+        "duration": 0.788,
+        "end": 179.64
+      },
+      {
+        "text": "stays ",
+        "start": 179.64,
+        "duration": 0.788,
+        "end": 180.428
+      },
+      {
+        "text": "with ",
+        "start": 180.428,
+        "duration": 0.63,
+        "end": 181.058
+      },
+      {
+        "text": "me ",
+        "start": 181.058,
+        "duration": 0.315,
+        "end": 181.373
+      },
+      {
+        "text": "warmer",
+        "start": 181.373,
+        "duration": 0.945,
+        "end": 182.318
+      }
+    ]
+  },
+  {
+    "start": 182.317,
+    "text": "To the memory that might fade if I blink once again",
+    "end": 185.282,
+    "translation": "只是这些回忆 眨眼间就可能消散在脑海",
+    "time": 182.317,
+    "words": [
+      {
+        "text": "To ",
+        "start": 182.317,
+        "duration": 0.145,
+        "end": 182.462
+      },
+      {
+        "text": "the ",
+        "start": 182.462,
+        "duration": 0.217,
+        "end": 182.679
+      },
+      {
+        "text": "memory ",
+        "start": 182.679,
+        "duration": 0.434,
+        "end": 183.113
+      },
+      {
+        "text": "that ",
+        "start": 183.113,
+        "duration": 0.289,
+        "end": 183.402
+      },
+      {
+        "text": "might ",
+        "start": 183.402,
+        "duration": 0.362,
+        "end": 183.764
+      },
+      {
+        "text": "fade ",
+        "start": 183.764,
+        "duration": 0.289,
+        "end": 184.053
+      },
+      {
+        "text": "if ",
+        "start": 184.053,
+        "duration": 0.145,
+        "end": 184.198
+      },
+      {
+        "text": "I ",
+        "start": 184.198,
+        "duration": 0.072,
+        "end": 184.27
+      },
+      {
+        "text": "blink ",
+        "start": 184.27,
+        "duration": 0.362,
+        "end": 184.632
+      },
+      {
+        "text": "once ",
+        "start": 184.632,
+        "duration": 0.289,
+        "end": 184.921
+      },
+      {
+        "text": "again",
+        "start": 184.921,
+        "duration": 0.362,
+        "end": 185.283
+      }
+    ]
+  },
+  {
+    "start": 185.282,
+    "text": "I let myself lie down",
+    "end": 186.879,
+    "translation": "所以我躺下 入梦",
+    "time": 185.282,
+    "words": [
+      {
+        "text": "I ",
+        "start": 185.282,
+        "duration": 0.094,
+        "end": 185.376
+      },
+      {
+        "text": "let ",
+        "start": 185.376,
+        "duration": 0.282,
+        "end": 185.658
+      },
+      {
+        "text": "myself ",
+        "start": 185.658,
+        "duration": 0.564,
+        "end": 186.222
+      },
+      {
+        "text": "lie ",
+        "start": 186.222,
+        "duration": 0.282,
+        "end": 186.504
+      },
+      {
+        "text": "down",
+        "start": 186.504,
+        "duration": 0.376,
+        "end": 186.88
+      }
+    ]
+  },
+  {
+    "start": 186.879,
+    "text": "In dreams I'm with you",
+    "end": 188.818,
+    "translation": "在梦中 我和你在一起",
+    "time": 186.879,
+    "words": [
+      {
+        "text": "In ",
+        "start": 186.879,
+        "duration": 0.215,
+        "end": 187.094
+      },
+      {
+        "text": "dreams ",
+        "start": 187.094,
+        "duration": 0.646,
+        "end": 187.74
+      },
+      {
+        "text": "I'm ",
+        "start": 187.74,
+        "duration": 0.323,
+        "end": 188.063
+      },
+      {
+        "text": "with ",
+        "start": 188.063,
+        "duration": 0.431,
+        "end": 188.494
+      },
+      {
+        "text": "you",
+        "start": 188.494,
+        "duration": 0.323,
+        "end": 188.817
+      }
+    ]
+  },
+  {
+    "start": 188.818,
+    "text": "Now I know we're sharing our warmth however far",
+    "end": 192.818,
+    "translation": "现在我明白 无论相隔多远 你和我 都在分享着彼此的温暖",
+    "time": 188.818,
+    "words": [
+      {
+        "text": "Now ",
+        "start": 188.818,
+        "duration": 0.308,
+        "end": 189.126
+      },
+      {
+        "text": "I ",
+        "start": 189.126,
+        "duration": 0.103,
+        "end": 189.229
+      },
+      {
+        "text": "know ",
+        "start": 189.229,
+        "duration": 0.41,
+        "end": 189.639
+      },
+      {
+        "text": "we're ",
+        "start": 189.639,
+        "duration": 0.513,
+        "end": 190.152
+      },
+      {
+        "text": "sharing ",
+        "start": 190.152,
+        "duration": 0.718,
+        "end": 190.87
+      },
+      {
+        "text": "our ",
+        "start": 190.87,
+        "duration": 0.308,
+        "end": 191.178
+      },
+      {
+        "text": "warmth ",
+        "start": 191.178,
+        "duration": 0.615,
+        "end": 191.793
+      },
+      {
+        "text": "however ",
+        "start": 191.793,
+        "duration": 0.718,
+        "end": 192.511
+      },
+      {
+        "text": "far",
+        "start": 192.511,
+        "duration": 0.308,
+        "end": 192.819
+      }
+    ]
+  }
+]

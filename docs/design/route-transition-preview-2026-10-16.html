@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>页面过渡对比</title>
+<style>
+  :root {
+    --bg: #f3f1ea;
+    --paper: #f9f9f6;
+    --ink: #1d1b18;
+    --muted: #77716a;
+    --line: #dcd7cc;
+    --accent: #d97757;
+    --rust: #9a5937;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 14px/1.6 "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+  }
+  header.top {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 16px 8px;
+  }
+  h1 { font-size: 22px; margin: 0 0 6px; font-weight: 600; }
+  .lead { color: var(--muted); margin: 0 0 18px; max-width: 760px; }
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
+    padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper);
+  }
+  .controls .label { color: var(--muted); font-size: 13px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .seg button {
+    border: 0; background: transparent; padding: 6px 14px; font: inherit; font-size: 13px; cursor: pointer; color: var(--ink);
+  }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .go {
+    border: 0; background: var(--accent); color: #fff; padding: 7px 16px; border-radius: 999px;
+    font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .go:focus-visible, .seg button:focus-visible, .mini nav a:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+
+  main.grid {
+    max-width: 1280px; margin: 0 auto; padding: 16px;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
+  }
+  @media (max-width: 860px) { main.grid { grid-template-columns: 1fr; } }
+
+  .card { display: flex; flex-direction: column; gap: 8px; }
+  .card h2 { font-size: 15px; margin: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .card h2 .tag { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .card p.desc { margin: 0; color: var(--muted); font-size: 12.5px; }
+  .meter { font-variant-numeric: tabular-nums; font-size: 13px; }
+  .meter b { font-size: 18px; }
+  .meter.good b { color: #3d7a4a; }
+  .meter.bad b { color: #b14a2c; }
+
+  /* mini browser */
+  .mini {
+    position: relative; height: 300px; border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden; background: var(--paper);
+  }
+  .mini .chrome {
+    height: 26px; display: flex; align-items: center; gap: 6px; padding: 0 10px;
+    border-bottom: 1px solid var(--line); background: #efece4; font: 11px/1 ui-monospace, monospace; color: var(--muted);
+  }
+  .mini .chrome i { width: 8px; height: 8px; border-radius: 50%; background: #d6d0c4; display: inline-block; }
+  .mini .chrome .url { margin-left: 8px; }
+  .mini nav { display: flex; gap: 14px; padding: 10px 14px; border-bottom: 1px solid var(--line); position: relative; z-index: 3; background: var(--paper); }
+  .mini nav a { color: var(--ink); text-decoration: none; font-size: 13px; cursor: pointer; }
+  .mini nav a[aria-current="page"] { color: var(--accent); }
+  .stage { position: absolute; inset: 64px 0 0 0; }
+  .page { position: absolute; inset: 0; padding: 18px 16px; }
+  .page h3 { margin: 0 0 4px; font-size: 22px; }
+  .page .sub { color: var(--muted); margin: 0 0 14px; font-size: 12px; }
+  .page .blocks { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+  .page .blk { height: 64px; border-radius: 6px; }
+  .page .blk.tall { grid-row: span 2; height: auto; min-height: 138px; }
+
+  /* A: current curtain (copied from RouteTransition.tsx) */
+  .curtain {
+    position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: hidden;
+    background: #f9f9f6; opacity: 1; transform: translateY(100%);
+    transition: transform 520ms cubic-bezier(0.25, 1, 0.5, 1), opacity 360ms ease;
+  }
+  .curtain::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 24% 18%, rgba(217, 119, 87, 0.18), transparent 32%),
+      linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.56) 48%, transparent 100%);
+    transform: translateX(-28%); transition: transform 720ms cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .curtain::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(154, 89, 55, 0.42), transparent);
+  }
+  .curtain .grain {
+    position: absolute; inset: 0; opacity: 0.42;
+    background-image: linear-gradient(rgba(17,17,17,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(17,17,17,.018) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .curtain.active { transform: translateY(0); }
+  .curtain.active::before { transform: translateX(18%); }
+  .curtain.leaving { opacity: 0; transform: translateY(-8%); }
+
+  /* C: delayed progress bar */
+  .bar {
+    position: absolute; left: 0; top: 0; height: 2px; width: 0; z-index: 4;
+    background: var(--accent); opacity: 0;
+  }
+  .bar.on { opacity: 1; width: 70%; transition: width 2.4s cubic-bezier(.17,.17,.3,1), opacity 150ms; }
+  .bar.done { opacity: 0; width: 100%; transition: width 160ms ease-out, opacity 220ms 160ms; }
+  .stage.dim .page.cur { opacity: .55; transition: opacity 200ms; }
+
+  /* D: crossfade (what <Link viewTransition> does by default) */
+  .page.vt-old { animation: vtOut 200ms cubic-bezier(.4,0,.2,1) forwards; }
+  .page.vt-new { animation: vtIn 200ms cubic-bezier(.4,0,.2,1) both; }
+  @keyframes vtOut { to { opacity: 0; } }
+  @keyframes vtIn { from { opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .curtain { transform: none; transition: opacity 140ms ease; }
+    .curtain::before { transition: none; }
+    .curtain.leaving { transform: none; }
+    .page.vt-old, .page.vt-new { animation-duration: 1ms; }
+  }
+
+  footer.notes { max-width: 1280px; margin: 0 auto; padding: 4px 16px 40px; color: var(--muted); font-size: 12.5px; }
+  footer.notes code { font-size: 12px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>页面过渡对比预览</h1>
+  <p class="lead">点任意一个小窗口顶栏的链接，或者点「四个一起跳」，四种方案会同时跳到同一页。右上角的数字是「点击 → 新页面完整可见」的耗时。切换网速，看看各方案在数据已预取和数据慢的时候分别是什么感觉。</p>
+  <div class="controls">
+    <span class="label">模拟数据到达时间</span>
+    <div class="seg" id="net">
+      <button data-ms="0" aria-pressed="true">已预取 0ms</button>
+      <button data-ms="250">普通 250ms</button>
+      <button data-ms="1800">慢网 1.8s</button>
+    </div>
+    <button class="go" id="all">四个一起跳 →</button>
+  </div>
+</header>
+
+<main class="grid" id="grid"></main>
+
+<footer class="notes">
+  A 的幕布参数直接抄自 <code>app/components/transitions/RouteTransition.tsx</code>（520ms 上滑、至少盖 430ms、360ms 淡出）。
+  D 是 React Router <code>&lt;Link viewTransition&gt;</code> 默认交叉淡入的模拟（真实浏览器里是截图淡入，效果一样）。
+  系统开了「减少动态效果」时，A 和 D 会自动变成几乎无动画。
+</footer>
+
+<script>
+const PAGES = [
+  { key: "home",    name: "首页", path: "/",        sub: "构建记录 · 最近更新",   c: ["#e8d9c7", "#cfdcd2", "#e9cfc3", "#d9d3e6"] },
+  { key: "music",   name: "音乐", path: "/music",   sub: "正在播放 · Goodbye",     c: ["#cbd6e2", "#e5d6bd", "#d1c8db", "#c9dccf"] },
+  { key: "gallery", name: "画廊", path: "/gallery", sub: "油画与照片",             c: ["#e6cbb8", "#c8d3c0", "#ead9b8", "#c4cbd8"] },
+  { key: "msg",     name: "留言", path: "/messages",sub: "贝壳留言板",             c: ["#efe3cc", "#d8cbb8", "#e2d4c6", "#cfd8d4"] },
+];
+
+const MODES = [
+  { id: "A", title: "A · 现在的幕布", tag: "RouteTransition.tsx", desc: "导航一开始就拉起幕布，至少盖 430ms，再淡出 360ms。数据再快也要等完整套动画。" },
+  { id: "B", title: "B · OpenAI 硬切", tag: "实测 openai.com", desc: "没有任何动画。数据到了直接替换；慢的时候旧页面原样停着，没有提示。" },
+  { id: "C", title: "C · 慢了才给反馈", tag: "推荐", desc: "快的时候和 B 一样硬切；超过 300ms 还没到，才出现顶部细进度条并把旧页面调暗。" },
+  { id: "D", title: "D · View Transition 淡入", tag: "<Link viewTransition>", desc: "数据到了以后新旧页面交叉淡入 200ms，几乎不增加等待。" },
+];
+
+let latency = 0;
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function pageHTML(p) {
+  return `<h3>${p.name}</h3><p class="sub">${p.sub}</p>
+  <div class="blocks">
+    <div class="blk tall" style="background:${p.c[0]}"></div>
+    <div class="blk" style="background:${p.c[1]}"></div>
+    <div class="blk" style="background:${p.c[2]}"></div>
+  </div>`;
+}
+
+const panels = MODES.map(mode => {
+  const card = document.createElement("section");
+  card.className = "card";
+  card.innerHTML = `
+    <h2>${mode.title} <span class="tag">${mode.tag.replace(/</g,"&lt;")}</span></h2>
+    <p class="desc">${mode.desc}</p>
+    <div class="mini">
+      <div class="chrome"><i></i><i></i><i></i><span class="url">jiajun.site/</span></div>
+      <nav>${PAGES.map(p => `<a data-key="${p.key}" tabindex="0">${p.name}</a>`).join("")}</nav>
+      <div class="stage"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="meter">点击 → 完整可见：<b>—</b></div>`;
+  document.getElementById("grid").appendChild(card);
+  const panel = {
+    mode: mode.id,
+    stage: card.querySelector(".stage"),
+    mini: card.querySelector(".mini"),
+    url: card.querySelector(".url"),
+    nav: card.querySelector("nav"),
+    bar: card.querySelector(".bar"),
+    meter: card.querySelector(".meter"),
+    current: "home",
+    token: 0,
+    timers: [],
+  };
+  const first = document.createElement("div");
+  first.className = "page cur";
+  first.innerHTML = pageHTML(PAGES[0]);
+  panel.stage.appendChild(first);
+  setCurrent(panel, "home");
+  panel.nav.addEventListener("click", e => {
+    const a = e.target.closest("a"); if (a) goAll(a.dataset.key);
+  });
+  panel.nav.addEventListener("keydown", e => {
+    const a = e.target.closest("a"); if (a && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); goAll(a.dataset.key); }
+  });
+  return panel;
+});
+
+function setCurrent(panel, key) {
+  panel.current = key;
+  const p = PAGES.find(x => x.key === key);
+  panel.url.textContent = "jiajun.site" + p.path;
+  panel.nav.querySelectorAll("a").forEach(a => { if (a.dataset.key === key) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+}
+
+function later(panel, ms, fn) { panel.timers.push(setTimeout(fn, ms)); }
+
+function reset(panel) {
+  panel.timers.forEach(clearTimeout); panel.timers = [];
+  panel.token++;
+  panel.mini.querySelectorAll(".curtain").forEach(n => n.remove());
+  panel.stage.classList.remove("dim");
+  panel.bar.className = "bar";
+  // keep only the newest page
+  const pages = [...panel.stage.querySelectorAll(".page")];
+  pages.slice(0, -1).forEach(n => n.remove());
+  const last = pages.at(-1); last.className = "page cur";
+}
+
+function swap(panel, key) {
+  panel.stage.querySelector(".page.cur").remove();
+  const n = document.createElement("div");
+  n.className = "page cur";
+  n.innerHTML = pageHTML(PAGES.find(p => p.key === key));
+  panel.stage.appendChild(n);
+  setCurrent(panel, key);
+  return n;
+}
+
+function report(panel, t0) {
+  const ms = Math.round(performance.now() - t0);
+  const extra = ms - latency;
+  panel.meter.className = "meter " + (extra > 300 ? "bad" : "good");
+  panel.meter.innerHTML = `点击 → 完整可见：<b>${ms}ms</b>　<span style="color:var(--muted)">（比数据到达多等 ${Math.max(0, extra)}ms）</span>`;
+}
+
+function run(panel, key) {
+  reset(panel);
+  if (panel.current === key) return;
+  const t0 = performance.now();
+  panel.meter.innerHTML = `点击 → 完整可见：<b>…</b>`;
+  panel.meter.className = "meter";
+
+  if (panel.mode === "A") {
+    const MIN_COVER = 430, FADE = 360;
+    const c = document.createElement("div");
+    c.className = "curtain"; c.innerHTML = '<div class="grain"></div>';
+    panel.mini.appendChild(c);
+    requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add("active")));
+    later(panel, latency, () => {
+      swap(panel, key);
+      const elapsed = performance.now() - t0;
+      later(panel, Math.max(80, MIN_COVER - elapsed), () => {
+        c.classList.add("leaving");
+        later(panel, reduced ? 140 : FADE, () => { c.remove(); report(panel, t0); });
+      });
+    });
+  }
+
+  if (panel.mode === "B") {
+    later(panel, latency, () => { swap(panel, key); requestAnimationFrame(() => report(panel, t0)); });
+  }
+
+  if (panel.mode === "C") {
+    later(panel, 300, () => {
+      panel.bar.className = "bar";
+      requestAnimationFrame(() => panel.bar.classList.add("on"));
+      panel.stage.classList.add("dim");
+    });
+    later(panel, latency, () => {
+      panel.timers.forEach(clearTimeout); panel.timers = [];
+      panel.stage.classList.remove("dim");
+      if (panel.bar.classList.contains("on")) panel.bar.className = "bar done";
+      swap(panel, key);
+      requestAnimationFrame(() => report(panel, t0));
+    });
+  }
+
+  if (panel.mode === "D") {
+    later(panel, latency, () => {
+      const old = panel.stage.querySelector(".page.cur");
+      old.className = "page vt-old";
+      const n = document.createElement("div");
+      n.className = "page cur vt-new";
+      n.innerHTML = pageHTML(PAGES.find(p => p.key === key));
+      panel.stage.appendChild(n);
+      setCurrent(panel, key);
+      n.addEventListener("animationend", () => { old.remove(); n.classList.remove("vt-new"); report(panel, t0); }, { once: true });
+    });
+  }
+}
+
+function goAll(key) { panels.forEach(p => run(p, key)); }
+
+document.getElementById("all").addEventListener("click", () => {
+  const cur = panels[1].current;
+  const order = PAGES.map(p => p.key);
+  const next = order[(order.indexOf(cur) + 1) % order.length];
+  goAll(next);
+});
+
+document.querySelectorAll("#net button").forEach(b => b.addEventListener("click", () => {
+  latency = Number(b.dataset.ms);
+  document.querySelectorAll("#net button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+}));
+</script>
+</body>
+</html>
