@@ -1,366 +1,191 @@
-# Remix Cloudflare 个人站点
+# 个人网站（公开脱敏版）
 
-基于 **Remix v2 + Cloudflare Workers** 的个人网站：多语言首页、内容页、留言板、Nemesis AI 聊天、游戏档案、音乐展示，以及 Better Auth 登录与 D1 持久化。
+> **说明：这是我个人网站源码的公开展示版，已做脱敏处理。**
+>
+> - 从私有仓库复制而来，**不包含原来的提交历史**。
+> - 密钥、服务器 IP、Webhook 地址、数据库 ID、Cloudflare 账号 ID、管理员邮箱等，全部换成了 `your-xxx` / `example.com` 这类占位符。
+> - Nemesis 的记忆文档（`app/nemesis/memory-canon.server.ts`）、人设提示词（`system-prompt.server.ts`）、回刺提示词（`grok-roast-prompt.server.ts`）涉及个人隐私，换成了**占位版**，只保留结构。
+> - 评测用例里朋友的真实姓名换成了化名，改写自线上真实访客提问的用例都换了说法。
+> - 和 AI 的交接记录、求职相关文档已删除。
+>
+> 因此这个仓库**不能直接部署成和线上一样的网站**。代码结构、请求链路、安全处置逻辑都是真实的。
+>
+> 线上地址：https://xn--cckl9nsb.com
 
-生产域名示例：`https://xn--cckl9nsb.com`（Worker 名 `my-remix-worker`）。
+---
+
+## 这是什么
+
+一个部署在 Cloudflare Workers 上的个人网站，支持中文 / 日文 / 英文。主要内容：
+
+- **内容页**：首页、音乐、动画、相册、游戏档案、简历、更新日志
+- **留言板**：访客留言先进入待审核，站长审核后才公开
+- **Nemesis**：站内的 AI 聊天角色，可以聊站长的事，也可以聊别的；带一套「怎么答」的回复安全处置
+- **站点监控**：一个独立的 Worker，定时检查主站错误日志，聚合后推送告警
+
+代码主要由 Claude Code 和 Cursor 编写；我负责提需求、定规则和标准、验收结果。
 
 ---
 
 ## 技术栈
 
-| 层级 | 选型 |
-|------|------|
-| Runtime | Cloudflare Workers（`worker.ts` 入口） |
-| Web | Remix v2 · React 18 · Vite 6 |
-| 样式 | Tailwind CSS v4 · GSAP · Framer Motion |
+| 层 | 选型 |
+|---|---|
+| 运行环境 | Cloudflare Workers（入口 `worker.ts`） |
+| 框架 | React Router v7（框架模式，文件路由）· React 18 · Vite 6 |
+| 样式与动效 | Tailwind CSS v4 · GSAP · Framer Motion |
 | 数据库 | Cloudflare D1（SQLite）+ Kysely |
-| 限流 | Durable Object `RateLimiterDO`（sqlite-backed，**非 KV**） |
-| 媒体 | R2 `gregorwang` · CDN 内容哈希静态图 · Worker 代理 `/fonts/*` `/stickers/*` |
+| 限流 | Durable Object `RateLimiterDO` |
+| 媒体 | R2 存储 + CDN，图片文件名带内容哈希，长期缓存 |
 | AI | Cloudflare AI Gateway · Gemini · DeepSeek · xAI Grok |
-| 认证 | [better-auth](https://www.better-auth.com/)（魔法链接 · Google One Tap · Microsoft OAuth · Admin 插件） |
+| 登录 | Better Auth（邮箱魔法链接 · Google One Tap · Microsoft OAuth） |
 | 邮件 | Resend |
 
-Node.js **≥ 20**（见 `.nvmrc`）。
-
 ---
 
-## 主要功能
+## 整体架构
 
-### 内容页面
-
-| 路由 | 说明 |
-|------|------|
-| `/` | 多语言 Hero、歌词动画、Tab/视频展示、首页留言板预览 |
-| `/music` | 音乐展示与 NetEase 风格播放器 |
-| `/anime` | 动画相关内容 |
-| `/gallery` | 图库 |
-| `/cv` | 简历 |
-| `/game` · `/game/:platform` | 游戏平台档案（Steam / PS / Switch 等） |
-| `/xiao` | 专题图文页 |
-| `/updates` | 更新日志（数据源 `app/data/updates.ts`） |
-| `/rapid-layers-preview` | 首页视觉实验预览 |
-
-### 留言板
-
-- 首页 `BubbleMessageBoard` + 独立 `/messages` 路由
-- 用户提交后进入 **pending** 状态；审核在**独立后台项目**完成（链接由 `ADMIN_MESSAGES_URL` 配置，非本站路由）
-- 三层限流：IP 小时上限 · 邮箱冷却 · 邮箱每日上限（留言与魔法链接共用 DO 实现）
-
-### Nemesis AI 聊天（`/chat`）
-
-- 需登录；前端 `NemesisChatPage`，SSE 流式响应（`POST /api/nemesis`）
-- 请求链路：登录校验 → 速率限制 → 长度限制 → 硬规则 →（灰区）Gemini JSON 分类 → 模型调用
-- 多模型路由：默认 Gemini Lite；规则触发辱骂走 Grok（无 xAI 密钥时 Gemini roast）；失败回退 DeepSeek；全部经 AI Gateway 转发
-- 富媒体附件：贴纸、音乐、视频、引用语（catalog 在 `app/nemesis/`）
-- 用户反馈：`POST /api/nemesis-feedback`
-- 对话状态持久化在浏览器（`app/hooks/useNemesisChat.client.ts`）
-
-### 认证（`/auth`）
-
-- Better Auth 端点：`/api/auth/*`
-- 插件：魔法链接、Google One Tap、Microsoft OAuth、Admin 角色
-- 登出：`/auth/sign-out`
-- 管理员由 `ADMIN_EMAILS`（逗号分隔）判定
-
-### 其他 API
-
-| 端点 | 说明 |
-|------|------|
-| `POST /api/nemesis` | Nemesis 聊天（SSE） |
-| `POST /api/nemesis-feedback` | Nemesis 消息反馈 |
-| `GET /sitemap.xml` | 站点地图 |
-
-> **已移除**：旧版 `api.image-token` / `api/media` / `api.verify-token` 签名媒体代理。公开站点图片现走 **CDN 内容哈希 URL**（见下方「媒体与 CDN」）。
-
----
-
-## 架构概览
+### 一个请求怎么走
 
 ```text
-Browser
-   │
-   ▼
-worker.ts ──► /fonts/*  /stickers/*  → R2 MEDIA_BUCKET
-   │          ASSETS (build/client)   → 静态资源
-   │          其余请求                  → Remix request handler
-   ▼
-app/routes/          薄路由：loader / action / meta
-app/components/      UI（按域分子目录）
-app/services/        Nemesis 业务编排
-app/lib/             通用服务端逻辑（auth、db、限流、CDN 解析）
-app/nemesis/         提示词、manifest、catalog（无 React）
-app/data/            静态站点内容
-app/types/           共享类型
-app/hooks/           客户端 hooks（`.client.ts`）
-app/generated/       构建产物（image-manifest，勿手改）
+浏览器
+  │
+  ▼
+worker.ts（Cloudflare Worker 入口）
+  ├─ /fonts/*、/stickers/*  → 直接从 R2 读取，设置长期缓存
+  ├─ 构建好的静态资源       → ASSETS（build/client）
+  └─ 其他请求               → React Router 请求处理
+                                │
+                                ▼
+                      app/routes/  路由：loader 取数据 / action 处理提交
+                                │
+          ┌─────────────┬───────┴────────┬──────────────┐
+          ▼             ▼                ▼              ▼
+     D1 数据库      限流 DO          R2 / CDN       AI Gateway
+   （用户、留言、   （留言、登录、               （Gemini / DeepSeek
+     审计记录）      Nemesis）                     / Grok）
 ```
 
 ```mermaid
 flowchart LR
-  subgraph Worker
-    W[worker.ts]
-    R[Remix Routes]
-    W --> R
-  end
-  subgraph Bindings
-    D1[(D1 DB)]
-    DO[RateLimiterDO]
-    R2[(R2 gregorwang)]
-    AI[AI Gateway URL]
-  end
-  R --> D1
-  R --> DO
-  R --> R2
-  R --> AI
-  AI --> Gemini[Gemini]
-  AI --> DeepSeek[DeepSeek]
-  AI --> xAI[Grok]
+  B[浏览器] --> W[worker.ts]
+  W -->|/fonts /stickers| R2[(R2)]
+  W -->|静态资源| A[ASSETS]
+  W -->|页面与 API| RR[React Router 路由]
+  RR --> D1[(D1)]
+  RR --> DO[RateLimiterDO]
+  RR --> AIG[AI Gateway]
+  AIG --> G[Gemini]
+  AIG --> DS[DeepSeek]
+  AIG --> X[Grok]
+  OBS[site-observer-worker] -. 定时读取日志 .-> W
 ```
 
----
-
-## 快速开始
-
-### 1. 安装依赖
-
-```bash
-npm install
-```
-
-### 2. 配置环境变量
-
-```bash
-cp .env.example .env
-```
-
-至少设置：
-
-```env
-AUTH_KEY_SECRET=replace_with_a_strong_random_secret
-BETTER_AUTH_SECRET=replace_with_a_strong_random_secret
-```
-
-完整变量说明见 [`.env.example`](.env.example)。生产密钥通过 Wrangler 注入：
-
-```bash
-wrangler secret put AUTH_KEY_SECRET
-wrangler secret put GOOGLE_AI_API_KEY
-wrangler secret put XAI_API_KEY
-# …见 .env.example 注释
-```
-
-### 3. 本地 D1 迁移
-
-```bash
-npm run d1:migrate:local
-```
-
-### 4. 启动开发服务器
-
-```bash
-npm run dev
-```
-
-默认 **http://localhost:3000**。Vite 配置了 `cloudflareDevProxy`，本地开发时可访问 D1 / R2 / DO / AI 等绑定（与纯前端 dev 不同）。
-
-需要完全模拟生产 Worker 时：
-
-```bash
-npm run dev:worker   # build + wrangler dev
-# 或
-npm run build && npm start
-```
-
-### 5. 检查与构建
-
-```bash
-npm run typecheck
-npm run lint
-npm run build
-```
-
-Windows 上若 `build/client` 被占用（`EBUSY`），先停止本项目的 dev / workerd 进程再重试。
-
----
-
-## 常用命令
-
-### 开发与部署
-
-| 命令 | 说明 |
-|------|------|
-| `npm run dev` | Remix + Vite 开发（端口 3000，含 CF 绑定代理） |
-| `npm run build` | 生产构建 → `build/` |
-| `npm start` | `wrangler dev`（需先 build） |
-| `npm run dev:worker` | build 后 wrangler dev |
-| `npm run deploy` | build + 部署到 Cloudflare |
-| `npm run cf:login` | Wrangler 登录 |
-| `npm run typecheck` | TypeScript 检查 |
-| `npm run lint` | ESLint |
-
-### 数据库
-
-| 命令 | 说明 |
-|------|------|
-| `npm run d1:migrate:local` | 本地 D1 迁移 |
-| `npm run d1:migrate:remote` | 远程 D1 迁移 |
-
-### 内容构建流水线
-
-| 命令 | 说明 |
-|------|------|
-| `npm run lyrics:build` | `assets/lyrics/*.lrc` → `app/data/lyrics/*.json` |
-| `npm run images:fetch` | 拉取图片源 |
-| `npm run images:process` | 生成 `app/generated/image-manifest.ts` |
-| `npm run images:upload` | 上传至 R2 |
-| `npm run images:pipeline` | 上述三步串联 |
-| `npm run fonts:build` | 字体子集化并准备上传 |
-| `npm run stickers:prepare` · `stickers:upload` | Nemesis 贴纸处理与上传 |
-| `npm run music:sync` · `music:verify` | Nemesis 音乐 manifest 同步与校验 |
-
-**Changelog**：只编辑 `app/data/updates.ts`；首页 `changelog-section` 自动展示最新 4 条。
-
----
-
-## 目录结构
+### 代码分层
 
 ```text
 app/
-  routes/              URL 路由（保持精简，UI 放 components）
-  components/
-    home/              首页区块
-    messages/          BubbleMessageBoard
-    nemesis/           Nemesis UI（chat/ 子目录为聊天页）
-    game/              游戏页
-    auth/              登录相关
-    error/             NotFound404、RouteErrorBoundary
-    transitions/       全局 RouteTransition
-  services/            Nemesis 编排（guard、model、rate-limit、SSE）
-  lib/                 auth、db、限流、邮件、CDN 解析等
-  nemesis/             提示词、memory canon、manifest、catalog
-  data/                updates、game、home-songs、music-showcase、lyrics JSON
-  types/               共享领域类型
-  hooks/               useNemesisChat 等客户端 hooks
-  generated/           image-manifest.ts（构建生成）
-  utils/               cloudflare-env、seo、theme、request
-assets/                构建源：lyrics、原始图片、字体 OTF
-scripts/               构建与上传脚本
-migrations/            D1 SQL 迁移
-docs/                  项目文档，按类别分子目录（索引见 docs/README.md）
-public/                小型静态资源（fonts/、stickers/ 生产走 R2，gitignore）
-worker.ts              Worker 入口 + R2 字体/贴纸代理
-wrangler.toml          Cloudflare 绑定与 vars
+  routes/        路由：只放 loader / action / meta，保持精简
+  components/    界面组件，按功能分目录（home、messages、nemesis、game、auth…）
+  hooks/         只在浏览器运行的 hooks（*.client.ts）
+  lib/           通用逻辑：登录、数据库、限流、多语言、CDN、通知
+  services/      Nemesis 的业务编排：分类、模型调用、泄露检测、审计
+  nemesis/       Nemesis 的提示词、处置策略、贴纸 / 音乐 / 语录清单（不含 React）
+  data/          静态内容：更新日志、游戏、简历、歌词
+  locales/       界面文案翻译（zh / ja / en）
+  generated/     脚本生成的文件（图片清单等），不手改
+  types/         共享类型
+  utils/         环境变量、SEO、主题等工具
+scripts/         构建和上传脚本：图片、歌词、字体、Nemesis 评测
+migrations/      D1 数据库迁移
+site-observer-worker/  独立的站点监控 Worker
+test/            单元测试（node --test）
 ```
 
-命名约定详见 [`AGENTS.md`](AGENTS.md) 与 [`.cursor/rules/layout-and-naming.mdc`](.cursor/rules/layout-and-naming.mdc)。
+文件后缀有约定：`.server.ts` 只在服务端运行（可以碰密钥、数据库、AI），`.client.ts(x)` 只在浏览器运行，两者不能互相导入。
 
 ---
 
-## Cloudflare 绑定
+## 主要模块
 
-配置见 [`wrangler.toml`](wrangler.toml)：
+### 多语言
 
-| 绑定 | 用途 |
-|------|------|
-| `DB` | D1 `app-db`（用户、会话、留言、Nemesis 审计等） |
-| `RATE_LIMITER` | Durable Object 限流 |
-| `MEDIA_BUCKET` | R2 `gregorwang` |
-| `ASSETS` | `build/client` 静态资源 |
-| `AI` | AI Gateway URL 解析（`env.AI.gateway().getUrl()`） |
+页面路由都带可选的语言前缀，比如 `($lang).music.tsx` 对应 `/music`、`/ja/music`、`/en/music`。语言按「URL 前缀 → Cookie → 浏览器语言」的顺序确定（`app/lib/i18n.server.ts`），界面文案在 `app/locales/`，长内容（简历、更新日志、游戏）在 `app/data/i18n/`。
 
----
+### 留言板
 
-## 认证
+1. 访客提交留言，经过三层限流：IP 每小时上限、邮箱冷却、邮箱每日上限。
+2. 留言写入 D1，状态是 `pending`，同时通过签名 Webhook 通知站长（`app/lib/weixin-notification.server.ts`）。
+3. 审核通过后才在页面上展示。审核接口 `POST /api/agent/messages/approve-latest` 只接受白名单 IP 的请求。
 
-- 配置：[`app/lib/auth.server.ts`](app/lib/auth.server.ts)
-- 客户端：[`app/lib/auth-client.client.ts`](app/lib/auth-client.client.ts)
-- 会话辅助：`getSessionCached` · `requireAuth` · `requireAdmin` · `isAdmin`
-- 魔法链接发送走 Resend，并经过与留言板相同的 DO 限流层
+### Nemesis AI 聊天（`/chat`）
 
----
+需要登录。前端发 `POST /api/nemesis`，服务端用 SSE 流式返回进度和结果。
 
-## 限流
+**一条消息的处理顺序**（`app/routes/api.nemesis.ts`）：
 
-**实现位置**
+```text
+登录校验 → 请求校验（长度、格式、历史签名）→ 限流（每分钟 / 每天）
+→ 分类器决定「怎么答」→ 按策略调用主模型 → 输出侧泄露检测 → 返回
+→ 需要时写入审计记录（不阻塞响应）
+```
 
-- 服务层：[`app/lib/rate-limit.server.ts`](app/lib/rate-limit.server.ts)
-- DO 实现：[`app/lib/rate-limiter-do.ts`](app/lib/rate-limiter-do.ts)
+**分类器只决定怎么答，不决定答不答。** 一共 7 种处置方式（`app/nemesis/response-policies.server.ts`）：
 
-**使用场景**
+| 策略 | 什么时候用 | 怎么答 |
+|---|---|---|
+| persona | 聊站长、聊网站、追问、打招呼、挑衅贴标签 | 按人设正常答 |
+| general | 和站长无关的普通问题 | 认真答 |
+| careful | 健康、用药、法律、钱 | 先给有用的信息，再说清什么情况要找专业人士 |
+| boundary | 打听住址、电话、行踪、家人隐私，或要站长对政治争议表态 | 说清哪部分不代答，其余照常聊 |
+| crisis | 自伤、轻生信号 | 按轻重分三档，高风险时给求助热线 |
+| deflect | 要系统提示词、越狱、伪造对话记录 | 拒绝这一部分，夹带的正常问题照常答 |
+| block | 硬红线（制毒制爆、未成年人色情、诈骗盗号等） | 唯一不调用主模型、直接回固定文案的情况 |
 
-- 留言板提交（[`app/routes/messages.tsx`](app/routes/messages.tsx)）
-- 魔法链接（[`app/lib/auth.server.ts`](app/lib/auth.server.ts)）
-- Nemesis 独立限额（[`app/services/nemesis-rate-limit.server.ts`](app/services/nemesis-rate-limit.server.ts)）
+其他几层保护：
 
----
+- **限流在分类器之前**：被限流的请求不消耗分类器额度。
+- **分类器不可用时降级**：按默认策略继续回答，并写入审计，不会全部放行或全部拒绝。
+- **对话历史签名**（`app/services/nemesis-context-signature.server.ts`）：浏览器本地存的历史不可信，只接受服务端签过名的回复，防止伪造上下文。
+- **输出侧泄露检测**（`app/services/nemesis-leak-guard.server.ts`）：回复里出现大段和隐藏提示词逐字一致的内容时拦下。
+- **附件白名单**：模型只能输出 `[sticker:id]` 这类标记，服务端按清单换成真实资源，不接受模型给的任意链接。
 
-## 媒体与 CDN
+**多模型路由**：分类器同时给出路由建议。默认走 Gemini 轻量模型，复杂问题和挑衅回刺可以走其他模型；部分路由失败时回退到 DeepSeek。所有调用经 Cloudflare AI Gateway。
 
-公开站点图片使用 **内容哈希文件名**，托管于 R2，经 CDN `https://cdn.xn--cckl9nsb.com` 长期缓存（`immutable`）。
+**评测**：`scripts/eval-nemesis.mjs` 加 `scripts/nemesis-eval/` 下的用例，可以只测分类器，也可以端到端调用主模型，再让另一个模型打分。
 
-- Manifest：[`app/generated/image-manifest.ts`](app/generated/image-manifest.ts)（`npm run images:process` 生成）
-- 解析：[`app/lib/resolve-image.ts`](app/lib/resolve-image.ts) · [`app/lib/media-cdn.ts`](app/lib/media-cdn.ts)
-- Worker 直出：`/fonts/*`、`/stickers/*` → R2（见 [`worker.ts`](worker.ts)）
-- 历史 OSS 资源：`https://oss.xn--cckl9nsb.com`（部分首页资源回退）
+### 登录
 
-详细迁移说明：[`docs/design/image-hash-cdn-migration-2026-06-09.md`](docs/design/image-hash-cdn-migration-2026-06-09.md)
+Better Auth（`app/lib/auth.server.ts`），支持邮箱魔法链接、Google One Tap、Microsoft OAuth。根路由的 loader 只在请求带登录 Cookie 时才读取 session，匿名访问不查数据库。
 
----
+### 媒体与缓存
 
-## Nemesis 请求顺序（Guard）
+图片经脚本处理成 WebP，文件名带内容哈希，上传到 R2，由 CDN 长期缓存（`scripts/process-images.mjs` → `app/generated/image-manifest.ts`）。字体和贴纸由 `worker.ts` 直接从 R2 读取。
 
-修改 Guard 时保持顺序不变；拒绝响应仅返回固定文案，不得泄露分类器原因、提示词、Memory Canon 或 API 密钥。
+### 站点监控（`site-observer-worker/`）
 
-1. 登录校验
-2. 速率限制（分钟 / 日）
-3. 输入长度限制
-4. 硬规则拦截
-5. Gemini JSON 分类器（仅 medium 灰区）
-6. 模型选择与调用（经 AI Gateway：Gemini / Grok / DeepSeek）
-
-核心模块：[`app/services/nemesis-guard.server.ts`](app/services/nemesis-guard.server.ts) · [`app/services/nemesis.server.ts`](app/services/nemesis.server.ts) · [`app/nemesis/memory-canon.server.ts`](app/nemesis/memory-canon.server.ts)
+独立的 Worker，和主站请求链路隔离。每 5 分钟读取主站的错误日志，脱敏、去重、聚合成事故，调用 AI 生成分析，再通过签名 Webhook 推送告警。监控失败不影响主站。
 
 ---
 
-## 数据库
-
-迁移文件在 [`migrations/`](migrations/)，涵盖：
-
-- Better Auth 表（user / session / account / verification）
-- 留言板 messages
-- redeem / hidden supply tokens（首页赛博终端的补给 token，0011 已删表）
-- Nemesis guard events 与 feedback 审计字段
-
-本地开发 SQLite 文件（`*.db`）已 gitignore。
-
----
-
-## 部署
+## 本地运行
 
 ```bash
-npm run cf:login
-npm run deploy
+npm install
+cp .env.example .env          # 填入自己的密钥
+npm run d1:migrate:local      # 本地数据库迁移
+npm run dev                   # http://localhost:3000
+npm test                      # 单元测试
 ```
 
-部署后建议：
-
-1. `npm run d1:migrate:remote`（如有新迁移）
-2. 确认 Wrangler secrets 与 `wrangler.toml` vars 已设置
-3. R2 桶 `gregorwang` 存在且 CDN 域名已绑定
+`wrangler.toml` 里的 ID、地址都是占位符，部署前需要换成自己的 Cloudflare 资源。
 
 ---
 
 ## 相关文档
 
 | 文档 | 内容 |
-|------|------|
-| [`AGENTS.md`](AGENTS.md) | 贡献指南、目录规范、调试经验 |
-| [`CLAUDE.md`](CLAUDE.md) | AI 助手项目速查 |
-| [`CURSOR.md`](CURSOR.md) | Cursor 工作区说明 |
-| [`docs/`](docs/README.md) | 功能设计、审计、问题排查、笔记等，按类别分目录 |
-
----
-
-## 许可证
-
-Private — 个人项目，未开源发布。
+|---|---|
+| [`AGENTS.md`](AGENTS.md) | 目录规范、命名约定 |
+| [`docs/`](docs/README.md) | 功能设计、审计、问题排查、笔记 |
+| [`site-observer-worker/README.md`](site-observer-worker/README.md) | 站点监控 Worker 说明 |
